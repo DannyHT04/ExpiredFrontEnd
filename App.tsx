@@ -11,12 +11,12 @@ import GroceryListScreen from './Screens/GroceryListScreen';
 
 
 type RootStackParamList = {
-  Home:undefined;
-  Login:undefined;
+  Home: undefined;
+  Login: undefined;
   CreateAccount: undefined;
-  Profile:undefined;
-  Splash:undefined;
-  GroceryList:undefined;
+  Profile: undefined;
+  Splash: undefined;
+  GroceryList: undefined;
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -24,36 +24,36 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
-      name="Login"
-      component={LoginScreen}
-      options={{title:"Login"}}
-      />
-      <Stack.Screen
-      name="CreateAccount"
-      component={CreateAccountScreen}
-      options={{title:"Create Account"}}
-      />
-      <Stack.Screen
-      name="Home"
-      component={HomeScreen}
-      options={{title:"Home"}}
-      />
-      <Stack.Screen
-      name="Profile"
-      component={ProfileScreen}
-      options={{title:"Profile"}}
-      />
-      <Stack.Screen
-      name="Splash"
-      component={SplashScreen}
-      options={{title:"Splash"}}
-      />
-      <Stack.Screen
-      name="GroceryList"
-      component={GroceryListScreen}
-      options={{title:"GroceryList"}}
-      />
+        {/* <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ title: "Login" }}
+        />
+        <Stack.Screen
+          name="CreateAccount"
+          component={CreateAccountScreen}
+          options={{ title: "Create Account" }}
+        /> */}
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "Home" }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{ title: "Profile" }}
+        />
+        <Stack.Screen
+          name="Splash"
+          component={SplashScreen}
+          options={{ title: "Splash" }}
+        />
+        <Stack.Screen
+          name="GroceryList"
+          component={GroceryListScreen}
+          options={{ title: "GroceryList" }}
+        />
       </Stack.Navigator>
 
     </NavigationContainer>
