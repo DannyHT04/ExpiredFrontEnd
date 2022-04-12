@@ -18,6 +18,7 @@ type RootStackParamList = {
   Profile: undefined;
   Splash: undefined;
   GroceryList: undefined;
+  Footer: undefined;
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
