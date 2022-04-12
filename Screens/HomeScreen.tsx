@@ -5,8 +5,7 @@ import FooterComponent from '../Components/FooterComponent';
 const HomeScreen: FC = () => {
     return (
         <View>
-        <Text>Create Account</Text>
-        <FooterComponent />
+        <Text>Home Screen </Text>
         </View>
     );
 }

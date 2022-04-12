@@ -1,33 +1,43 @@
 import { FC, useState } from "react";
 import { BottomNavigation, Text } from 'react-native-paper';
+import HomeScreen from '../Screens/HomeScreen';
+import ProfileScreen from '../Screens/ProfileScreen';
+import GroceryListScreen from '../Screens/GroceryListScreen';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const MusicRoute = () => <Text>Music</Text>;
 
-const AlbumsRoute = () => <Text>Albums</Text>;
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-const RecentsRoute = () => <Text>Recents</Text>;
+const Tab = createMaterialBottomTabNavigator();
 
-const FooterComponent: FC = () => {
-  const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    { key: 'music', title: 'Music', icon: 'album' },
-    { key: 'albums', title: 'Albums', icon: 'album' },
-    { key: 'recents', title: 'Recents', icon: 'history' },
-  ]);
-
-  const renderScene = BottomNavigation.SceneMap({
-    music: MusicRoute,
-    albums: AlbumsRoute,
-    recents: RecentsRoute,
-  });
-
+function FooterComponent() {
   return (
-    <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-    />
+    <Tab.Navigator initialRouteName="Home"
+    activeColor="#E9E9E1"
+    barStyle={{ backgroundColor: '#393939' }}>
+      <Tab.Screen name="Profile" component={ProfileScreen} 
+      options={{
+        tabBarLabel: 'Profile',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="account" color={color} size={26} />
+        ),
+      }}/>
+      <Tab.Screen name="Home" component={HomeScreen}
+      options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="home" color={color} size={26} />
+        ),
+      }} />
+      <Tab.Screen name="Grocery List" component={GroceryListScreen}
+      options={{
+        tabBarLabel: 'Grocery List',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="receipt" color={color} size={26} />
+        ),
+      }} />
+    </Tab.Navigator>
   );
-};
+}
 
 export default FooterComponent;

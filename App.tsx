@@ -8,6 +8,7 @@ import CreateAccountScreen from './Screens/CreateAccountScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import SplashScreen from './Screens/SplashScreen';
 import GroceryListScreen from './Screens/GroceryListScreen';
+import FooterComponent from './Components/FooterComponent';
 
 
 type RootStackParamList = {
@@ -34,6 +35,11 @@ export default function App() {
           component={CreateAccountScreen}
           options={{ title: "Create Account" }}
         /> */}
+        <Stack.Screen
+          name='Footer'
+          component={FooterComponent}
+          options={{ headerShown: false}}
+        />
         <Stack.Screen
           name="Home"
           component={HomeScreen}
