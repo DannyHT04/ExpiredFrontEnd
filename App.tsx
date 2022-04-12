@@ -39,7 +39,7 @@ export default function App() {
       component={HomeScreen}
       options={{title:"Home"}}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
       name="Profile"
       component={ProfileScreen}
       options={{title:"Profile"}}
@@ -53,7 +53,7 @@ export default function App() {
       name="GroceryList"
       component={GroceryListScreen}
       options={{title:"GroceryList"}}
-      />
+      /> */}
       </Stack.Navigator>
 
     </NavigationContainer>
