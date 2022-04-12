@@ -12,10 +12,27 @@ import {
   RobotoSlab_800ExtraBold,
   RobotoSlab_900Black,
 } from "@expo-google-fonts/roboto-slab";
+import AppLoading from "expo-app-loading";
+import { useFonts } from "@expo-google-fonts/roboto-slab";
 
 const LoginScreen: FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  let [fontsLoaded, error] = useFonts({
+    RobotoSlab_100Thin,
+    RobotoSlab_200ExtraLight,
+    RobotoSlab_300Light,
+    RobotoSlab_400Regular,
+    RobotoSlab_500Medium,
+    RobotoSlab_600SemiBold,
+    RobotoSlab_700Bold,
+    RobotoSlab_800ExtraBold,
+    RobotoSlab_900Black,
+  });
+  if(!fontsLoaded){
+    return <AppLoading/>
+  }
+
   return (
     <View style={styles.Center}>
       <View style={[styles.BoxBg]}>
@@ -23,7 +40,7 @@ const LoginScreen: FC = () => {
 
         <View style={[styles.Mt2]}>
           <TextInput
-            style={styles.Mt1}
+            style={[styles.Mt1]}
             autoComplete="off"
             label="Username"
             value={username}
@@ -73,6 +90,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 40,
     marginBottom: 40,
+  },
+  Font:{
+    fontFamily:"RobotoSlab_400Regular"
   },
   c1: {
     color: "grey",
