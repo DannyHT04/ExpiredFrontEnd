@@ -8,6 +8,7 @@ import CreateAccountScreen from "./Screens/CreateAccountScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
 import SplashScreen from "./Screens/SplashScreen";
 import GroceryListScreen from "./Screens/GroceryListScreen";
+import FooterComponent from "./Components/FooterComponent";
 
 type RootStackParamList = {
   Home: undefined;
@@ -59,7 +60,6 @@ export default function App() {
           component={GroceryListScreen}
           options={{ title: "GroceryList" }}
         />
-      </Stack.Navigator>
 
         <Stack.Screen
           name="Home"
