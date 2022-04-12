@@ -29,8 +29,8 @@ const LoginScreen: FC = () => {
     RobotoSlab_800ExtraBold,
     RobotoSlab_900Black,
   });
-  if(!fontsLoaded){
-    return <AppLoading/>
+  if (!fontsLoaded) {
+    return <AppLoading />;
   }
 
   return (
@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 40,
   },
-  Font:{
-    fontFamily:"RobotoSlab_400Regular"
+  Font: {
+    fontFamily: "RobotoSlab_400Regular",
   },
   c1: {
     color: "grey",
