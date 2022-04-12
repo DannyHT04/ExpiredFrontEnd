@@ -41,16 +41,6 @@ export default function App() {
           options={{ headerShown: false}}
         />
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: "Home" }}
-        />
-        <Stack.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{ title: "Profile" }}
-        />
-        <Stack.Screen
           name="Splash"
           component={SplashScreen}
           options={{ title: "Splash" }}
@@ -60,7 +50,6 @@ export default function App() {
           component={GroceryListScreen}
           options={{ title: "GroceryList" }}
         />
-
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -70,16 +59,6 @@ export default function App() {
           name="Profile"
           component={ProfileScreen}
           options={{ title: "Profile" }}
-        />
-        <Stack.Screen
-          name="Splash"
-          component={SplashScreen}
-          options={{ title: "Splash" }}
-        />
-        <Stack.Screen
-          name="GroceryList"
-          component={GroceryListScreen}
-          options={{ title: "GroceryList" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
