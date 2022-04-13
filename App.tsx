@@ -23,6 +23,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+       
         <Stack.Screen
           name="CreateAccount"
           component={CreateAccountScreen}
@@ -32,8 +33,12 @@ export default function App() {
           name="Login"
           component={LoginScreen}
           options={{ headerShown: false }}
+        /> 
+        <Stack.Screen
+          name="Splash"
+          component={SplashScreen}
+          options={{ headerShown: false}}
         />
-
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -44,11 +49,7 @@ export default function App() {
           component={ProfileScreen}
           options={{ title: "Profile" }}
         />
-        <Stack.Screen
-          name="Splash"
-          component={SplashScreen}
-          options={{ title: "Splash" }}
-        />
+
         <Stack.Screen
           name="GroceryList"
           component={GroceryListScreen}

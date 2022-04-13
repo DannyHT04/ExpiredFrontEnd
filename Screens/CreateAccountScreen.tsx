@@ -48,12 +48,13 @@ const CreateAccountScreen: FC = () => {
           style={[styles.Mt1, styles.textInputSizng]}
           autoComplete="off"
           label="First Name"
-          theme={{colors: {primary:"red"}}}
+          theme={{colors: {primary:"#4B4B4B"}}}
           value={firstname}
           onChangeText={setFirstName}
         />
         <TextInput
           style={[styles.Mt1, styles.textInputSizng]}
+          theme={{colors: {primary:"#4B4B4B"}}}
           autoComplete="off"
           label="Last Name"
           value={lastname}
@@ -61,6 +62,7 @@ const CreateAccountScreen: FC = () => {
         />
         <TextInput
           style={[styles.Mt1, styles.textInputSizng]}
+          theme={{colors: {primary:"#4B4B4B"}}}
           autoComplete="off"
           label="Email"
           value={email}
@@ -70,6 +72,7 @@ const CreateAccountScreen: FC = () => {
       <View>
         <TextInput
           style={[styles.Mt1, styles.textInputSizng]}
+          theme={{colors: {primary:"#4B4B4B"}}}
           autoComplete="off"
           label="Username"
           value={username}
@@ -77,6 +80,7 @@ const CreateAccountScreen: FC = () => {
         />
         <TextInput
           autoComplete="off"
+          theme={{colors: {primary:"#4B4B4B"}}}
           style={[styles.Mt1, styles.textInputSizng]}
           label="Password"
           value={password}
