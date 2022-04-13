@@ -23,7 +23,7 @@ const HomeScreen: FC = () => {
       {/* list according */}
       <List.AccordionGroup>
     <List.Accordion title="Personal Items" id="1">
-      <List.Item title="Milk" />
+      <List.Item style={{backgroundColor: 'white'}} title="Milk" />
     </List.Accordion>
     <List.Accordion title="House Fridge " id="2">
       <List.Item title="Steak" />
