@@ -48,6 +48,7 @@ const CreateAccountScreen: FC = () => {
           style={[styles.Mt1, styles.textInputSizng]}
           autoComplete="off"
           label="First Name"
+          theme={{colors: {primary:"red"}}}
           value={firstname}
           onChangeText={setFirstName}
         />
