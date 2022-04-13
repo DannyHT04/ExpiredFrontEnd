@@ -34,6 +34,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
+  bgBox:{
+    backgroundColor: "grey"
+  }
 });
 
 export default HomeScreen;
