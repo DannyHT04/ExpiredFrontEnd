@@ -1,11 +1,12 @@
 import { Text, View, StyleSheet } from "react-native";
 import { FC } from "react";
 import { List } from 'react-native-paper';
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const HomeScreen: FC = () => {
   return (
     //view container
-    <View style={styles.container}>
+    <View style={{paddingTop:200 , backgroundColor:"#4B4B4B", flex:1}}>
       {/* <View style={[styles.row, styles.bgBox]}>
         <Text>Instructions</Text>
 
@@ -18,27 +19,23 @@ const HomeScreen: FC = () => {
           your Grocery List select the icon on
         </Text>
       </View> */}
-      <View>
-      <List.AccordionGroup>
-    <List.Accordion title="Accordion 1" id="1" >
-      
-      <List.Item title="Item 1" />
-    </List.Accordion>
-    <List.Accordion title="Accordion 2" id="2">
-      <List.Item title="Item 2" />
-    </List.Accordion>
-    <View>
-      <Text>
-        List.Accordion can be wrapped because implementation uses React.Context.
-      </Text>
-      <List.Accordion title="Accordion 3" id="3">
-        <List.Item title="Item 3" />
-      </List.Accordion>
-    </View>
-  </List.AccordionGroup>
 
-      </View>
+      {/* list according */}
+      <List.AccordionGroup>
+    <List.Accordion title="Personal Items" id="1">
+      <List.Item title="Milk" />
+    </List.Accordion>
+    <List.Accordion title="House Fridge " id="2">
+      <List.Item title="Steak" />
+    </List.Accordion>
+      <List.Accordion title="Work Fridge" id="3">
+        <List.Item title="Egg" />
+      </List.Accordion>
+   
+  </List.AccordionGroup>
     </View>
+    
+    
   );
 };
 
@@ -61,6 +58,10 @@ const styles = StyleSheet.create({
     marginBottom:650,
     flex:1,
     padding: 10
+  },
+  testing:{
+    marginLeft: 100,
+    marginRight: 100
   }
 });
 
