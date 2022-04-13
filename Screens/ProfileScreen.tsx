@@ -6,8 +6,7 @@ import Logo from '../assets/Logo.png';
 const ProfileScreen: FC = () => {
     return (
         <SafeAreaView style={styles.Bg}>
-            <Text>Create Account test</Text>
-            <Image source={Logo} style={{width: 104, height: 100}}/>
+            <Image source={Logo} style={{width: 104, height: 101}}/>
         </SafeAreaView>
     );
 }
