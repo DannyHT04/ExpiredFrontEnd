@@ -21,9 +21,12 @@ const HomeScreen: FC = () => {
       </View> */}
 
       {/* list according */}
-      <List.AccordionGroup>
-        <List.Accordion title="Personal Items" id="1">
-          <View style={{ backgroundColor: "white" }}>
+      <View style={[{marginLeft: 10, marginRight: 10}]}>
+      <List.AccordionGroup >
+        <List.Accordion theme={{colors:{background:"#E9E9E1", primary:'#4B4B4B'}}} title="Personal Items" id="1"
+        >
+         
+          <View style={{ backgroundColor: "#E9E9E1"}}>
             <List.Item
               title="eggs"
               style={styles.Pill}
@@ -41,8 +44,8 @@ const HomeScreen: FC = () => {
             />
           </View>
         </List.Accordion>
-        <List.Accordion title="House Fridge " id="2">
-          <View style={{ backgroundColor: "white" }}>
+        <List.Accordion theme={{colors:{background:"#E9E9E1", primary:'#4B4B4B'}}} title="House Fridge " id="2">
+          <View style={{ backgroundColor: "#E9E9E1" }}>
             <List.Item
               title="eggs"
               style={styles.Pill}
@@ -60,7 +63,7 @@ const HomeScreen: FC = () => {
             />
           </View>
         </List.Accordion>
-        <List.Accordion title="Work Fridge" id="3">
+        <List.Accordion theme={{colors:{background:"#E9E9E1", primary:'#4B4B4B'}}} title="Work Fridge" id="3">
           <View style={{ backgroundColor: "white" }}>
             <List.Item
               title="eggs"
@@ -80,6 +83,7 @@ const HomeScreen: FC = () => {
           </View>
         </List.Accordion>
       </List.AccordionGroup>
+      </View>
     </View>
   );
 };
@@ -112,9 +116,9 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: "#9A9B9A",
     borderRadius: 25,
-    marginLeft: 30,
+    marginLeft: 10,
     marginBottom: 10,
-    width: 370,
+    width: 350,
   },
 });
 
