@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { FC, useState } from "react";
 import { TextInput, Button } from "react-native-paper";
 import {
@@ -14,6 +14,7 @@ import {
 } from "@expo-google-fonts/roboto-slab";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
+import Logo from "../assets/Logo.png";
 
 const LoginScreen: FC = () => {
   const [username, setUsername] = useState("");
@@ -36,6 +37,13 @@ const LoginScreen: FC = () => {
   return (
     <View style={styles.Center}>
       <View style={[styles.BoxBg]}>
+        <View>
+          <Image
+            source={Logo}
+            style={styles.SplashLogo}
+            accessibilityLabel="Expired Logo"
+          />
+        </View>
         <Text style={[styles.Fontsize]}>Login</Text>
 
         <View style={[styles.Mt2]}>
@@ -56,9 +64,9 @@ const LoginScreen: FC = () => {
         </View>
         <View style={styles.Mt2}>
           <Button color="#505050" mode="contained">
-            Log In
+            <Text style={styles.Font}>Log In</Text>
           </Button>
-          <Button color="#405CBB">Create Account?</Button>
+          <Button style={{marginTop:20}} color="#405CBB">Create Account?</Button>
         </View>
       </View>
     </View>
@@ -73,11 +81,11 @@ const styles = StyleSheet.create({
   },
   Fontsize: {
     fontSize: 30,
-    marginTop: 60,
+    marginTop: 20,
     fontFamily: "RobotoSlab_400Regular",
   },
   Mt1: {
-    marginTop: 30,
+    marginTop: 10,
     width: 300,
   },
   Mt2: {
@@ -97,22 +105,11 @@ const styles = StyleSheet.create({
   c1: {
     color: "grey",
   },
+  SplashLogo: {
+    height: 90,
+    width: 93,
+    marginTop: 20,
+  },
 });
-
-//   BoxBg: {
-//     backgroundColor: "#9A9B9A",
-
-//     marginLeft: 25,
-//     marginTop: 60,
-//   },
-//   InputTxt: {
-//     height: 40,
-//     width:300,
-//     marginTop: 40,
-//     borderWidth: 1,
-//     backgroundColor:"white",
-//     borderColor:"#707070",
-//     padding: 10,
-//   },
 
 export default LoginScreen;

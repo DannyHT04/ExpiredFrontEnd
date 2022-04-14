@@ -40,11 +40,7 @@ export default function App() {
           component={FooterComponent}
           options={{ headerShown: false}}
         />
-        <Stack.Screen
-          name="Splash"
-          component={SplashScreen}
-          options={{ title: "Splash" }}
-        />
+
         <Stack.Screen
           name="GroceryList"
           component={GroceryListScreen}
