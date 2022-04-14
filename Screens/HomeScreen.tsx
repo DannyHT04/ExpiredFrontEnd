@@ -24,6 +24,9 @@ const HomeScreen: FC = () => {
       <List.AccordionGroup >
     <List.Accordion title="Personal Items" id="1">
       <List.Item style={{backgroundColor: 'white'}} title="Milk" onPress={() =>console.log('Milk')}/>
+      <View style={styles.Pill}>
+                    <Text style={styles.Text} onPress={() => console.log('Edit Name')}>Bobby</Text>
+                </View>
     </List.Accordion>
     <List.Accordion title="House Fridge " id="2">
       <List.Item title="Steak" />
