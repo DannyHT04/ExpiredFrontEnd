@@ -64,7 +64,7 @@ const HomeScreen: FC = () => {
           </View>
         </List.Accordion>
         <List.Accordion theme={{colors:{background:"#E9E9E1", primary:'#4B4B4B'}}} title="Work Fridge" id="3">
-          <View style={{ backgroundColor: "white" }}>
+          <View style={{ backgroundColor: "#E9E9E1" }}>
             <List.Item
               title="eggs"
               style={styles.Pill}
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: "#9A9B9A",
     borderRadius: 25,
+    marginTop: 5,
     marginLeft: 10,
     marginBottom: 10,
     width: 350,
