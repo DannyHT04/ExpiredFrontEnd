@@ -42,17 +42,26 @@ const ProfileScreen: FC = () => {
 
             <View style={{ alignItems: "flex-start", paddingTop: 50 }}>
                 <Button icon="account-edit" color="#E9E9E1"> Name </Button>
+            </View>
+            <View style={{ alignItems: "center" }}>
                 <View style={styles.Pill}>
                     <Text style={styles.Text} onPress={() => console.log('Edit Name')}>Bobby</Text>
                 </View>
+            </View>
+            <View style={{ alignItems: "flex-start", paddingTop: 50 }}>
                 <Button icon="account-multiple-plus" color="#E9E9E1"> Groups </Button>
+            </View>
+            <View style={{ alignItems: "center" }}>
                 <View style={styles.Pill}>
                     <Text style={styles.Text} onPress={() => console.log('View Group')}>Group 1</Text>
                 </View>
+            </View>
+            <View style={{ alignItems: "center" }}>
                 <View style={styles.Pill}>
                     <Text style={styles.Text}>Group 2</Text>
                 </View>
             </View>
+
             <View style={{ alignItems: "center", marginTop: 50 }}>
                 <Button icon="logout" color="#E9E9E1" onPress={() => console.log('Log Out')}> Log Out </Button>
             </View>
@@ -74,7 +83,13 @@ const styles = StyleSheet.create({
 
     },
     Pill: {
-        padding: 15, backgroundColor: "#9A9B9A", borderRadius: 25, marginLeft: 30, marginBottom: 10, width: 370
+        padding: 15,
+        backgroundColor: "#9A9B9A",
+        borderRadius: 25,
+        // marginLeft: 30,
+        marginBottom: 10,
+        width: 350,
+        justifyContent: "center"
     }
 
 })
