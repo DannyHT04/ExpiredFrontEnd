@@ -21,11 +21,12 @@ const HomeScreen: FC = () => {
       </View> */}
 
       {/* list according */}
-      <List.AccordionGroup >
+      <List.AccordionGroup>
     <List.Accordion title="Personal Items" id="1">
-      <List.Item style={{backgroundColor: 'white'}} title="Milk" onPress={() =>console.log('Milk')}/>
-      <View style={styles.Pill}>
-                    <Text style={styles.Text} onPress={() => console.log('Edit Name')}>Bobby</Text>
+                <View style={{backgroundColor:"white"}}>
+                    <List.Item title="eggs" style={styles.Pill} onPress={() => console.log('Me eggs')} />
+                    <List.Item title="Steak" style={styles.Pill} onPress={() => console.log('Me Steak')} />
+                    <List.Item title="Milk" style={styles.Pill} onPress={() => console.log('Me Milk')} />
                 </View>
     </List.Accordion>
     <List.Accordion title="House Fridge " id="2">
@@ -65,7 +66,10 @@ const styles = StyleSheet.create({
   testing:{
     marginLeft: 100,
     marginRight: 100
-  }
+  },
+  Pill: {
+    padding: 8, backgroundColor: "#9A9B9A", borderRadius: 25, marginLeft: 30, marginBottom: 10, width: 370
+}
 });
 
 export default HomeScreen;
