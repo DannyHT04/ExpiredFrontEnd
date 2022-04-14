@@ -1,13 +1,21 @@
 import { Text, View } from 'react-native';
 import { FC } from 'react';
-import FooterComponent from '../Components/FooterComponent';
+import { Modal, Portal, Button, Provider } from 'react-native-paper';
+import ProfileModalComponent from '../Components/ProfileModalComponent';
 
 const HomeScreen: FC = () => {
     return (
-        <View>
+        <Provider>
+        <View style={{margin:100, backgroundColor: "blue"}}>
         <Text>Home Screen </Text>
         <Text>Home Screen </Text>
+        
+        <Portal>
+        <ProfileModalComponent />
+        </Portal>
+        
         </View>
+        </Provider>
     );
 }
 

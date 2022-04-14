@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, Image } from 'react-native';
 import { FC } from 'react';
-import { Button } from 'react-native-paper';
+import { Button, Provider, Portal } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Logo from '../assets/Logo.png';
 import {
@@ -16,6 +16,7 @@ import {
 } from "@expo-google-fonts/roboto-slab";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
+import ProfileModalComponent from '../Components/ProfileModalComponent';
 
 
 const ProfileScreen: FC = () => {
@@ -65,7 +66,17 @@ const ProfileScreen: FC = () => {
             <View style={{ alignItems: "center", marginTop: 50 }}>
                 <Button icon="logout" color="#E9E9E1" onPress={() => console.log('Log Out')}> Log Out </Button>
             </View>
+
+
+
+            <Provider>
+                <Portal>
+                    <ProfileModalComponent />
+                </Portal>
+            </Provider>
         </SafeAreaView>
+
+        
 
     );
 }
