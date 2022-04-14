@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import { FC, useState } from "react";
 import { TextInput, Button } from "react-native-paper";
+import { UserLogin, DoesUserExist } from "../Services/DataService";
 import {
   RobotoSlab_100Thin,
   RobotoSlab_200ExtraLight,
@@ -15,10 +16,40 @@ import {
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import Logo from "../assets/Logo.png";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-const LoginScreen: FC = () => {
+type RootStackParamList = {
+  Home: undefined;
+  Login: undefined;
+  CreateAccount: undefined;
+  Profile: undefined;
+  Splash: undefined;
+  GroceryList: undefined;
+  Footer: undefined;
+};
+
+type Props = NativeStackScreenProps<RootStackParamList, "Login">;
+
+const LoginScreen: FC<Props> = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = async () => {
+    let userData = {
+      UserName: username,
+      Password: password,
+    };
+
+    let token = await UserLogin(userData);
+    if (token.token != null) {
+      localStorage.setItem("Token", token.token);
+      let loginUser = await DoesUserExist(username);
+      setUsername(loginUser);
+      navigation.navigate('Home');
+    }
+  };
+
   let [fontsLoaded, error] = useFonts({
     RobotoSlab_100Thin,
     RobotoSlab_200ExtraLight,
@@ -49,6 +80,7 @@ const LoginScreen: FC = () => {
         <View style={[styles.Mt2]}>
           <TextInput
             style={[styles.Mt1]}
+            theme={{ colors: { primary: "#4B4B4B" } }}
             autoComplete="off"
             label="Username"
             value={username}
@@ -56,6 +88,7 @@ const LoginScreen: FC = () => {
           />
           <TextInput
             autoComplete="off"
+            theme={{ colors: { primary: "#4B4B4B" } }}
             style={[styles.Mt1]}
             label="Password"
             value={password}
@@ -63,10 +96,14 @@ const LoginScreen: FC = () => {
           />
         </View>
         <View style={styles.Mt2}>
-          <Button color="#505050" mode="contained">
+          <Button onPress={handleSubmit} color="#505050" mode="contained">
             <Text style={styles.Font}>Log In</Text>
           </Button>
-          <Button style={{marginTop:20}} color="#405CBB">Create Account?</Button>
+          <Button onPress={() => {
+            navigation.navigate('CreateAccount')
+          }}  style={{ marginTop: 20 }} color="#405CBB">
+            Create Account?
+          </Button>
         </View>
       </View>
     </View>
