@@ -28,4 +28,10 @@ async function AddUser(newUser){
    return data;
 }
 
-export { UserLogin, AddUser};
+async function DoesUserExist(Username){
+    let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/User/DoesUserExist${Username}`);
+    let data = await res.json();
+    return data;
+}
+
+export { UserLogin, AddUser, DoesUserExist};
