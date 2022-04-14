@@ -40,7 +40,7 @@ const ProfileScreen: FC = () => {
                 <Image source={Logo} style={{ width: 104, height: 101 }} />
             </View>
 
-            <View style={{ alignItems: "flex-start", paddingTop: 100 }}>
+            <View style={{ alignItems: "flex-start", paddingTop: 50 }}>
                 <Button icon="account-edit" color="#E9E9E1"> Name </Button>
                 <View style={styles.Pill}>
                     <Text style={styles.Text} onPress={() => console.log('Edit Name')}>Bobby</Text>
