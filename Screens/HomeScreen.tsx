@@ -1,12 +1,12 @@
 import { Text, View, StyleSheet } from "react-native";
 import { FC } from "react";
-import { List } from 'react-native-paper';
+import { List } from "react-native-paper";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 const HomeScreen: FC = () => {
   return (
     //view container
-    <View style={{paddingTop:200 , backgroundColor:"#4B4B4B", flex:1}}>
+    <View style={{ paddingTop: 200, backgroundColor: "#4B4B4B", flex: 1 }}>
       {/* <View style={[styles.row, styles.bgBox]}>
         <Text>Instructions</Text>
 
@@ -22,24 +22,65 @@ const HomeScreen: FC = () => {
 
       {/* list according */}
       <List.AccordionGroup>
-    <List.Accordion title="Personal Items" id="1">
-                <View style={{backgroundColor:"white"}}>
-                    <List.Item title="eggs" style={styles.Pill} onPress={() => console.log('Me eggs')} />
-                    <List.Item title="Steak" style={styles.Pill} onPress={() => console.log('Me Steak')} />
-                    <List.Item title="Milk" style={styles.Pill} onPress={() => console.log('Me Milk')} />
-                </View>
-    </List.Accordion>
-    <List.Accordion title="House Fridge " id="2">
-      <List.Item title="Steak" />
-    </List.Accordion>
-      <List.Accordion title="Work Fridge" id="3">
-        <List.Item title="Egg" />
-      </List.Accordion>
-   
-  </List.AccordionGroup>
+        <List.Accordion title="Personal Items" id="1">
+          <View style={{ backgroundColor: "white" }}>
+            <List.Item
+              title="eggs"
+              style={styles.Pill}
+              onPress={() => console.log("Me eggs")}
+            />
+            <List.Item
+              title="Steak"
+              style={styles.Pill}
+              onPress={() => console.log("Me Steak")}
+            />
+            <List.Item
+              title="Milk"
+              style={styles.Pill}
+              onPress={() => console.log("Me Milk")}
+            />
+          </View>
+        </List.Accordion>
+        <List.Accordion title="House Fridge " id="2">
+          <View style={{ backgroundColor: "white" }}>
+            <List.Item
+              title="eggs"
+              style={styles.Pill}
+              onPress={() => console.log("Me eggs")}
+            />
+            <List.Item
+              title="Steak"
+              style={styles.Pill}
+              onPress={() => console.log("Me Steak")}
+            />
+            <List.Item
+              title="Milk"
+              style={styles.Pill}
+              onPress={() => console.log("Me Milk")}
+            />
+          </View>
+        </List.Accordion>
+        <List.Accordion title="Work Fridge" id="3">
+          <View style={{ backgroundColor: "white" }}>
+            <List.Item
+              title="eggs"
+              style={styles.Pill}
+              onPress={() => console.log("Me eggs")}
+            />
+            <List.Item
+              title="Steak"
+              style={styles.Pill}
+              onPress={() => console.log("Me Steak")}
+            />
+            <List.Item
+              title="Milk"
+              style={styles.Pill}
+              onPress={() => console.log("Me Milk")}
+            />
+          </View>
+        </List.Accordion>
+      </List.AccordionGroup>
     </View>
-    
-    
   );
 };
 
@@ -53,23 +94,28 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "column",
-    alignItems: 'center'
+    alignItems: "center",
   },
-  bgBox:{
+  bgBox: {
     backgroundColor: "#9A9B9A",
     width: 350,
-    marginTop:100,
-    marginBottom:650,
-    flex:1,
-    padding: 10
+    marginTop: 100,
+    marginBottom: 650,
+    flex: 1,
+    padding: 10,
   },
-  testing:{
+  testing: {
     marginLeft: 100,
-    marginRight: 100
+    marginRight: 100,
   },
   Pill: {
-    padding: 8, backgroundColor: "#9A9B9A", borderRadius: 25, marginLeft: 30, marginBottom: 10, width: 370
-}
+    padding: 8,
+    backgroundColor: "#9A9B9A",
+    borderRadius: 25,
+    marginLeft: 30,
+    marginBottom: 10,
+    width: 370,
+  },
 });
 
 export default HomeScreen;
