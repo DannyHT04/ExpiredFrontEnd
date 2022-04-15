@@ -15,8 +15,20 @@ import {
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import Logo from '../assets/Logo.png'
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-const CreateAccountScreen: FC = () => {
+type RootStackParamList = {
+    Home: undefined;
+    Login: undefined;
+    CreateAccount: undefined;
+    Profile: undefined;
+    Splash: undefined;
+    GroceryList: undefined;
+    Footer: undefined;
+  };
+  type Props = NativeStackScreenProps<RootStackParamList, "CreateAccount">;
+
+const CreateAccountScreen: FC <Props> = ({navigation}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -37,6 +49,8 @@ const CreateAccountScreen: FC = () => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+
+  
 
   return (
     <View style={styles.Center}>
@@ -98,6 +112,13 @@ const CreateAccountScreen: FC = () => {
             <Text style={styles.Font}>Create</Text>
           </Button>
         </View>
+        <View>
+          <Button onPress={() => {
+            navigation.navigate('Login')
+          }}  color="#405CBB">
+            Already have an account?
+          </Button>
+        </View>
       </View>
     </View>
   );
@@ -120,7 +141,7 @@ const styles = StyleSheet.create({
     width: 300,
   },
   Mt2: {
-    marginTop: 40,
+    marginTop: 20,
   },
   BoxBg: {
     backgroundColor: "#9A9B9A",
