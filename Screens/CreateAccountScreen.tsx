@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Alert } from "react-native";
 import { FC, useState } from "react";
 import { Button, TextInput } from "react-native-paper";
 import {
@@ -56,10 +56,17 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
     if(result = false){
       let userData ={
         Id: 0,
+        firstname,
+        lastname,
         username,
+        email,
+        
       }
     }else{
       console.log("Already exist")
+      Alert.alert(
+        "Unable to Create Account",
+        "The username is already taken");
     }
   }
   
@@ -115,6 +122,7 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
             theme={{ colors: { primary: "#4B4B4B" } }}
             style={[styles.Mt1, styles.textInputSizng]}
             label="Password"
+            secureTextEntry = {true}
             value={password}
             onChangeText={setPassword}
           />
