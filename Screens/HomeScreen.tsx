@@ -16,6 +16,7 @@ import {
 } from "@expo-google-fonts/roboto-slab";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen: FC = () => {
   let [fontsLoaded, error] = useFonts({
@@ -35,8 +36,9 @@ const HomeScreen: FC = () => {
   }
 
   return (
+    <SafeAreaView style={{ backgroundColor: "#4B4B4B", flex:1}}>
     <View style={{ backgroundColor: "#4B4B4B", flex:1}}>
-      <View style={{flexDirection:"row", justifyContent: "space-evenly", marginTop:20}}>
+      <View style={{flexDirection:"row", justifyContent: "space-evenly", marginTop:15}}>
         
           <View style={{flex:1}}>
             <IconButton
@@ -168,6 +170,7 @@ const HomeScreen: FC = () => {
         </View>
       </View>
     </View>
+    </SafeAreaView>
   );
 };
 
