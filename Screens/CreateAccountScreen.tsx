@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Alert } from "react-native";
 import { FC, useState } from "react";
 import { Button, TextInput } from "react-native-paper";
 import {
@@ -16,6 +16,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import Logo from '../assets/Logo.png'
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { DoesUserExist } from "../Services/DataService";
 
 type RootStackParamList = {
     Home: undefined;
@@ -49,7 +50,25 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-
+  const handleSubmit = async () => {
+    let result = await DoesUserExist(username);
+    console.log(result);
+    if(result = false){
+      let userData ={
+        Id: 0,
+        firstname,
+        lastname,
+        username,
+        email,
+        
+      }
+    }else{
+      console.log("Already exist")
+      Alert.alert(
+        "Unable to Create Account",
+        "The username is already taken");
+    }
+  }
   
 
   return (
@@ -103,13 +122,14 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
             theme={{ colors: { primary: "#4B4B4B" } }}
             style={[styles.Mt1, styles.textInputSizng]}
             label="Password"
+            secureTextEntry = {true}
             value={password}
             onChangeText={setPassword}
           />
         </View>
         <View style={styles.Mt2}>
           <Button color="#505050" mode="contained">
-            <Text style={styles.Font}>Create</Text>
+            <Text style={styles.Font} onPress={handleSubmit}>Create</Text>
           </Button>
         </View>
         <View>
