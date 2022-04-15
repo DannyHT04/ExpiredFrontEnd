@@ -16,6 +16,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import Logo from '../assets/Logo.png'
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { DoesUserExist } from "../Services/DataService";
 
 type RootStackParamList = {
     Home: undefined;
@@ -49,7 +50,18 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-
+  const handleSubmit = async () => {
+    let result = await DoesUserExist(username);
+    console.log(result);
+    if(result = false){
+      let userData ={
+        Id: 0,
+        username,
+      }
+    }else{
+      console.log("Already exist")
+    }
+  }
   
 
   return (
@@ -109,7 +121,7 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
         </View>
         <View style={styles.Mt2}>
           <Button color="#505050" mode="contained">
-            <Text style={styles.Font}>Create</Text>
+            <Text style={styles.Font} onPress={handleSubmit}>Create</Text>
           </Button>
         </View>
         <View>
