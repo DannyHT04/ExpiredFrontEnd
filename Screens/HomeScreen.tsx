@@ -1,13 +1,73 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Image } from "react-native";
 import { FC } from "react";
-import { List } from "react-native-paper";
+import { IconButton, List } from "react-native-paper";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import Logo from "../assets/Logo.png";
+import {
+  RobotoSlab_100Thin,
+  RobotoSlab_200ExtraLight,
+  RobotoSlab_300Light,
+  RobotoSlab_400Regular,
+  RobotoSlab_500Medium,
+  RobotoSlab_600SemiBold,
+  RobotoSlab_700Bold,
+  RobotoSlab_800ExtraBold,
+  RobotoSlab_900Black,
+} from "@expo-google-fonts/roboto-slab";
+import AppLoading from "expo-app-loading";
+import { useFonts } from "@expo-google-fonts/roboto-slab";
 
 const HomeScreen: FC = () => {
+  let [fontsLoaded, error] = useFonts({
+    RobotoSlab_100Thin,
+    RobotoSlab_200ExtraLight,
+    RobotoSlab_300Light,
+    RobotoSlab_400Regular,
+    RobotoSlab_500Medium,
+    RobotoSlab_600SemiBold,
+    RobotoSlab_700Bold,
+    RobotoSlab_800ExtraBold,
+    RobotoSlab_900Black,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
-    //view container
-    <View style={{ paddingTop: 200, backgroundColor: "#4B4B4B", flex: 1 }}>
-      {/* <View style={[styles.row, styles.bgBox]}>
+    <View style={{ backgroundColor: "#4B4B4B", flex:1}}>
+      <View style={{flexDirection:"row", justifyContent: "space-evenly", marginTop:20}}>
+        
+          <View style={{flex:1}}>
+            <IconButton
+              icon="sort-variant"
+              color={Colors.red500}
+              size={40}
+              onPress={() => console.log("Pressed")}
+            />
+          </View>
+
+          <View style={{alignItems:"center"}}>
+            <Image
+              source={Logo}
+              style={[styles.LogoStyle]}
+              accessibilityLabel="Expired Logo"
+            />
+          </View>
+
+          <View style={{flex:1, alignItems: "flex-end"}}>
+            <IconButton
+              icon="plus-circle-outline"
+              color={Colors.red500}
+              size={45}
+              onPress={() => console.log("Pressed")}
+            />
+          </View>
+        
+      </View>
+
+      <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1 }}>
+        {/* <View style={[styles.row, styles.bgBox]}>
         <Text>Instructions</Text>
 
         <Text>1. Select the plus icon in the top right corner </Text>
@@ -20,69 +80,92 @@ const HomeScreen: FC = () => {
         </Text>
       </View> */}
 
-      {/* list according */}
-      <View style={[{marginLeft: 10, marginRight: 10}]}>
-      <List.AccordionGroup >
-        <List.Accordion theme={{colors:{background:"#E9E9E1", primary:'#4B4B4B'}}} title="Personal Items" id="1"
-        >
-         
-          <View style={{ backgroundColor: "#E9E9E1"}}>
-            <List.Item
-              title="eggs"
-              style={styles.Pill}
-              onPress={() => console.log("Me eggs")}
-            />
-            <List.Item
-              title="Steak"
-              style={styles.Pill}
-              onPress={() => console.log("Me Steak")}
-            />
-            <List.Item
-              title="Milk"
-              style={styles.Pill}
-              onPress={() => console.log("Me Milk")}
-            />
-          </View>
-        </List.Accordion>
-        <List.Accordion theme={{colors:{background:"#E9E9E1", primary:'#4B4B4B'}}} title="House Fridge " id="2">
-          <View style={{ backgroundColor: "#E9E9E1" }}>
-            <List.Item
-              title="eggs"
-              style={styles.Pill}
-              onPress={() => console.log("Me eggs")}
-            />
-            <List.Item
-              title="Steak"
-              style={styles.Pill}
-              onPress={() => console.log("Me Steak")}
-            />
-            <List.Item
-              title="Milk"
-              style={styles.Pill}
-              onPress={() => console.log("Me Milk")}
-            />
-          </View>
-        </List.Accordion>
-        <List.Accordion theme={{colors:{background:"#E9E9E1", primary:'#4B4B4B'}}} title="Work Fridge" id="3">
-          <View style={{ backgroundColor: "#E9E9E1" }}>
-            <List.Item
-              title="eggs"
-              style={styles.Pill}
-              onPress={() => console.log("Me eggs")}
-            />
-            <List.Item
-              title="Steak"
-              style={styles.Pill}
-              onPress={() => console.log("Me Steak")}
-            />
-            <List.Item
-              title="Milk"
-              style={styles.Pill}
-              onPress={() => console.log("Me Milk")}
-            />
-          </View>
-        </List.Accordion>
-      </List.AccordionGroup>
+        {/* list according */}
+        <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+          <List.AccordionGroup>
+            <List.Accordion
+              theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
+              title="Personal Items"
+              titleStyle={{
+                color: "#E9E9E1",
+                fontFamily: "RobotoSlab_400Regular",
+              }}
+              id="1"
+            >
+              <View style={{ backgroundColor: "#E9E9E1" }}>
+                <List.Item
+                  title="eggs"
+                  style={styles.Pill}
+                  onPress={() => console.log("Me eggs")}
+                />
+                <List.Item
+                  title="Steak"
+                  style={styles.Pill}
+                  onPress={() => console.log("Me Steak")}
+                />
+                <List.Item
+                  title="Milk"
+                  style={styles.Pill}
+                  onPress={() => console.log("Me Milk")}
+                />
+              </View>
+            </List.Accordion>
+            <List.Accordion
+              theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
+              title="House Fridge "
+              titleStyle={{
+                color: "#E9E9E1",
+                fontFamily: "RobotoSlab_400Regular",
+              }}
+              id="2"
+            >
+              <View style={{ backgroundColor: "#E9E9E1" }}>
+                <List.Item
+                  title="eggs"
+                  style={styles.Pill}
+                  onPress={() => console.log("Me eggs")}
+                />
+                <List.Item
+                  title="Steak"
+                  style={styles.Pill}
+                  onPress={() => console.log("Me Steak")}
+                />
+                <List.Item
+                  title="Milk"
+                  style={styles.Pill}
+                  onPress={() => console.log("Me Milk")}
+                />
+              </View>
+            </List.Accordion>
+            <List.Accordion
+              theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
+              title="Work Fridge"
+              titleStyle={{
+                color: "#E9E9E1",
+                fontFamily: "RobotoSlab_400Regular",
+              }}
+              id="3"
+            >
+              <View style={{ backgroundColor: "#E9E9E1" }}>
+                <List.Item
+                  title="eggs"
+                  style={styles.Pill}
+                  onPress={() => console.log("Me eggs")}
+                />
+                <List.Item
+                  title="Steak"
+                  style={styles.Pill}
+                  onPress={() => console.log("Me Steak")}
+                />
+                <List.Item
+                  title="Milk"
+                  style={styles.Pill}
+                  onPress={() => console.log("Me Milk")}
+                />
+              </View>
+            </List.Accordion>
+          </List.AccordionGroup>
+        </View>
       </View>
     </View>
   );
@@ -117,9 +200,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#9A9B9A",
     borderRadius: 25,
     marginTop: 5,
-    marginLeft: 10,
+    marginLeft: 20,
     marginBottom: 10,
-    width: 350,
+    width: 300,
+  },
+  LogoStyle: {
+    height: 90,
+    width: 93,
   },
 });
 
