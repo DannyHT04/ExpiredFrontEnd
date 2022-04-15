@@ -48,7 +48,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
       AsyncStorage.setItem("Token", token.token);
       let loginUser = await UserLogin(username);
       setUsername(loginUser);
-      navigation.navigate('Home');
+      navigation.navigate('Footer');
     }
   
   };
