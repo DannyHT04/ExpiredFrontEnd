@@ -12,7 +12,7 @@ async function UserLogin(userData){
 }
 
 async function AddUser(newUser){
-    let res= await fetch('https://expiredbackendapi2.azurewebsites.net/User/AddUser', {
+    let res= await fetch('https://expiredbackendapi2.azurewebsites.net/User/AddUser/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -21,7 +21,7 @@ async function AddUser(newUser){
     });
     if(!res.ok)
     {
-        const message = `An Error has Occured ${res.status}`
+        const message = `An Error has Occurred ${res.status}`
         throw new Error (message)
     }
     let data = await res.json();
@@ -29,7 +29,7 @@ async function AddUser(newUser){
 }
 
 async function DoesUserExist(Username){
-    let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/User/DoesUserExist${Username}`);
+    let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/User/DoesUserExist/${Username}`);
     let data = await res.json();
     return data;
 }
