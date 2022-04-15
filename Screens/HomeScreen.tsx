@@ -208,8 +208,8 @@ const styles = StyleSheet.create({
     width: 300,
   },
   LogoStyle: {
-    height: 90,
-    width: 93,
+    height: 101,
+    width: 104,
   },
 });
 
