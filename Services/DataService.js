@@ -21,7 +21,7 @@ async function AddUser(newUser){
     });
     if(!res.ok)
     {
-        const message = `An Error has Occured ${res.status}`
+        const message = `An Error has Occurred ${res.status}`
         throw new Error (message)
     }
     let data = await res.json();

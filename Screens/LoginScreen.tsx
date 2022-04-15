@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, Image } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FC, useState } from "react";
 import { TextInput, Button } from "react-native-paper";
 import { UserLogin, DoesUserExist } from "../Services/DataService";
@@ -18,6 +19,7 @@ import { useFonts } from "@expo-google-fonts/roboto-slab";
 import Logo from "../assets/Logo.png";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 
 type RootStackParamList = {
   Home: undefined;
@@ -43,11 +45,12 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
 
     let token = await UserLogin(userData);
     if (token.token != null) {
-      localStorage.setItem("Token", token.token);
-      let loginUser = await DoesUserExist(username);
+      AsyncStorage.setItem("Token", token.token);
+      let loginUser = await UserLogin(username);
       setUsername(loginUser);
       navigation.navigate('Home');
     }
+  
   };
 
   let [fontsLoaded, error] = useFonts({
@@ -90,6 +93,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
             autoComplete="off"
             theme={{ colors: { primary: "#4B4B4B" } }}
             style={[styles.Mt1]}
+            secureTextEntry = {true}
             label="Password"
             value={password}
             onChangeText={setPassword}

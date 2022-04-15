@@ -25,7 +25,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Login"
           component={LoginScreen}
           options={{ headerShown: false }}
@@ -34,7 +34,7 @@ export default function App() {
           name="CreateAccount"
           component={CreateAccountScreen}
           options={{ headerShown: false }}
-        /> */}
+        />
         <Stack.Screen
           name='Footer'
           component={FooterComponent}
@@ -49,7 +49,7 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "Home" }}
+          options={{ headerShown: false}}
         />
         <Stack.Screen
           name="Profile"
