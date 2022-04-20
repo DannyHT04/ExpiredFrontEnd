@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, Image } from "react-native";
-import { FC } from "react";
-import { IconButton, List } from "react-native-paper";
+import { FC, useState } from "react";
+import { IconButton, List, Modal, Portal, Button, Provider, TextInput } from "react-native-paper";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import Logo from "../assets/Logo.png";
 import {
@@ -19,6 +19,16 @@ import { useFonts } from "@expo-google-fonts/roboto-slab";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen: FC = () => {
+  const [showShort, setShowSort] = useState(false);
+  const [showAddItem, setShowAddItem] = useState(false);
+
+  const showSortModal = () => setShowSort(true);
+  const hideSortModal = () => setShowSort(false);
+  const showAddItemModal = () => setShowAddItem(true);
+  const hideAddItemModal = () => setShowAddItem(false);
+
+  const containerStyle = { backgroundColor: '#303030', padding: 20 };
+
   let [fontsLoaded, error] = useFonts({
     RobotoSlab_100Thin,
     RobotoSlab_200ExtraLight,
@@ -36,20 +46,20 @@ const HomeScreen: FC = () => {
   }
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#4B4B4B", flex:1}}>
-    <View style={{ backgroundColor: "#4B4B4B", flex:1}}>
-      <View style={{flexDirection:"row", justifyContent: "space-evenly"}}>
-        
-          <View style={{flex:1}}>
+    <SafeAreaView style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
+      <View style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+
+          <View style={{ flex: 1 }}>
             <IconButton
               icon="sort-variant"
               color={Colors.red500}
               size={40}
-              onPress={() => console.log("Pressed")}
+              onPress={showSortModal}
             />
           </View>
 
-          <View style={{alignItems:"center"}}>
+          <View style={{ alignItems: "center" }}>
             <Image
               source={Logo}
               style={[styles.LogoStyle]}
@@ -57,19 +67,19 @@ const HomeScreen: FC = () => {
             />
           </View>
 
-          <View style={{flex:1, alignItems: "flex-end"}}>
+          <View style={{ flex: 1, alignItems: "flex-end" }}>
             <IconButton
               icon="plus-circle-outline"
               color={Colors.red500}
               size={45}
-              onPress={() => console.log("Pressed")}
+              onPress={showAddItemModal}
             />
           </View>
-        
-      </View>
 
-      <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1 }}>
-        {/* <View style={[styles.row, styles.bgBox]}>
+        </View>
+
+        <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1 }}>
+          {/* <View style={[styles.row, styles.bgBox]}>
         <Text>Instructions</Text>
 
         <Text>1. Select the plus icon in the top right corner </Text>
@@ -82,94 +92,153 @@ const HomeScreen: FC = () => {
         </Text>
       </View> */}
 
-        {/* list according */}
-        <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
-          <List.AccordionGroup>
-            <List.Accordion
-              theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
-              title="Personal Items"
-              titleStyle={{
-                color: "#E9E9E1",
-                fontFamily: "RobotoSlab_400Regular",
-              }}
-              id="1"
-            >
-              <View style={{ backgroundColor: "#E9E9E1" }}>
-                <List.Item
-                  title="eggs"
-                  style={styles.Pill}
-                  onPress={() => console.log("Me eggs")}
-                />
-                <List.Item
-                  title="Steak"
-                  style={styles.Pill}
-                  onPress={() => console.log("Me Steak")}
-                />
-                <List.Item
-                  title="Milk"
-                  style={styles.Pill}
-                  onPress={() => console.log("Me Milk")}
-                />
-              </View>
-            </List.Accordion>
-            <List.Accordion
-              theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
-              title="House Fridge "
-              titleStyle={{
-                color: "#E9E9E1",
-                fontFamily: "RobotoSlab_400Regular",
-              }}
-              id="2"
-            >
-              <View style={{ backgroundColor: "#E9E9E1" }}>
-                <List.Item
-                  title="eggs"
-                  style={styles.Pill}
-                  onPress={() => console.log("Me eggs")}
-                />
-                <List.Item
-                  title="Steak"
-                  style={styles.Pill}
-                  onPress={() => console.log("Me Steak")}
-                />
-                <List.Item
-                  title="Milk"
-                  style={styles.Pill}
-                  onPress={() => console.log("Me Milk")}
-                />
-              </View>
-            </List.Accordion>
-            <List.Accordion
-              theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
-              title="Work Fridge"
-              titleStyle={{
-                color: "#E9E9E1",
-                fontFamily: "RobotoSlab_400Regular",
-              }}
-              id="3"
-            >
-              <View style={{ backgroundColor: "#E9E9E1" }}>
-                <List.Item
-                  title="eggs"
-                  style={styles.Pill}
-                  onPress={() => console.log("Me eggs")}
-                />
-                <List.Item
-                  title="Steak"
-                  style={styles.Pill}
-                  onPress={() => console.log("Me Steak")}
-                />
-                <List.Item
-                  title="Milk"
-                  style={styles.Pill}
-                  onPress={() => console.log("Me Milk")}
-                />
-              </View>
-            </List.Accordion>
-          </List.AccordionGroup>
+          {/* list according */}
+          <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+            <List.AccordionGroup>
+              <List.Accordion
+                theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
+                title="Personal Items"
+                titleStyle={{
+                  color: "#E9E9E1",
+                  fontFamily: "RobotoSlab_400Regular",
+                }}
+                id="1"
+              >
+                <View style={{ backgroundColor: "#E9E9E1" }}>
+                  <List.Item
+                    title="eggs"
+                    style={styles.Pill}
+                    onPress={() => console.log("Me eggs")}
+                  />
+                  <List.Item
+                    title="Steak"
+                    style={styles.Pill}
+                    onPress={() => console.log("Me Steak")}
+                  />
+                  <List.Item
+                    title="Milk"
+                    style={styles.Pill}
+                    onPress={() => console.log("Me Milk")}
+                  />
+                </View>
+              </List.Accordion>
+              <List.Accordion
+                theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
+                title="House Fridge "
+                titleStyle={{
+                  color: "#E9E9E1",
+                  fontFamily: "RobotoSlab_400Regular",
+                }}
+                id="2"
+              >
+                <View style={{ backgroundColor: "#E9E9E1" }}>
+                  <List.Item
+                    title="eggs"
+                    style={styles.Pill}
+                    onPress={() => console.log("Me eggs")}
+                  />
+                  <List.Item
+                    title="Steak"
+                    style={styles.Pill}
+                    onPress={() => console.log("Me Steak")}
+                  />
+                  <List.Item
+                    title="Milk"
+                    style={styles.Pill}
+                    onPress={() => console.log("Me Milk")}
+                  />
+                </View>
+              </List.Accordion>
+              <List.Accordion
+                theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
+                title="Work Fridge"
+                titleStyle={{
+                  color: "#E9E9E1",
+                  fontFamily: "RobotoSlab_400Regular",
+                }}
+                id="3"
+              >
+                <View style={{ backgroundColor: "#E9E9E1" }}>
+                  <List.Item
+                    title="eggs"
+                    style={styles.Pill}
+                    onPress={() => console.log("Me eggs")}
+                  />
+                  <List.Item
+                    title="Steak"
+                    style={styles.Pill}
+                    onPress={() => console.log("Me Steak")}
+                  />
+                  <List.Item
+                    title="Milk"
+                    style={styles.Pill}
+                    onPress={() => console.log("Me Milk")}
+                  />
+                </View>
+              </List.Accordion>
+            </List.AccordionGroup>
+          </View>
         </View>
       </View>
-    </View>
+
+
+      {/* **** VIEW SORT MODAL **** */}
+      <Provider>
+                <Portal>
+                    <Modal visible={showShort} onDismiss={hideSortModal} contentContainerStyle={containerStyle}>
+                        <View >
+                            <View style={{ alignItems: 'center' }}>
+                                <Text style={styles.Text} >SORT !!!</Text>
+                                <TextInput
+                                    style={{ width: 300, marginTop: 20 }}
+                                    theme={{ colors: { primary: "#4B4B4B" } }}
+                                    autoComplete="off"
+                                    label="Type New Name"
+                                />
+                                <Button style={{ marginTop: 20 }} color="#505050" mode="contained" onPress={hideSortModal}>
+                                    Save
+                                </Button>
+                            </View>
+                        </View>
+                    </Modal>
+                </Portal>
+            </Provider>
+
+
+
+
+{/* **** VIEW ADD ITEM MODAL **** */}
+<Provider>
+                <Portal>
+                    <Modal visible={showAddItem} onDismiss={hideAddItemModal} contentContainerStyle={containerStyle}>
+                        <View >
+                            <View style={{ alignItems: 'center' }}>
+                                <Text style={styles.Text} >ADD ITEM MODAL</Text>
+                                <TextInput
+                                    style={{ width: 300, marginTop: 20 }}
+                                    theme={{ colors: { primary: "#4B4B4B" } }}
+                                    autoComplete="off"
+                                    label="Type New Name"
+                                />
+                                <Button style={{ marginTop: 20 }} color="#505050" mode="contained" onPress={hideAddItemModal}>
+                                    Save
+                                </Button>
+                            </View>
+                        </View>
+                    </Modal>
+                </Portal>
+            </Provider>
+
+
+
+
+
+
+
+
+
+
+
     </SafeAreaView>
   );
 };
@@ -211,6 +280,12 @@ const styles = StyleSheet.create({
     height: 101,
     width: 104,
   },
+  Text: {
+    fontFamily: "RobotoSlab_400Regular",
+    fontSize: 24,
+    alignItems: "center",
+    color: "#E9E9E1",
+},
 });
 
 export default HomeScreen;
