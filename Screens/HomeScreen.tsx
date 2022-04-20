@@ -38,7 +38,7 @@ const HomeScreen: FC = () => {
   return (
     <SafeAreaView style={{ backgroundColor: "#4B4B4B", flex:1}}>
     <View style={{ backgroundColor: "#4B4B4B", flex:1}}>
-      <View style={{flexDirection:"row", justifyContent: "space-evenly", marginTop:15}}>
+      <View style={{flexDirection:"row", justifyContent: "space-evenly"}}>
         
           <View style={{flex:1}}>
             <IconButton
