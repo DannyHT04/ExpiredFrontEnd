@@ -101,17 +101,20 @@ const GroceryListScreen: FC = () => {
                   title="eggs"
                   style={styles.Pill}
                   onPress={() => console.log("Me eggs")}
-                  right={props => <List.Icon {...props} color="#AA4040" icon="trash-can-outline" />}
+                  right={props => <IconButton  onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" />}
                 />
+                <View></View>
                 <List.Item
                   title="Steak"
                   style={styles.Pill}
                   onPress={() => console.log("Me Steak")}
+                  right={props => <IconButton  onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" />}
                 />
                 <List.Item
                   title="Milk"
                   style={styles.Pill}
                   onPress={() => console.log("Me Milk")}
+                  right={props => <IconButton  onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" />}
                 />
               </View>
             </List.Accordion>
@@ -129,16 +132,19 @@ const GroceryListScreen: FC = () => {
                   title="eggs"
                   style={styles.Pill}
                   onPress={() => console.log("Me eggs")}
+                  right={props => <IconButton  onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" />}
                 />
                 <List.Item
                   title="Steak"
                   style={styles.Pill}
                   onPress={() => console.log("Me Steak")}
+                  right={props => <IconButton  onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" />}
                 />
                 <List.Item
                   title="Milk"
                   style={styles.Pill}
                   onPress={() => console.log("Me Milk")}
+                  right={props => <IconButton  onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" />}
                 />
               </View>
             </List.Accordion>
@@ -156,16 +162,19 @@ const GroceryListScreen: FC = () => {
                   title="eggs"
                   style={styles.Pill}
                   onPress={() => console.log("Me eggs")}
+                  right={props => <IconButton  onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" />}
                 />
                 <List.Item
                   title="Steak"
                   style={styles.Pill}
                   onPress={() => console.log("Me Steak")}
+                  right={props => <IconButton  onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" />}
                 />
                 <List.Item
                   title="Milk"
                   style={styles.Pill}
                   onPress={() => console.log("Me Milk")}
+                  right={props => <IconButton  onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" />}
                 />
               </View>
             </List.Accordion>
