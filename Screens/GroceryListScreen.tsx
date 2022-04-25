@@ -199,8 +199,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   SplashLogo: {
-    height: 90,
-    width: 93,
+    height: 101,
+    width: 104,
     marginTop: 20,
   },
   Font:{
