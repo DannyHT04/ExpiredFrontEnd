@@ -204,13 +204,9 @@ const HomeScreen: FC = () => {
           >
             <View>
               <View style={{ alignItems: "center" }}>
-                <Text style={styles.Text}>SORT !!!</Text>
-                <TextInput
-                  style={{ width: 300, marginTop: 20 }}
-                  theme={{ colors: { primary: "#4B4B4B" } }}
-                  autoComplete="off"
-                  label="Type New Name"
-                />
+                <Text style={styles.Text}>Sort Grocery Items</Text>
+                </View>
+                <Text style={styles.SortText}> Item Name</Text>
                 <Button
                   style={{ marginTop: 20 }}
                   color="#505050"
@@ -219,7 +215,7 @@ const HomeScreen: FC = () => {
                 >
                   Save
                 </Button>
-              </View>
+              
             </View>
           </Modal>
         </Portal>
@@ -300,6 +296,12 @@ const styles = StyleSheet.create({
   Text: {
     fontFamily: "RobotoSlab_400Regular",
     fontSize: 24,
+    alignItems: "center",
+    color: "#E9E9E1",
+  },
+  SortText: {
+    fontFamily: "RobotoSlab_400Regular",
+    fontSize: 18,
     alignItems: "center",
     color: "#E9E9E1",
   },
