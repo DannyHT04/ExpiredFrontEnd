@@ -17,7 +17,6 @@ import {
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import Logo from "../assets/Logo.png";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 
