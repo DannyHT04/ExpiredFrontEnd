@@ -54,7 +54,7 @@ const HomeScreen: FC = () => {
             <IconButton
               icon="sort-variant"
               color={Colors.red500}
-              size={40}
+              size={45}
               onPress={showSortModal}
             />
           </View>
@@ -93,7 +93,7 @@ const HomeScreen: FC = () => {
       </View> */}
 
           {/* list according */}
-          <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+          <View style={[{ marginRight: 20, marginLeft: 30, width: 300 }]}>
             <List.AccordionGroup>
               <List.Accordion
                 theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
