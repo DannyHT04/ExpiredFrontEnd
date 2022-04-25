@@ -80,7 +80,8 @@ const GroceryListScreen: FC = () => {
         </Text>
         <Text>
           3. Now your product is successfully entered & if you'd like to add to
-          your Grocery List select the icon on
+          your Grocery List select the icon on  
+          
         </Text>
       </View> */}
 
