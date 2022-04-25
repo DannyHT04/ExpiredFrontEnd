@@ -146,8 +146,8 @@ const styles = StyleSheet.create({
     color: "grey",
   },
   SplashLogo: {
-    height: 90,
-    width: 93,
+    height: 101,
+    width: 104,
     marginTop: 20,
   },
 });
