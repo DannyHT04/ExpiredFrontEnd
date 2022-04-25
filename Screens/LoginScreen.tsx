@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Alert } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FC, useState } from "react";
 import { TextInput, Button } from "react-native-paper";
@@ -44,6 +44,12 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
     };
 
     let token = await UserLogin(userData);
+    console.log(token.status)
+    if(token.status === 401){
+      Alert.alert(
+        "Unable to Login",
+        "Username or password is incorrect");
+    }
     if (token.token != null) {
       AsyncStorage.setItem("Token", token.token);
       let loginUser = await UserLogin(username);
