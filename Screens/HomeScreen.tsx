@@ -54,6 +54,7 @@ const HomeScreen: FC = () => {
   }
 
   return (
+    <Provider>
     <SafeAreaView style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
       <View style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
@@ -194,7 +195,7 @@ const HomeScreen: FC = () => {
       </View>
 
       {/* **** VIEW SORT MODAL **** */}
-      <Provider>
+      
         <Portal>
           <Modal
             visible={showShort}
@@ -222,10 +223,10 @@ const HomeScreen: FC = () => {
             </View>
           </Modal>
         </Portal>
-      </Provider>
+      
 
       {/* **** VIEW ADD ITEM MODAL **** */}
-      <Provider>
+      
         <Portal>
           <Modal
             visible={showAddItem}
@@ -253,8 +254,9 @@ const HomeScreen: FC = () => {
             </View>
           </Modal>
         </Portal>
-      </Provider>
+      
     </SafeAreaView>
+    </Provider>
   );
 };
 
