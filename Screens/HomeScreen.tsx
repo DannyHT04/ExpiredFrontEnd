@@ -184,50 +184,50 @@ const HomeScreen: FC = () => {
 
       {/* **** VIEW SORT MODAL **** */}
       <Provider>
-                <Portal>
-                    <Modal visible={showShort} onDismiss={hideSortModal} contentContainerStyle={containerStyle}>
-                        <View >
-                            <View style={{ alignItems: 'center' }}>
-                                <Text style={styles.Text} >SORT !!!</Text>
-                                <TextInput
-                                    style={{ width: 300, marginTop: 20 }}
-                                    theme={{ colors: { primary: "#4B4B4B" } }}
-                                    autoComplete="off"
-                                    label="Type New Name"
-                                />
-                                <Button style={{ marginTop: 20 }} color="#505050" mode="contained" onPress={hideSortModal}>
-                                    Save
-                                </Button>
-                            </View>
-                        </View>
-                    </Modal>
-                </Portal>
-            </Provider>
+        <Portal>
+          <Modal visible={showShort} onDismiss={hideSortModal} contentContainerStyle={containerStyle}>
+            <View >
+              <View style={{ alignItems: 'center' }}>
+                <Text style={styles.Text} >SORT !!!</Text>
+                <TextInput
+                  style={{ width: 300, marginTop: 20 }}
+                  theme={{ colors: { primary: "#4B4B4B" } }}
+                  autoComplete="off"
+                  label="Type New Name"
+                />
+                <Button style={{ marginTop: 20 }} color="#505050" mode="contained" onPress={hideSortModal}>
+                  Save
+                </Button>
+              </View>
+            </View>
+          </Modal>
+        </Portal>
+      </Provider>
 
 
 
 
-{/* **** VIEW ADD ITEM MODAL **** */}
-<Provider>
-                <Portal>
-                    <Modal visible={showAddItem} onDismiss={hideAddItemModal} contentContainerStyle={containerStyle}>
-                        <View >
-                            <View style={{ alignItems: 'center' }}>
-                                <Text style={styles.Text} >ADD ITEM MODAL</Text>
-                                <TextInput
-                                    style={{ width: 300, marginTop: 20 }}
-                                    theme={{ colors: { primary: "#4B4B4B" } }}
-                                    autoComplete="off"
-                                    label="Type New Name"
-                                />
-                                <Button style={{ marginTop: 20 }} color="#505050" mode="contained" onPress={hideAddItemModal}>
-                                    Save
-                                </Button>
-                            </View>
-                        </View>
-                    </Modal>
-                </Portal>
-            </Provider>
+      {/* **** VIEW ADD ITEM MODAL **** */}
+      <Provider>
+        <Portal>
+          <Modal visible={showAddItem} onDismiss={hideAddItemModal} contentContainerStyle={containerStyle}>
+            <View >
+              <View style={{ alignItems: 'center' }}>
+                <Text style={styles.Text} >ADD ITEM MODAL</Text>
+                <TextInput
+                  style={{ width: 300, marginTop: 20 }}
+                  theme={{ colors: { primary: "#4B4B4B" } }}
+                  autoComplete="off"
+                  label="Type New Name"
+                />
+                <Button style={{ marginTop: 20 }} color="#505050" mode="contained" onPress={hideAddItemModal}>
+                  Save
+                </Button>
+              </View>
+            </View>
+          </Modal>
+        </Portal>
+      </Provider>
 
 
 
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     alignItems: "center",
     color: "#E9E9E1",
-},
+  },
 });
 
 export default HomeScreen;
