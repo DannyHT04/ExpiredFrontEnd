@@ -124,7 +124,7 @@ const HomeScreen: FC = () => {
               </List.Accordion>
               <List.Accordion
                 theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
-                title="House Fridge "
+                title="House Fridge"
                 titleStyle={{
                   color: "#E9E9E1",
                   fontFamily: "RobotoSlab_400Regular",
