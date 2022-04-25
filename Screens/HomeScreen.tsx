@@ -272,9 +272,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#9A9B9A",
     borderRadius: 25,
     marginTop: 5,
-    marginLeft: 20,
+    marginLeft: 15,
     marginBottom: 10,
-    width: 300,
+    width: 270,
   },
   LogoStyle: {
     height: 101,
