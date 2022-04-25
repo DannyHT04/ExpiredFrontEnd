@@ -1,6 +1,14 @@
 import { Text, View, StyleSheet, Image } from "react-native";
 import { FC, useState } from "react";
-import { IconButton, List, Modal, Portal, Button, Provider, TextInput } from "react-native-paper";
+import {
+  IconButton,
+  List,
+  Modal,
+  Portal,
+  Button,
+  Provider,
+  TextInput,
+} from "react-native-paper";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import Logo from "../assets/Logo.png";
 import {
@@ -27,7 +35,7 @@ const HomeScreen: FC = () => {
   const showAddItemModal = () => setShowAddItem(true);
   const hideAddItemModal = () => setShowAddItem(false);
 
-  const containerStyle = { backgroundColor: '#303030', padding: 20 };
+  const containerStyle = { backgroundColor: "#303030", padding: 20 };
 
   let [fontsLoaded, error] = useFonts({
     RobotoSlab_100Thin,
@@ -49,12 +57,11 @@ const HomeScreen: FC = () => {
     <SafeAreaView style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
       <View style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-
           <View style={{ flex: 1 }}>
             <IconButton
               icon="sort-variant"
               color={Colors.red500}
-              size={40}
+              size={45}
               onPress={showSortModal}
             />
           </View>
@@ -75,10 +82,9 @@ const HomeScreen: FC = () => {
               onPress={showAddItemModal}
             />
           </View>
-
         </View>
 
-        <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1 }}>
+        <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1, alignItems:'center'}}>
           {/* <View style={[styles.row, styles.bgBox]}>
         <Text>Instructions</Text>
 
@@ -96,7 +102,9 @@ const HomeScreen: FC = () => {
           <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
             <List.AccordionGroup>
               <List.Accordion
-                theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
+                theme={{
+                  colors: { background: "#9A9B9A", primary: "#4B4B4B" },
+                }}
                 title="Personal Items"
                 titleStyle={{
                   color: "#E9E9E1",
@@ -123,8 +131,10 @@ const HomeScreen: FC = () => {
                 </View>
               </List.Accordion>
               <List.Accordion
-                theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
-                title="House Fridge "
+                theme={{
+                  colors: { background: "#9A9B9A", primary: "#4B4B4B" },
+                }}
+                title="House Fridge"
                 titleStyle={{
                   color: "#E9E9E1",
                   fontFamily: "RobotoSlab_400Regular",
@@ -150,7 +160,9 @@ const HomeScreen: FC = () => {
                 </View>
               </List.Accordion>
               <List.Accordion
-                theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
+                theme={{
+                  colors: { background: "#9A9B9A", primary: "#4B4B4B" },
+                }}
                 title="Work Fridge"
                 titleStyle={{
                   color: "#E9E9E1",
@@ -181,64 +193,67 @@ const HomeScreen: FC = () => {
         </View>
       </View>
 
-
       {/* **** VIEW SORT MODAL **** */}
       <Provider>
-                <Portal>
-                    <Modal visible={showShort} onDismiss={hideSortModal} contentContainerStyle={containerStyle}>
-                        <View >
-                            <View style={{ alignItems: 'center' }}>
-                                <Text style={styles.Text} >SORT !!!</Text>
-                                <TextInput
-                                    style={{ width: 300, marginTop: 20 }}
-                                    theme={{ colors: { primary: "#4B4B4B" } }}
-                                    autoComplete="off"
-                                    label="Type New Name"
-                                />
-                                <Button style={{ marginTop: 20 }} color="#505050" mode="contained" onPress={hideSortModal}>
-                                    Save
-                                </Button>
-                            </View>
-                        </View>
-                    </Modal>
-                </Portal>
-            </Provider>
+        <Portal>
+          <Modal
+            visible={showShort}
+            onDismiss={hideSortModal}
+            contentContainerStyle={containerStyle}
+          >
+            <View>
+              <View style={{ alignItems: "center" }}>
+                <Text style={styles.Text}>SORT !!!</Text>
+                <TextInput
+                  style={{ width: 300, marginTop: 20 }}
+                  theme={{ colors: { primary: "#4B4B4B" } }}
+                  autoComplete="off"
+                  label="Type New Name"
+                />
+                <Button
+                  style={{ marginTop: 20 }}
+                  color="#505050"
+                  mode="contained"
+                  onPress={hideSortModal}
+                >
+                  Save
+                </Button>
+              </View>
+            </View>
+          </Modal>
+        </Portal>
+      </Provider>
 
-
-
-
-{/* **** VIEW ADD ITEM MODAL **** */}
-<Provider>
-                <Portal>
-                    <Modal visible={showAddItem} onDismiss={hideAddItemModal} contentContainerStyle={containerStyle}>
-                        <View >
-                            <View style={{ alignItems: 'center' }}>
-                                <Text style={styles.Text} >ADD ITEM MODAL</Text>
-                                <TextInput
-                                    style={{ width: 300, marginTop: 20 }}
-                                    theme={{ colors: { primary: "#4B4B4B" } }}
-                                    autoComplete="off"
-                                    label="Type New Name"
-                                />
-                                <Button style={{ marginTop: 20 }} color="#505050" mode="contained" onPress={hideAddItemModal}>
-                                    Save
-                                </Button>
-                            </View>
-                        </View>
-                    </Modal>
-                </Portal>
-            </Provider>
-
-
-
-
-
-
-
-
-
-
-
+      {/* **** VIEW ADD ITEM MODAL **** */}
+      <Provider>
+        <Portal>
+          <Modal
+            visible={showAddItem}
+            onDismiss={hideAddItemModal}
+            contentContainerStyle={containerStyle}
+          >
+            <View>
+              <View style={{ alignItems: "center" }}>
+                <Text style={styles.Text}>ADD ITEM MODAL</Text>
+                <TextInput
+                  style={{ width: 300, marginTop: 20 }}
+                  theme={{ colors: { primary: "#4B4B4B" } }}
+                  autoComplete="off"
+                  label="Type New Name"
+                />
+                <Button
+                  style={{ marginTop: 20 }}
+                  color="#505050"
+                  mode="contained"
+                  onPress={hideAddItemModal}
+                >
+                  Save
+                </Button>
+              </View>
+            </View>
+          </Modal>
+        </Portal>
+      </Provider>
     </SafeAreaView>
   );
 };
@@ -285,7 +300,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     alignItems: "center",
     color: "#E9E9E1",
-},
+  },
 });
 
 export default HomeScreen;

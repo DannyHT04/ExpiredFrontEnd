@@ -70,7 +70,7 @@ const GroceryListScreen: FC = () => {
       </View>
 
 
-      <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1 }}>
+      <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1, alignItems:'center' }}>
         {/* <View style={[styles.row, styles.bgBox]}>
         <Text>Instructions</Text>
 
@@ -80,7 +80,8 @@ const GroceryListScreen: FC = () => {
         </Text>
         <Text>
           3. Now your product is successfully entered & if you'd like to add to
-          your Grocery List select the icon on
+          your Grocery List select the icon on  
+          
         </Text>
       </View> */}
 
@@ -199,8 +200,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   SplashLogo: {
-    height: 90,
-    width: 93,
+    height: 101,
+    width: 104,
     marginTop: 20,
   },
   Font:{

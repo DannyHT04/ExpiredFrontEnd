@@ -3,6 +3,8 @@ import { FC, useState } from 'react';
 import { Modal, Portal, Button, Provider, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Logo from '../assets/Logo.png';
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
     RobotoSlab_100Thin,
     RobotoSlab_200ExtraLight,
@@ -17,8 +19,18 @@ import {
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 
+type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
+type RootStackParamList = {
+    Home: undefined;
+    Login: undefined;
+    CreateAccount: undefined;
+    Profile: undefined;
+    Splash: undefined;
+    GroceryList: undefined;
+    Footer: undefined;
+  };
 
-const ProfileScreen: FC = () => {
+const ProfileScreen: FC<Props> = ({navigation}) => {
     const [visible, setVisible] = useState(false);
     const [showGroup, setShowGroup] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
@@ -33,6 +45,10 @@ const ProfileScreen: FC = () => {
     const [username, setUsername] = useState("");
 
 
+    const handleLogOut = () => {
+        AsyncStorage.clear()
+        navigation.navigate('Login')
+    }
 
     let [fontsLoaded, error] = useFonts({
         RobotoSlab_100Thin,
@@ -78,7 +94,7 @@ const ProfileScreen: FC = () => {
             </View>
 
             <View style={{ alignItems: "center", marginTop: 50 }}>
-                <Button icon="logout" color="#E9E9E1" onPress={() => console.log('Log Out')}> Log Out </Button>
+                <Button icon="logout" color="#E9E9E1" onPress={handleLogOut}> Log Out </Button>
             </View>
 
 
