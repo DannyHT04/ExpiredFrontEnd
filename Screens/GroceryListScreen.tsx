@@ -70,7 +70,7 @@ const GroceryListScreen: FC = () => {
       </View>
 
 
-      <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1 }}>
+      <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1, alignItems:'center' }}>
         {/* <View style={[styles.row, styles.bgBox]}>
         <Text>Instructions</Text>
 
@@ -85,7 +85,7 @@ const GroceryListScreen: FC = () => {
       </View> */}
 
         {/* list according */}
-        <View style={[{ marginRight: 20, marginLeft: 30, width: 300 }]}>
+        <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
           <List.AccordionGroup>
             <List.Accordion
               theme={{ colors: { background: "#9A9B9A", primary: "#4B4B4B" } }}
@@ -214,9 +214,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#9A9B9A",
     borderRadius: 25,
     marginTop: 5,
-    marginLeft: 15,
+    marginLeft: 20,
     marginBottom: 10,
-    width: 270,
+    width: 300,
   },
 });
 export default GroceryListScreen;
