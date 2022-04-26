@@ -259,12 +259,18 @@ const HomeScreen: FC = () => {
           >
             <View>
               <View style={{ alignItems: "center" }}>
-                <Text style={styles.Text}>ADD ITEM MODAL</Text>
+                <Text style={styles.Text}>Add Item</Text>
                 <TextInput
                   style={{ width: 300, marginTop: 20 }}
                   theme={{ colors: { primary: "#4B4B4B" } }}
                   autoComplete="off"
-                  label="Type New Name"
+                  label="Product Name"
+                />
+                <TextInput
+                  style={{ width: 300, marginTop: 20 }}
+                  theme={{ colors: { primary: "#4B4B4B" } }}
+                  autoComplete="off"
+                  label="Owner"
                 />
                 <Button
                   style={{ marginTop: 20 }}
