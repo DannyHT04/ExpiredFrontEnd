@@ -44,10 +44,9 @@ const ProfileScreen: FC<Props> = ({navigation}) => {
     const containerStyle = { backgroundColor: '#303030', padding: 20 };
     const [username, setUsername] = useState("");
 
-
     const handleLogOut = () => {
-        AsyncStorage.clear()
-        navigation.navigate('Login')
+        AsyncStorage.clear();
+        navigation.navigate('Login');
     }
 
     let [fontsLoaded, error] = useFonts({

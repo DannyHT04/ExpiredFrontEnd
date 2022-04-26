@@ -55,6 +55,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
       setUsername(loginUser);
       navigation.navigate('Footer');
     }
+    setPassword("")
   
   };
 
