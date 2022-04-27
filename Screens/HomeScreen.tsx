@@ -9,6 +9,7 @@ import {
   Provider,
   TextInput,
   RadioButton,
+  DefaultTheme
 } from "react-native-paper";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import Logo from "../assets/Logo.png";
@@ -26,6 +27,8 @@ import {
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { DatePickerInput } from 'react-native-paper-dates';
+import DropDown from "react-native-paper-dropdown";
 
 const HomeScreen: FC = () => {
   const [showShort, setShowSort] = useState(false);
@@ -38,7 +41,28 @@ const HomeScreen: FC = () => {
   const showAddItemModal = () => setShowAddItem(true);
   const hideAddItemModal = () => setShowAddItem(false);
 
+  const [inputDate, setInputDate] = useState<Date | undefined>(undefined)
+  const [remindDate, setRemindDate] = useState<Date | undefined>(undefined)
+
   const containerStyle = { backgroundColor: "#303030", padding: 20 };
+
+  const [showDropDown, setShowDropDown] = useState(false);
+  const [group, setGroup] = useState("");
+
+  const groupList = [
+    {
+      label: "Group 1",
+      value: "group1",
+    },
+    {
+      label: "Group 2",
+      value: "group2",
+    },
+    {
+      label: "Group 3",
+      value: "group3",
+    },
+  ];
 
   let [fontsLoaded, error] = useFonts({
     RobotoSlab_100Thin,
@@ -56,8 +80,17 @@ const HomeScreen: FC = () => {
     return <AppLoading />;
   }
 
+  //used to change full theme color
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#4B4B4B',
+    }
+  };
+
   return (
-    <Provider>
+    <Provider theme={theme}>
       <SafeAreaView style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
         <View style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
           <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
@@ -211,38 +244,38 @@ const HomeScreen: FC = () => {
               </View>
               <Text style={styles.SortText}> Item Name</Text>
               <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
-              <RadioButton.Item
-                      label="A-Z"
-                      value="first"
-                      color="#E9E9E1"
-                    />
                 <RadioButton.Item
-                      label="Z-A"
-                      value="second"
-                      color="#E9E9E1"
-                    />
-                    <Text style={styles.SortText}>Best By Date</Text>
-                    <RadioButton.Item
-                      label="Closest to Farthest"
-                      value="third"
-                      color="#E9E9E1"
-                    />
-                    <RadioButton.Item
-                      label="Farthest to Closest"
-                      value="fourth"
-                      color="#E9E9E1"
-                    />
-                    
+                  label="A-Z"
+                  value="first"
+                  color="#E9E9E1"
+                />
+                <RadioButton.Item
+                  label="Z-A"
+                  value="second"
+                  color="#E9E9E1"
+                />
+                <Text style={styles.SortText}>Best By Date</Text>
+                <RadioButton.Item
+                  label="Closest to Farthest"
+                  value="third"
+                  color="#E9E9E1"
+                />
+                <RadioButton.Item
+                  label="Farthest to Closest"
+                  value="fourth"
+                  color="#E9E9E1"
+                />
+
               </RadioButton.Group>
               <View style={{ alignItems: "center" }}>
-              <Button
-                style={{ marginTop: 20 }}
-                color="#505050"
-                mode="contained"
-                onPress={hideSortModal}
-              >
-                Save
-              </Button>
+                <Button
+                  style={{ marginTop: 20 }}
+                  color="#505050"
+                  mode="contained"
+                  onPress={hideSortModal}
+                >
+                  Save
+                </Button>
               </View>
             </View>
           </Modal>
@@ -258,7 +291,7 @@ const HomeScreen: FC = () => {
             contentContainerStyle={containerStyle}
           >
             <View>
-              <View style={{ alignItems: "center" }}>
+              <View>
                 <Text style={styles.Text}>Add Item</Text>
                 <TextInput
                   style={{ width: 300, marginTop: 20 }}
@@ -266,19 +299,56 @@ const HomeScreen: FC = () => {
                   autoComplete="off"
                   label="Product Name"
                 />
+
+                <View style={{ width: 300, marginTop: 20 }}>
+                  <DatePickerInput
+                    locale="en"
+                    autoComplete="off"
+                    label="Expiration Date"
+                    value={inputDate}
+                    onChange={(d) => setInputDate(d)}
+                    inputMode="start"
+                  />
+                </View>
+
+
                 <TextInput
-                  style={{ width: 300, marginTop: 20 }}
+                  style={{ width: 300 }}
                   theme={{ colors: { primary: "#4B4B4B" } }}
                   autoComplete="off"
                   label="Owner"
                 />
+
+                <View style={{ width: 300, marginTop: 20 }}>
+                  <DatePickerInput
+                    locale="en"
+                    autoComplete="off"
+                    label="Set Notification"
+                    value={remindDate}
+                    onChange={(d) => setRemindDate(d)}
+                    inputMode="start"
+                  />
+                </View>
+                <View style={{ width: 300}}>
+                <DropDown
+                  label={"Select Group"}
+                  mode={"outlined"}
+                  visible={showDropDown}
+                  showDropDown={() => setShowDropDown(true)}
+                  onDismiss={() => setShowDropDown(false)}
+                  value={group}
+                  setValue={setGroup}
+                  list={groupList}
+                />
+                </View>
+
                 <Button
                   style={{ marginTop: 20 }}
                   color="#505050"
                   mode="contained"
                   onPress={hideAddItemModal}
                 >
-                  Save
+                  Add
                 </Button>
               </View>
             </View>
