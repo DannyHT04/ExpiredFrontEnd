@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, Alert } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FC, useState } from "react";
 import { TextInput, Button } from "react-native-paper";
 import { UserLogin, DoesUserExist } from "../Services/DataService";
@@ -19,6 +19,7 @@ import { useFonts } from "@expo-google-fonts/roboto-slab";
 import Logo from "../assets/Logo.png";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
+import { useToast } from "react-native-paper-toast";
 
 type RootStackParamList = {
   Home: undefined;
@@ -36,6 +37,8 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const toaster = useToast();
+
   const handleSubmit = async () => {
     let userData = {
       UserName: username,
@@ -43,20 +46,17 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
     };
 
     let token = await UserLogin(userData);
-    console.log(token.status)
-    if(token.status === 401){
-      Alert.alert(
-        "Unable to Login",
-        "Username or password is incorrect");
+    console.log(token.status);
+    if (token.status === 401) {
+      Alert.alert("Unable to Login", "Username or password is incorrect");
     }
     if (token.token != null) {
       AsyncStorage.setItem("Token", token.token);
       let loginUser = await UserLogin(username);
       setUsername(loginUser);
-      navigation.navigate('Footer');
+      navigation.navigate("Footer");
     }
-    setPassword("")
-  
+    setPassword("");
   };
 
   let [fontsLoaded, error] = useFonts({
@@ -77,6 +77,9 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.Center}>
       <View style={[styles.BoxBg]}>
+        {/* <View>
+      <SuccessComponent/>
+      </View> */}
         <View>
           <Image
             source={Logo}
@@ -99,7 +102,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
             autoComplete="off"
             theme={{ colors: { primary: "#4B4B4B" } }}
             style={[styles.Mt1]}
-            secureTextEntry = {true}
+            secureTextEntry={true}
             label="Password"
             value={password}
             onChangeText={setPassword}
@@ -109,10 +112,21 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
           <Button onPress={handleSubmit} color="#505050" mode="contained">
             <Text style={styles.Font}>Log In</Text>
           </Button>
-          <Button onPress={() => {
-            navigation.navigate('CreateAccount')
-          }}  style={{ marginTop: 20 }} color="#405CBB">
+          <Button
+            onPress={() => {
+              navigation.navigate("CreateAccount");
+            }}
+            style={{ marginTop: 20 }}
+            color="#405CBB"
+          >
             Create Account?
+          </Button>
+
+          <Button
+            mode="contained"
+            onPress={() => toaster.show({message:'Success!'})}
+          >
+            Press me
           </Button>
         </View>
       </View>

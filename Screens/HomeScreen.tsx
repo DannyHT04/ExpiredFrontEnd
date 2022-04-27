@@ -10,6 +10,9 @@ import {
   TextInput,
   RadioButton,
   DefaultTheme
+  Card,
+  Paragraph,
+  Title,
 } from "react-native-paper";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import Logo from "../assets/Logo.png";
@@ -33,8 +36,9 @@ import DropDown from "react-native-paper-dropdown";
 const HomeScreen: FC = () => {
   const [showShort, setShowSort] = useState(false);
   const [showAddItem, setShowAddItem] = useState(false);
+  const[showCard, setShowCard] = useState(false)
 
-  const [value, setValue] = useState('first');
+  const [value, setValue] = useState("first");
 
   const showSortModal = () => setShowSort(true);
   const hideSortModal = () => setShowSort(false);
@@ -93,7 +97,9 @@ const HomeScreen: FC = () => {
     <Provider theme={theme}>
       <SafeAreaView style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
         <View style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
-          <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+          >
             <View style={{ flex: 1 }}>
               <IconButton
                 icon="sort-variant"
@@ -121,22 +127,46 @@ const HomeScreen: FC = () => {
             </View>
           </View>
 
-          <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1, alignItems: 'center' }}>
-            {/* <View style={[styles.row, styles.bgBox]}>
-        <Text>Instructions</Text>
+          <View
+            style={{
+              marginTop: 50,
+              backgroundColor: "#4B4B4B",
+              flex: 1,
+              alignItems: "center",
+            }}
+          >
+            <View style={[styles.row]}>
+              {/* <Text>Instructions</Text>
 
-        <Text>1. Select the plus icon in the top right corner </Text>
-        <Text>
-          2. Insert Product Name, Best Used by, Owner & when you would like to receive notifications. Click on Add button to add your item
-        </Text>
-        <Text>
-          3. Now your product is successfully entered & if you'd like to add to
-          your Grocery List select the icon on
-        </Text>
-      </View> */}
+              <Text>1. Select the plus icon in the top right corner </Text>
+              <Text>
+                2. Insert Product Name, Best Used by, Owner & when you would
+                like to receive notifications. Click on Add button to add your
+                item
+              </Text>
+              <Text>
+                3. Now your product is successfully entered & if you'd like to
+                add to your Grocery List select the icon on
+              </Text> */}
+
+              <Card style={{width:350}}>
+                <Card.Title
+                  title="Instructions"
+                  // left={LeftContent}
+                />
+                <Card.Content>
+                  <Text>1. Select the plus icon in the top right corner</Text>
+                  <Text>2. Insert Product Name, Best Used by, Owner & when you would
+                like to receive notifications. Click on Add button to add your
+                item</Text>
+                  <Text>3. Now your product is successfully entered & if you'd like to
+                add to your Grocery List select the icon on</Text>
+                </Card.Content>
+              </Card>
+            </View>
 
             {/* list according */}
-            <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+            {/* <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
               <List.AccordionGroup>
                 <List.Accordion
                   theme={{
@@ -226,7 +256,7 @@ const HomeScreen: FC = () => {
                   </View>
                 </List.Accordion>
               </List.AccordionGroup>
-            </View>
+            </View> */}
           </View>
         </View>
 
@@ -265,7 +295,6 @@ const HomeScreen: FC = () => {
                   value="fourth"
                   color="#E9E9E1"
                 />
-
               </RadioButton.Group>
               <View style={{ alignItems: "center" }}>
                 <Button
@@ -280,7 +309,6 @@ const HomeScreen: FC = () => {
             </View>
           </Modal>
         </Portal>
-
 
         {/* **** VIEW ADD ITEM MODAL **** */}
 
@@ -354,7 +382,6 @@ const HomeScreen: FC = () => {
             </View>
           </Modal>
         </Portal>
-
       </SafeAreaView>
     </Provider>
   );
