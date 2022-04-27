@@ -9,6 +9,9 @@ import {
   Provider,
   TextInput,
   RadioButton,
+  Card,
+  Paragraph,
+  Title,
 } from "react-native-paper";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import Logo from "../assets/Logo.png";
@@ -30,8 +33,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const HomeScreen: FC = () => {
   const [showShort, setShowSort] = useState(false);
   const [showAddItem, setShowAddItem] = useState(false);
+  const[showCard, setShowCard] = useState(false)
 
-  const [value, setValue] = useState('first');
+  const [value, setValue] = useState("first");
 
   const showSortModal = () => setShowSort(true);
   const hideSortModal = () => setShowSort(false);
@@ -60,7 +64,9 @@ const HomeScreen: FC = () => {
     <Provider>
       <SafeAreaView style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
         <View style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
-          <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+          >
             <View style={{ flex: 1 }}>
               <IconButton
                 icon="sort-variant"
@@ -88,22 +94,46 @@ const HomeScreen: FC = () => {
             </View>
           </View>
 
-          <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1, alignItems: 'center' }}>
-            {/* <View style={[styles.row, styles.bgBox]}>
-        <Text>Instructions</Text>
+          <View
+            style={{
+              marginTop: 50,
+              backgroundColor: "#4B4B4B",
+              flex: 1,
+              alignItems: "center",
+            }}
+          >
+            <View style={[styles.row]}>
+              {/* <Text>Instructions</Text>
 
-        <Text>1. Select the plus icon in the top right corner </Text>
-        <Text>
-          2. Insert Product Name, Best Used by, Owner & when you would like to receive notifications. Click on Add button to add your item
-        </Text>
-        <Text>
-          3. Now your product is successfully entered & if you'd like to add to
-          your Grocery List select the icon on
-        </Text>
-      </View> */}
+              <Text>1. Select the plus icon in the top right corner </Text>
+              <Text>
+                2. Insert Product Name, Best Used by, Owner & when you would
+                like to receive notifications. Click on Add button to add your
+                item
+              </Text>
+              <Text>
+                3. Now your product is successfully entered & if you'd like to
+                add to your Grocery List select the icon on
+              </Text> */}
+
+              <Card style={{width:350}}>
+                <Card.Title
+                  title="Instructions"
+                  // left={LeftContent}
+                />
+                <Card.Content>
+                  <Text>1. Select the plus icon in the top right corner</Text>
+                  <Text>2. Insert Product Name, Best Used by, Owner & when you would
+                like to receive notifications. Click on Add button to add your
+                item</Text>
+                  <Text>3. Now your product is successfully entered & if you'd like to
+                add to your Grocery List select the icon on</Text>
+                </Card.Content>
+              </Card>
+            </View>
 
             {/* list according */}
-            <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+            {/* <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
               <List.AccordionGroup>
                 <List.Accordion
                   theme={{
@@ -193,7 +223,7 @@ const HomeScreen: FC = () => {
                   </View>
                 </List.Accordion>
               </List.AccordionGroup>
-            </View>
+            </View> */}
           </View>
         </View>
 
@@ -210,44 +240,37 @@ const HomeScreen: FC = () => {
                 <Text style={styles.Text}>Sort Grocery Items</Text>
               </View>
               <Text style={styles.SortText}> Item Name</Text>
-              <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
-              <RadioButton.Item
-                      label="A-Z"
-                      value="first"
-                      color="#E9E9E1"
-                    />
+              <RadioButton.Group
+                onValueChange={(newValue) => setValue(newValue)}
+                value={value}
+              >
+                <RadioButton.Item label="A-Z" value="first" color="#E9E9E1" />
+                <RadioButton.Item label="Z-A" value="second" color="#E9E9E1" />
+                <Text style={styles.SortText}>Best By Date</Text>
                 <RadioButton.Item
-                      label="Z-A"
-                      value="second"
-                      color="#E9E9E1"
-                    />
-                    <Text style={styles.SortText}>Best By Date</Text>
-                    <RadioButton.Item
-                      label="Closest to Farthest"
-                      value="third"
-                      color="#E9E9E1"
-                    />
-                    <RadioButton.Item
-                      label="Farthest to Closest"
-                      value="fourth"
-                      color="#E9E9E1"
-                    />
-                    
+                  label="Closest to Farthest"
+                  value="third"
+                  color="#E9E9E1"
+                />
+                <RadioButton.Item
+                  label="Farthest to Closest"
+                  value="fourth"
+                  color="#E9E9E1"
+                />
               </RadioButton.Group>
               <View style={{ alignItems: "center" }}>
-              <Button
-                style={{ marginTop: 20 }}
-                color="#505050"
-                mode="contained"
-                onPress={hideSortModal}
-              >
-                Save
-              </Button>
+                <Button
+                  style={{ marginTop: 20 }}
+                  color="#505050"
+                  mode="contained"
+                  onPress={hideSortModal}
+                >
+                  Save
+                </Button>
               </View>
             </View>
           </Modal>
         </Portal>
-
 
         {/* **** VIEW ADD ITEM MODAL **** */}
 
@@ -284,7 +307,6 @@ const HomeScreen: FC = () => {
             </View>
           </Modal>
         </Portal>
-
       </SafeAreaView>
     </Provider>
   );

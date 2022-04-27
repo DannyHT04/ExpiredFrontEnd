@@ -10,6 +10,11 @@ import SplashScreen from "./Screens/SplashScreen";
 import GroceryListScreen from "./Screens/GroceryListScreen";
 import FooterComponent from "./Components/FooterComponent";
 
+import React from 'react';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context';
+import { ToastProvider } from 'react-native-paper-toast';
+
 type RootStackParamList = {
   Home: undefined;
   Login: undefined;
@@ -23,6 +28,9 @@ type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
   return (
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+    <PaperProvider theme={DefaultTheme}>
+      <ToastProvider>    
     <NavigationContainer>
       <Stack.Navigator> 
         <Stack.Screen
@@ -58,7 +66,10 @@ export default function App() {
           options={{ title: "Profile" }}
         />
       </Stack.Navigator>
-    </NavigationContainer>
+    </NavigationContainer> 
+    </ToastProvider>
+    </PaperProvider>
+    </SafeAreaProvider>
   );
 }
 
