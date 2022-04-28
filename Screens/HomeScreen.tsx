@@ -422,7 +422,7 @@ const styles = StyleSheet.create({
   },
   LogoStyle: {
     height: 101,
-    width: 104,
+    width: 105,
   },
   Text: {
     fontFamily: "RobotoSlab_400Regular",

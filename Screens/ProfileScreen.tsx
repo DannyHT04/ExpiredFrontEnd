@@ -67,7 +67,7 @@ const ProfileScreen: FC<Props> = ({navigation}) => {
     return (
         <SafeAreaView style={styles.Bg}>
             <View style={{ alignItems: "center" }}>
-                <Image source={Logo} style={{ width: 104, height: 101 }} />
+                <Image source={Logo} style={{ width: 105, height: 101 }} />
             </View>
 
             <View style={{ alignItems: "flex-start", paddingTop: 50 }}>
