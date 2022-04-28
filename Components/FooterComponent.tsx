@@ -13,8 +13,16 @@ const Tab = createMaterialBottomTabNavigator();
 function FooterComponent() {
   return (
     <Tab.Navigator initialRouteName="Home"
-    activeColor="#E9E9E1"
-    barStyle={{ backgroundColor: '#393939' }}>
+    activeColor="#D5EEBB"
+    barStyle={{ backgroundColor: '#2C443A' }}> 
+    
+    <Tab.Screen name="Home" component={HomeScreen}
+      options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="home" color={color} size={26} />
+        ),
+      }} />
       <Tab.Screen name="Profile" component={ProfileScreen} 
       options={{
         tabBarLabel: 'Profile',
@@ -22,13 +30,7 @@ function FooterComponent() {
           <MaterialCommunityIcons name="account" color={color} size={26} />
         ),
       }}/>
-      <Tab.Screen name="Home" component={HomeScreen}
-      options={{
-        tabBarLabel: 'Home',
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="home" color={color} size={26} />
-        ),
-      }} />
+     
       <Tab.Screen name="Grocery List" component={GroceryListScreen}
       options={{
         tabBarLabel: 'Grocery List',
