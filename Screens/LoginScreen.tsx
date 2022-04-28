@@ -109,7 +109,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
           />
         </View>
         <View style={styles.Mt2}>
-          <Button onPress={handleSubmit} color="#505050" mode="contained">
+          <Button onPress={handleSubmit} color="#2C443A" mode="contained">
             <Text style={styles.Font}>Log In</Text>
           </Button>
           <Button
@@ -136,7 +136,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
 const styles = StyleSheet.create({
   Center: {
     alignItems: "center",
-    backgroundColor: "#4B4B4B",
+    backgroundColor: "#2C443A",
     justifyContent: "center",
     flex: 1,
   },
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   BoxBg: {
-    backgroundColor: "#9A9B9A",
+    backgroundColor: "#87AF9E",
     flex: 1,
     width: 350,
     alignItems: "center",
