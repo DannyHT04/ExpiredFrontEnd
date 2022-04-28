@@ -94,15 +94,15 @@ const HomeScreen: FC = () => {
 
   return (
     <Provider theme={theme}>
-      <SafeAreaView style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
-        <View style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
+        <View style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
           <View
             style={{ flexDirection: "row", justifyContent: "space-evenly" }}
           >
             <View style={{ flex: 1 }}>
               <IconButton
                 icon="sort-variant"
-                color={Colors.red500}
+                color='#2C443A'
                 size={45}
                 onPress={showSortModal}
               />
@@ -119,7 +119,7 @@ const HomeScreen: FC = () => {
             <View style={{ flex: 1, alignItems: "flex-end" }}>
               <IconButton
                 icon="plus-circle-outline"
-                color={Colors.red500}
+                color='#2C443A'
                 size={45}
                 onPress={showAddItemModal}
               />
@@ -129,7 +129,7 @@ const HomeScreen: FC = () => {
           <View
             style={{
               marginTop: 50,
-              backgroundColor: "#4B4B4B",
+              backgroundColor: "#7FC8A9",
               flex: 1,
               alignItems: "center",
             }}
@@ -148,17 +148,18 @@ const HomeScreen: FC = () => {
                 add to your Grocery List select the icon on
               </Text> */}
 
-              <Card style={{width:350}}>
+              <Card style={{width:350, backgroundColor:'#2C443A'}}>
                 <Card.Title
                   title="Instructions"
+                  titleStyle={{color:"#E9E9E1"}}
                   // left={LeftContent}
                 />
                 <Card.Content>
-                  <Text>1. Select the plus icon in the top right corner</Text>
-                  <Text>2. Insert Product Name, Best Used by, Owner & when you would
+                  <Text style={{color:"#E9E9E1"}}>1. Select the plus icon in the top right corner</Text>
+                  <Text style={{color:"#E9E9E1"}}>2. Insert Product Name, Best Used by, Owner & when you would
                 like to receive notifications. Click on Add button to add your
                 item</Text>
-                  <Text>3. Now your product is successfully entered & if you'd like to
+                  <Text style={{color:"#E9E9E1"}}>3. Now your product is successfully entered & if you'd like to
                 add to your Grocery List select the icon on</Text>
                 </Card.Content>
               </Card>
