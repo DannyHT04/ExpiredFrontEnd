@@ -36,7 +36,6 @@ import DropDown from "react-native-paper-dropdown";
 const HomeScreen: FC = () => {
   const [showShort, setShowSort] = useState(false);
   const [showAddItem, setShowAddItem] = useState(false);
-  const[showCard, setShowCard] = useState(false)
 
   const [value, setValue] = useState("first");
 
@@ -328,7 +327,7 @@ const HomeScreen: FC = () => {
                   label="Product Name"
                 />
 
-                <View style={{ width: 300, marginTop: 20 }}>
+                {/* <View style={{ width: 300, marginTop: 20 }}>
                   <DatePickerInput
                     locale="en"
                     autoComplete="off"
@@ -337,7 +336,7 @@ const HomeScreen: FC = () => {
                     onChange={(d) => setInputDate(d)}
                     inputMode="start"
                   />
-                </View>
+                </View> */}
 
 
                 <TextInput
@@ -347,7 +346,7 @@ const HomeScreen: FC = () => {
                   label="Owner"
                 />
 
-                <View style={{ width: 300, marginTop: 20 }}>
+                {/* <View style={{ width: 300, marginTop: 20 }}>
                   <DatePickerInput
                     locale="en"
                     autoComplete="off"
@@ -356,7 +355,7 @@ const HomeScreen: FC = () => {
                     onChange={(d) => setRemindDate(d)}
                     inputMode="start"
                   />
-                </View>
+                </View> */}
                 <View style={{ width: 300}}>
                 <DropDown
                   label={"Select Group"}
