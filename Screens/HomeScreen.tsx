@@ -320,7 +320,7 @@ const HomeScreen: FC = () => {
             contentContainerStyle={containerStyle}
           >
             <View>
-              <View>
+              <View style={{alignItems: 'center'}}>
                 <Text style={styles.Text}>Add Item</Text>
                 <TextInput
                   style={{ width: 300, marginTop: 20 }}
