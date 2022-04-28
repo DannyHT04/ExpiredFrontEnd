@@ -16,7 +16,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import Logo from '../assets/Logo.png'
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { DoesUserExist } from "../Services/DataService";
+import { DoesUserExist, AddUser } from "../Services/DataService";
 
 type RootStackParamList = {
     Home: undefined;
@@ -30,11 +30,11 @@ type RootStackParamList = {
   type Props = NativeStackScreenProps<RootStackParamList, "CreateAccount">;
 
 const CreateAccountScreen: FC <Props> = ({navigation}) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
+  const [Username, setUsername] = useState("");
+  const [Password, setPassword] = useState("");
+  const [Email, setEmail] = useState("");
+  const [FirstName, setFirstName] = useState("");
+  const [LastName, setLastName] = useState("");
 
   let [fontsLoaded, error] = useFonts({
     RobotoSlab_100Thin,
@@ -50,18 +50,21 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+  let userData ={
+    Id: 0,
+    FirstName,
+    LastName,
+    Username,
+    Email,
+    Password,
+    
+  }
   const handleSubmit = async () => {
-    let result = await DoesUserExist(username);
+    let result = await DoesUserExist(Username);
     console.log(result);
-    if(result = false){
-      let userData ={
-        Id: 0,
-        firstname,
-        lastname,
-        username,
-        email,
-        
-      }
+    if(result === false){
+     
+      AddUser(userData)
     }else{
       console.log("Already exist")
       Alert.alert(
@@ -88,7 +91,7 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
             autoComplete="off"
             label="First Name"
             theme={{ colors: { primary: "#4B4B4B" } }}
-            value={firstname}
+            value={FirstName}
             onChangeText={setFirstName}
           />
           <TextInput
@@ -96,7 +99,7 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
             theme={{ colors: { primary: "#4B4B4B" } }}
             autoComplete="off"
             label="Last Name"
-            value={lastname}
+            value={LastName}
             onChangeText={setLastName}
           />
           <TextInput
@@ -104,7 +107,7 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
             theme={{ colors: { primary: "#4B4B4B" } }}
             autoComplete="off"
             label="Email"
-            value={email}
+            value={Email}
             onChangeText={setEmail}
           />
         </View>
@@ -114,7 +117,7 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
             theme={{ colors: { primary: "#4B4B4B" } }}
             autoComplete="off"
             label="Username"
-            value={username}
+            value={Username}
             onChangeText={setUsername}
           />
           <TextInput
@@ -123,7 +126,7 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
             style={[styles.Mt1, styles.textInputSizng]}
             label="Password"
             secureTextEntry = {true}
-            value={password}
+            value={Password}
             onChangeText={setPassword}
           />
         </View>
