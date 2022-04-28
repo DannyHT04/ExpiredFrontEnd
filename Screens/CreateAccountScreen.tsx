@@ -52,19 +52,21 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
   }
   let userData ={
     Id: 0,
+    Username,
+    Password,
     FirstName,
     LastName,
-    Username,
     Email,
-    Password,
     
   }
   const handleSubmit = async () => {
     let result = await DoesUserExist(Username);
     console.log(result);
     if(result === false){
+      console.log("im pressed")
      
       AddUser(userData)
+     
     }else{
       console.log("Already exist")
       Alert.alert(
