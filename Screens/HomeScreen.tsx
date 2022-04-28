@@ -115,7 +115,7 @@ const HomeScreen: FC = () => {
               >
                 <View style={{ backgroundColor: "#E9E9E1" }}>
                   <List.Item
-                    title="eggs"
+                    title="eggs Expiration Date: 07-22-22"
                     style={styles.Pill}
                     onPress={() => console.log("Me eggs")}
                   />
