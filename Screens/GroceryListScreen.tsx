@@ -35,7 +35,7 @@ const GroceryListScreen: FC = () => {
   const showAddItemModal = () => setShowAddItem(true);
   const hideAddItemModal = () => setShowAddItem(false);
 
-  const containerStyle = { backgroundColor: "#303030", padding: 20 };
+  const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
 
   let [fontsLoaded, error] = useFonts({
     RobotoSlab_100Thin,
