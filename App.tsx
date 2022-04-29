@@ -1,3 +1,14 @@
+import "intl";
+import { Platform } from "react-native";
+
+if (Platform.OS === "android") {
+    // See https://github.com/expo/expo/issues/6536 for this issue.
+    if (typeof (Intl as any).__disableRegExpRestore === "function") {
+        (Intl as any).__disableRegExpRestore();
+    }
+}
+
+import "intl/locale-data/jsonp/en";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -15,6 +26,7 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-paper-toast';
 
+
 type RootStackParamList = {
   Home: undefined;
   Login: undefined;
@@ -26,7 +38,10 @@ type RootStackParamList = {
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+
 export default function App() {
+  
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
     <PaperProvider theme={DefaultTheme}>
