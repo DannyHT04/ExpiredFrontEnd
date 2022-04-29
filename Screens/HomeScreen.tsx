@@ -347,7 +347,7 @@ const HomeScreen: FC = () => {
                   label="Owner"
                 />
 
-                {/* <View style={{ width: 300, marginTop: 20 }}>
+                <View style={{ width: 300, marginTop: 20 }}>
                   <DatePickerInput
                     locale="en"
                     autoComplete="off"
@@ -356,7 +356,7 @@ const HomeScreen: FC = () => {
                     onChange={(d) => setRemindDate(d)}
                     inputMode="start"
                   />
-                </View> */}
+                </View>
                 <View style={{ width: 300}}>
                 <DropDown
                   label={"Select Group"}
