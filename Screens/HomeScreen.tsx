@@ -189,15 +189,14 @@ const HomeScreen: FC = () => {
                       descriptionStyle={{ color: "white", marginTop: 8 }}
                     />
                     <View style={styles.Pill}>
-                    <View style={[{ flexDirection: "row" }]}>
-                      <Image source={Logo} style={{ width: 75, height: 73 }} />
-                      <Text style={{ color: "white", flex: 1 }}>Eggs</Text>
-                      
-                    </View>
-                    <View style={{flexDirection: "row"}}>
-                        <Text style={{ color: "white" }}>
-                          Expired in: 5 days
-                        </Text>
+                      <View style={[{ flexDirection: "row" }]}>
+                        <Image source={Logo} style={{ width: 75, height: 72 }} />
+                        <View style={{justifyContent: 'space-evenly', marginLeft: 20}}>
+                          <Text style={styles.pillText}>Eggs</Text>
+                          <Text style={styles.pillText2}>
+                            Expires in: 1678 days
+                          </Text>
+                        </View>
                       </View>
                     </View>
 
@@ -457,6 +456,16 @@ const styles = StyleSheet.create({
   font: {
     fontFamily: "RobotoSlab_400Regular",
   },
+  pillText: {
+    fontFamily: "RobotoSlab_400Regular",
+    color: 'white',
+    fontSize: 20
+  },
+  pillText2: {
+    fontFamily: "RobotoSlab_400Regular",
+    color: 'white',
+    fontSize: 18
+  }
 });
 
 export default HomeScreen;
