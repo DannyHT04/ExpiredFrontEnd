@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, Pressable } from "react-native";
 import { FC, useState } from "react";
 import {
   IconButton,
@@ -189,7 +189,8 @@ const HomeScreen: FC = () => {
                       description={"Best used by: 3/19/2022"}
                       descriptionStyle={{ color: "white", marginTop: 8 }}
                     /> */}
-                    <View style={styles.Pill} >
+                    <View style={styles.Pill}>
+                      <Pressable onPress={() => console.log("i work")}>
                       <View style={[{ flexDirection: "row" }]}>
                         <Image source={Logo} style={{ width: 75, height: 72 }} />
                         <View style={{justifyContent: 'space-evenly', marginLeft: 20}}>
@@ -199,6 +200,7 @@ const HomeScreen: FC = () => {
                           </Text>
                         </View>
                       </View>
+                      </Pressable>
                     </View>
 
 
