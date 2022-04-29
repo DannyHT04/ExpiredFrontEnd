@@ -55,13 +55,13 @@ const GroceryListScreen: FC = () => {
 
   return (
     <Provider>
-    <SafeAreaView style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
-      <View style={{ backgroundColor: "#4B4B4B", flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
+      <View style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
           <View style={{ flex: 1 }}>
             <IconButton
               icon="sort-variant"
-              color={Colors.red500}
+              color='#2C443A'
               size={45}
               onPress={showSortModal}
             />
@@ -78,18 +78,15 @@ const GroceryListScreen: FC = () => {
           <View style={{ flex: 1, alignItems: "flex-end" }}>
             <IconButton
               icon="plus-circle-outline"
-              color={Colors.red500}
+              color='#2C443A'
               size={45}
               onPress={showAddItemModal}
             />
           </View>
         </View>
 
-        <View style={{alignItems: "center"}}>
-          <Text >Grocery List</Text>
-        </View>
 
-        <View style={{ marginTop: 50, backgroundColor: "#4B4B4B", flex: 1, alignItems:'center'}}>
+        <View style={{ marginTop: 50, backgroundColor: "#7FC8A9", flex: 1, alignItems:'center'}}>
           {/* <View style={[styles.row, styles.bgBox]}>
         <Text>Instructions</Text>
 
@@ -108,7 +105,7 @@ const GroceryListScreen: FC = () => {
             <List.AccordionGroup>
               <List.Accordion
                 theme={{
-                  colors: { background: "#9A9B9A", primary: "#4B4B4B" },
+                  colors: { background: "#2C443A", primary: "#87AF9E" },
                 }}
                 title="Personal Items"
                 titleStyle={{
@@ -117,21 +114,24 @@ const GroceryListScreen: FC = () => {
                 }}
                 id="1"
               >
-                <View style={{ backgroundColor: "#E9E9E1" }}>
+                <View style={{ backgroundColor: "#87AF9E" }}>
                   <List.Item
                     title="eggs"
+                    titleStyle={{color:'white'}}
                     style={styles.Pill}
                     onPress={() => console.log("Me eggs")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
                   />
                   <List.Item
                     title="Steak"
+                    titleStyle={{color:'white'}}
                     style={styles.Pill}
                     onPress={() => console.log("Me Steak")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
                   />
                   <List.Item
                     title="Milk"
+                    titleStyle={{color:'white'}}
                     style={styles.Pill}
                     onPress={() => console.log("Me Milk")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
@@ -140,7 +140,7 @@ const GroceryListScreen: FC = () => {
               </List.Accordion>
               <List.Accordion
                 theme={{
-                  colors: { background: "#9A9B9A", primary: "#4B4B4B" },
+                  colors: { background: "#2C443A", primary: "#4B4B4B" },
                 }}
                 title="House Fridge"
                 titleStyle={{
@@ -149,21 +149,24 @@ const GroceryListScreen: FC = () => {
                 }}
                 id="2"
               >
-                <View style={{ backgroundColor: "#E9E9E1" }}>
+                <View style={{ backgroundColor: "#87AF9E" }}>
                   <List.Item
                     title="eggs"
+                    titleStyle={{color:'white'}}
                     style={styles.Pill}
                     onPress={() => console.log("Me eggs")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
                   />
                   <List.Item
                     title="Steak"
+                    titleStyle={{color:'white'}}
                     style={styles.Pill}
                     onPress={() => console.log("Me Steak")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
                   />
                   <List.Item
                     title="Milk"
+                    titleStyle={{color:'white'}}
                     style={styles.Pill}
                     onPress={() => console.log("Me Milk")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
@@ -172,7 +175,7 @@ const GroceryListScreen: FC = () => {
               </List.Accordion>
               <List.Accordion
                 theme={{
-                  colors: { background: "#9A9B9A", primary: "#4B4B4B" },
+                  colors: { background: "#2C443A", primary: "#4B4B4B" },
                 }}
                 title="Work Fridge"
                 titleStyle={{
@@ -181,21 +184,24 @@ const GroceryListScreen: FC = () => {
                 }}
                 id="3"
               >
-                <View style={{ backgroundColor: "#E9E9E1" }}>
+                <View style={{ backgroundColor: "#87AF9E" }}>
                   <List.Item
                     title="eggs"
+                    titleStyle={{color:'white'}}
                     style={styles.Pill}
                     onPress={() => console.log("Me eggs")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
                   />
                   <List.Item
                     title="Steak"
+                    titleStyle={{color:'white'}}
                     style={styles.Pill}
                     onPress={() => console.log("Me Steak")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
                   />
                   <List.Item
                     title="Milk"
+                    titleStyle={{color:'white'}}
                     style={styles.Pill}
                     onPress={() => console.log("Me Milk")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
@@ -295,7 +301,7 @@ const styles = StyleSheet.create({
   },
   Pill: {
     padding: 8,
-    backgroundColor: "#9A9B9A",
+    backgroundColor: "#2C443A",
     borderRadius: 25,
     marginTop: 5,
     marginLeft: 20,

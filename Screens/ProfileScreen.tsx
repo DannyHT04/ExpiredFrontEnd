@@ -178,7 +178,7 @@ const ProfileScreen: FC<Props> = ({navigation}) => {
 
 const styles = StyleSheet.create({
     Bg: {
-        backgroundColor: "#4B4B4B",
+        backgroundColor: "#7FC8A9",
         flex: 1
     },
     Text: {
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     },
     Pill: {
         padding: 15,
-        backgroundColor: "#9A9B9A",
+        backgroundColor: "#2C443A",
         borderRadius: 25,
         // marginLeft: 30,
         marginBottom: 10,
