@@ -176,6 +176,7 @@ const HomeScreen: FC = () => {
                   titleStyle={{
                     color: "#E9E9E1",
                     fontFamily: "RobotoSlab_400Regular",
+                    fontSize: 20
                   }}
                   id="1"
                 >
@@ -188,7 +189,7 @@ const HomeScreen: FC = () => {
                       description={"Best used by: 3/19/2022"}
                       descriptionStyle={{ color: "white", marginTop: 8 }}
                     />
-                    <View style={styles.Pill}>
+                    <View style={styles.Pill} >
                       <View style={[{ flexDirection: "row" }]}>
                         <Image source={Logo} style={{ width: 75, height: 72 }} />
                         <View style={{justifyContent: 'space-evenly', marginLeft: 20}}>
@@ -222,6 +223,7 @@ const HomeScreen: FC = () => {
                   titleStyle={{
                     color: "#E9E9E1",
                     fontFamily: "RobotoSlab_400Regular",
+                    fontSize: 20
                   }}
                   id="2"
                 >
@@ -254,6 +256,7 @@ const HomeScreen: FC = () => {
                   titleStyle={{
                     color: "#E9E9E1",
                     fontFamily: "RobotoSlab_400Regular",
+                    fontSize: 20
                   }}
                   id="3"
                 >
