@@ -47,7 +47,7 @@ const HomeScreen: FC = () => {
   const [inputDate, setInputDate] = useState<Date | undefined>(undefined)
   const [remindDate, setRemindDate] = useState<Date | undefined>(undefined)
 
-  const containerStyle = { backgroundColor: "#303030", padding: 20 };
+  const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
 
   const [showDropDown, setShowDropDown] = useState(false);
   const [group, setGroup] = useState("");
@@ -328,7 +328,7 @@ const HomeScreen: FC = () => {
                   label="Product Name"
                 />
 
-                {/* <View style={{ width: 300, marginTop: 20 }}>
+                <View style={{ width: 300, marginTop: 20 }}>
                   <DatePickerInput
                     locale="en"
                     autoComplete="off"
@@ -337,7 +337,7 @@ const HomeScreen: FC = () => {
                     onChange={(d) => setInputDate(d)}
                     inputMode="start"
                   />
-                </View> */}
+                </View>
 
 
                 <TextInput
@@ -347,7 +347,7 @@ const HomeScreen: FC = () => {
                   label="Owner"
                 />
 
-                {/* <View style={{ width: 300, marginTop: 20 }}>
+                <View style={{ width: 300, marginTop: 20 }}>
                   <DatePickerInput
                     locale="en"
                     autoComplete="off"
@@ -356,7 +356,7 @@ const HomeScreen: FC = () => {
                     onChange={(d) => setRemindDate(d)}
                     inputMode="start"
                   />
-                </View> */}
+                </View>
                 <View style={{ width: 300}}>
                 <DropDown
                   label={"Select Group"}
