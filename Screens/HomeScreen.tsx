@@ -181,14 +181,14 @@ const HomeScreen: FC = () => {
                   id="1"
                 >
                   <View style={{ backgroundColor: "#87AF9E" }}>
-                    <List.Item
+                    {/* <List.Item
                       title="eggs"
                       titleStyle={{ color: "white" }}
                       style={styles.Pill}
                       onPress={() => console.log("Me eggs")}
                       description={"Best used by: 3/19/2022"}
                       descriptionStyle={{ color: "white", marginTop: 8 }}
-                    />
+                    /> */}
                     <View style={styles.Pill} >
                       <View style={[{ flexDirection: "row" }]}>
                         <Image source={Logo} style={{ width: 75, height: 72 }} />
@@ -201,7 +201,35 @@ const HomeScreen: FC = () => {
                       </View>
                     </View>
 
-                    <List.Item
+
+                    <View style={styles.Pill} >
+                      <View style={[{ flexDirection: "row" }]}>
+                        <Image source={Logo} style={{ width: 75, height: 72 }} />
+                        <View style={{justifyContent: 'space-evenly', marginLeft: 20}}>
+                          <Text style={styles.pillText}>Steak</Text>
+                          <Text style={styles.pillText2}>
+                            Expires in: 78 days
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+
+
+                    <View style={styles.Pill} >
+                      <View style={[{ flexDirection: "row" }]}>
+                        <Image source={Logo} style={{ width: 75, height: 72 }} />
+                        <View style={{justifyContent: 'space-evenly', marginLeft: 20}}>
+                          <Text style={styles.pillText}>Eggs</Text>
+                          <Text style={styles.pillText2}>
+                            Expires in: 1678 days
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+
+                    
+
+                    {/* <List.Item
                       title="Steak"
                       titleStyle={{ color: "white" }}
                       style={styles.Pill}
@@ -212,7 +240,7 @@ const HomeScreen: FC = () => {
                       titleStyle={{ color: "white" }}
                       style={styles.Pill}
                       onPress={() => console.log("Me Milk")}
-                    />
+                    /> */}
                   </View>
                 </List.Accordion>
                 <List.Accordion
