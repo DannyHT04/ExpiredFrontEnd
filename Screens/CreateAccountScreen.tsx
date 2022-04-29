@@ -17,6 +17,7 @@ import { useFonts } from "@expo-google-fonts/roboto-slab";
 import Logo from '../assets/Logo.png'
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { DoesUserExist, AddUser } from "../Services/DataService";
+import createUser from "../interfaces/userModelInterfaces";
 
 type RootStackParamList = {
     Home: undefined;
@@ -30,11 +31,11 @@ type RootStackParamList = {
   type Props = NativeStackScreenProps<RootStackParamList, "CreateAccount">;
 
 const CreateAccountScreen: FC <Props> = ({navigation}) => {
-  const [Username, setUsername] = useState("");
-  const [Password, setPassword] = useState("");
-  const [Email, setEmail] = useState("");
-  const [FirstName, setFirstName] = useState("");
-  const [LastName, setLastName] = useState("");
+  const [Username, setUsername] = useState<string>("");
+  const [Password, setPassword] = useState<string>("");
+  const [Email, setEmail] = useState<string>("");
+  const [FirstName, setFirstName] = useState<string>("");
+  const [LastName, setLastName] = useState<string>("");
 
   let [fontsLoaded, error] = useFonts({
     RobotoSlab_100Thin,
@@ -50,13 +51,14 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-  let userData ={
+  let userData :createUser ={
     Id: 0,
-    Username,
-    Password,
-    FirstName,
-    LastName,
-    Email,
+    GroupId: 0,
+    Username : Username,
+    Password : Password,
+    FirstName : FirstName,
+    LastName : LastName,
+    Email : Email
     
   }
   const handleSubmit = async () => {
@@ -66,6 +68,7 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
       console.log("im pressed")
      
       AddUser(userData)
+      Alert.alert("success");
      
     }else{
       console.log("Already exist")

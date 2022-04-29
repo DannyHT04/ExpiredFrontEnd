@@ -20,7 +20,7 @@ import Logo from "../assets/Logo.png";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 import { useToast } from "react-native-paper-toast";
-
+import IuserData from "../interfaces/LoginInterfaces"
 type RootStackParamList = {
   Home: undefined;
   Login: undefined;
@@ -34,26 +34,24 @@ type RootStackParamList = {
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
 const LoginScreen: FC<Props> = ({ navigation }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const toaster = useToast();
 
   const handleSubmit = async () => {
-    let userData = {
-      UserName: username,
+    let userInfo : IuserData = {
+      Username: username,
       Password: password,
     };
 
-    let token = await UserLogin(userData);
+    let token = await UserLogin(userInfo);
     console.log(token.status);
-    if (token.status === 401) {
+    if (token.status != 401) {
       Alert.alert("Unable to Login", "Username or password is incorrect");
     }
     if (token.token != null) {
       AsyncStorage.setItem("Token", token.token);
-      let loginUser = await UserLogin(username);
-      setUsername(loginUser);
       navigation.navigate("Footer");
     }
     setPassword("");

@@ -1,5 +1,5 @@
 import createUser from "../interfaces/userModelInterfaces";
-import IuserData from "../interfaces/userModelInterfaces";
+import IuserData from "../interfaces/LoginInterfaces";
 
 
 async function AddUser(newUser: createUser){
@@ -19,13 +19,13 @@ async function AddUser(newUser: createUser){
    return data;
 }
 
-async function UserLogin(userData: IuserData){
+async function UserLogin(userInfo: IuserData){
     let res= await fetch('https://expiredbackendapi2.azurewebsites.net/User/Login', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(userInfo)
     });
     let data = await res.json();
    return data;
