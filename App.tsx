@@ -32,17 +32,18 @@ export default function App() {
     <PaperProvider theme={DefaultTheme}>
       <ToastProvider>    
     <NavigationContainer>
-      <Stack.Navigator> 
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
+      <Stack.Navigator>  
         <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{ headerShown: false}}
         />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+       
         <Stack.Screen
           name="CreateAccount"
           component={CreateAccountScreen}

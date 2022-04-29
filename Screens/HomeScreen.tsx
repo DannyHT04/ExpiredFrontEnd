@@ -148,7 +148,7 @@ const HomeScreen: FC = () => {
                 add to your Grocery List select the icon on
               </Text> */}
 
-              <Card style={{width:350, backgroundColor:'#2C443A'}}>
+              {/* <Card style={{width:350, backgroundColor:'#2C443A'}}>
                 <Card.Title
                   title="Instructions"
                   titleStyle={{color:"#E9E9E1"}}
@@ -162,15 +162,15 @@ const HomeScreen: FC = () => {
                   <Text style={{color:"#E9E9E1"}}>3. Now your product is successfully entered & if you'd like to
                 add to your Grocery List select the icon on</Text>
                 </Card.Content>
-              </Card>
+              </Card> */}
             </View>
 
             {/* list according */}
-            {/* <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+            <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
               <List.AccordionGroup>
                 <List.Accordion
                   theme={{
-                    colors: { background: "#9A9B9A", primary: "#4B4B4B" },
+                    colors: { background: "#2C443A", primary: "#4B4B4B" },
                   }}
                   title="Personal Items"
                   titleStyle={{
@@ -179,19 +179,24 @@ const HomeScreen: FC = () => {
                   }}
                   id="1"
                 >
-                  <View style={{ backgroundColor: "#E9E9E1" }}>
+                  <View style={{ backgroundColor: "#87AF9E" }}>
                     <List.Item
                       title="eggs"
+                      titleStyle={{color:'white'}}
                       style={styles.Pill}
                       onPress={() => console.log("Me eggs")}
+                      description={"Best used by: 3/19/2022"}
+                      descriptionStyle={{color:'white', marginTop:8}}
                     />
                     <List.Item
                       title="Steak"
+                      titleStyle={{color:'white'}}
                       style={styles.Pill}
                       onPress={() => console.log("Me Steak")}
                     />
                     <List.Item
                       title="Milk"
+                      titleStyle={{color:'white'}}
                       style={styles.Pill}
                       onPress={() => console.log("Me Milk")}
                     />
@@ -199,7 +204,7 @@ const HomeScreen: FC = () => {
                 </List.Accordion>
                 <List.Accordion
                   theme={{
-                    colors: { background: "#9A9B9A", primary: "#4B4B4B" },
+                    colors: { background: "#2C443A", primary: "#4B4B4B" },
                   }}
                   title="House Fridge"
                   titleStyle={{
@@ -208,19 +213,22 @@ const HomeScreen: FC = () => {
                   }}
                   id="2"
                 >
-                  <View style={{ backgroundColor: "#E9E9E1" }}>
+                  <View style={{ backgroundColor: "#87AF9E" }}>
                     <List.Item
                       title="eggs"
+                      titleStyle={{color:'white'}}
                       style={styles.Pill}
                       onPress={() => console.log("Me eggs")}
                     />
                     <List.Item
                       title="Steak"
+                      titleStyle={{color:'white'}}
                       style={styles.Pill}
                       onPress={() => console.log("Me Steak")}
                     />
                     <List.Item
                       title="Milk"
+                      titleStyle={{color:'white'}}
                       style={styles.Pill}
                       onPress={() => console.log("Me Milk")}
                     />
@@ -228,7 +236,7 @@ const HomeScreen: FC = () => {
                 </List.Accordion>
                 <List.Accordion
                   theme={{
-                    colors: { background: "#9A9B9A", primary: "#4B4B4B" },
+                    colors: { background: "#2C443A", primary: "#4B4B4B" },
                   }}
                   title="Work Fridge"
                   titleStyle={{
@@ -237,26 +245,29 @@ const HomeScreen: FC = () => {
                   }}
                   id="3"
                 >
-                  <View style={{ backgroundColor: "#E9E9E1" }}>
+                  <View style={{ backgroundColor: "#87AF9E" }}>
                     <List.Item
                       title="eggs"
+                      titleStyle={{color:'white'}}
                       style={styles.Pill}
                       onPress={() => console.log("Me eggs")}
                     />
                     <List.Item
                       title="Steak"
+                      titleStyle={{color:'white'}}
                       style={styles.Pill}
                       onPress={() => console.log("Me Steak")}
                     />
                     <List.Item
                       title="Milk"
+                      titleStyle={{color:'white'}}
                       style={styles.Pill}
                       onPress={() => console.log("Me Milk")}
                     />
                   </View>
                 </List.Accordion>
               </List.AccordionGroup>
-            </View> */}
+            </View>
           </View>
         </View>
 
@@ -413,7 +424,7 @@ const styles = StyleSheet.create({
   },
   Pill: {
     padding: 8,
-    backgroundColor: "#9A9B9A",
+    backgroundColor: "#2C443A",
     borderRadius: 25,
     marginTop: 5,
     marginLeft: 20,
@@ -436,6 +447,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     color: "#E9E9E1",
   },
+  font:{
+    fontFamily: "RobotoSlab_400Regular"
+  }
 });
 
 export default HomeScreen;
