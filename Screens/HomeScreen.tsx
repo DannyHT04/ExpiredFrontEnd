@@ -30,7 +30,7 @@ import {
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { DatePickerInput } from 'react-native-paper-dates';
+import { DatePickerInput } from "react-native-paper-dates";
 import DropDown from "react-native-paper-dropdown";
 
 const HomeScreen: FC = () => {
@@ -44,8 +44,8 @@ const HomeScreen: FC = () => {
   const showAddItemModal = () => setShowAddItem(true);
   const hideAddItemModal = () => setShowAddItem(false);
 
-  const [inputDate, setInputDate] = useState<Date | undefined>(undefined)
-  const [remindDate, setRemindDate] = useState<Date | undefined>(undefined)
+  const [inputDate, setInputDate] = useState<Date | undefined>(undefined);
+  const [remindDate, setRemindDate] = useState<Date | undefined>(undefined);
 
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
 
@@ -88,8 +88,8 @@ const HomeScreen: FC = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: '#4B4B4B',
-    }
+      primary: "#4B4B4B",
+    },
   };
 
   return (
@@ -102,7 +102,7 @@ const HomeScreen: FC = () => {
             <View style={{ flex: 1 }}>
               <IconButton
                 icon="sort-variant"
-                color='#2C443A'
+                color="#2C443A"
                 size={45}
                 onPress={showSortModal}
               />
@@ -119,7 +119,7 @@ const HomeScreen: FC = () => {
             <View style={{ flex: 1, alignItems: "flex-end" }}>
               <IconButton
                 icon="plus-circle-outline"
-                color='#2C443A'
+                color="#2C443A"
                 size={45}
                 onPress={showAddItemModal}
               />
@@ -182,21 +182,34 @@ const HomeScreen: FC = () => {
                   <View style={{ backgroundColor: "#87AF9E" }}>
                     <List.Item
                       title="eggs"
-                      titleStyle={{color:'white'}}
+                      titleStyle={{ color: "white" }}
                       style={styles.Pill}
                       onPress={() => console.log("Me eggs")}
                       description={"Best used by: 3/19/2022"}
-                      descriptionStyle={{color:'white', marginTop:8}}
+                      descriptionStyle={{ color: "white", marginTop: 8 }}
                     />
+                    <View style={styles.Pill}>
+                    <View style={[{ flexDirection: "row" }]}>
+                      <Image source={Logo} style={{ width: 75, height: 73 }} />
+                      <Text style={{ color: "white", flex: 1 }}>Eggs</Text>
+                      
+                    </View>
+                    <View style={{flexDirection: "row"}}>
+                        <Text style={{ color: "white" }}>
+                          Expired in: 5 days
+                        </Text>
+                      </View>
+                    </View>
+
                     <List.Item
                       title="Steak"
-                      titleStyle={{color:'white'}}
+                      titleStyle={{ color: "white" }}
                       style={styles.Pill}
                       onPress={() => console.log("Me Steak")}
                     />
                     <List.Item
                       title="Milk"
-                      titleStyle={{color:'white'}}
+                      titleStyle={{ color: "white" }}
                       style={styles.Pill}
                       onPress={() => console.log("Me Milk")}
                     />
@@ -216,19 +229,19 @@ const HomeScreen: FC = () => {
                   <View style={{ backgroundColor: "#87AF9E" }}>
                     <List.Item
                       title="eggs"
-                      titleStyle={{color:'white'}}
+                      titleStyle={{ color: "white" }}
                       style={styles.Pill}
                       onPress={() => console.log("Me eggs")}
                     />
                     <List.Item
                       title="Steak"
-                      titleStyle={{color:'white'}}
+                      titleStyle={{ color: "white" }}
                       style={styles.Pill}
                       onPress={() => console.log("Me Steak")}
                     />
                     <List.Item
                       title="Milk"
-                      titleStyle={{color:'white'}}
+                      titleStyle={{ color: "white" }}
                       style={styles.Pill}
                       onPress={() => console.log("Me Milk")}
                     />
@@ -248,19 +261,19 @@ const HomeScreen: FC = () => {
                   <View style={{ backgroundColor: "#87AF9E" }}>
                     <List.Item
                       title="eggs"
-                      titleStyle={{color:'white'}}
+                      titleStyle={{ color: "white" }}
                       style={styles.Pill}
                       onPress={() => console.log("Me eggs")}
                     />
                     <List.Item
                       title="Steak"
-                      titleStyle={{color:'white'}}
+                      titleStyle={{ color: "white" }}
                       style={styles.Pill}
                       onPress={() => console.log("Me Steak")}
                     />
                     <List.Item
                       title="Milk"
-                      titleStyle={{color:'white'}}
+                      titleStyle={{ color: "white" }}
                       style={styles.Pill}
                       onPress={() => console.log("Me Milk")}
                     />
@@ -284,17 +297,12 @@ const HomeScreen: FC = () => {
                 <Text style={styles.Text}>Sort Grocery Items</Text>
               </View>
               <Text style={styles.SortText}> Item Name</Text>
-              <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
-                <RadioButton.Item
-                  label="A-Z"
-                  value="first"
-                  color="#E9E9E1"
-                />
-                <RadioButton.Item
-                  label="Z-A"
-                  value="second"
-                  color="#E9E9E1"
-                />
+              <RadioButton.Group
+                onValueChange={(newValue) => setValue(newValue)}
+                value={value}
+              >
+                <RadioButton.Item label="A-Z" value="first" color="#E9E9E1" />
+                <RadioButton.Item label="Z-A" value="second" color="#E9E9E1" />
                 <Text style={styles.SortText}>Best By Date</Text>
                 <RadioButton.Item
                   label="Closest to Farthest"
@@ -330,7 +338,7 @@ const HomeScreen: FC = () => {
             contentContainerStyle={containerStyle}
           >
             <View>
-              <View style={{alignItems: 'center'}}>
+              <View style={{ alignItems: "center" }}>
                 <Text style={styles.Text}>Add Item</Text>
                 <TextInput
                   style={{ width: 300, marginTop: 20 }}
@@ -350,7 +358,6 @@ const HomeScreen: FC = () => {
                   />
                 </View>
 
-
                 <TextInput
                   style={{ width: 300 }}
                   theme={{ colors: { primary: "#4B4B4B" } }}
@@ -368,17 +375,17 @@ const HomeScreen: FC = () => {
                     inputMode="start"
                   />
                 </View>
-                <View style={{ width: 300}}>
-                <DropDown
-                  label={"Select Group"}
-                  mode={"outlined"}
-                  visible={showDropDown}
-                  showDropDown={() => setShowDropDown(true)}
-                  onDismiss={() => setShowDropDown(false)}
-                  value={group}
-                  setValue={setGroup}
-                  list={groupList}
-                />
+                <View style={{ width: 300 }}>
+                  <DropDown
+                    label={"Select Group"}
+                    mode={"outlined"}
+                    visible={showDropDown}
+                    showDropDown={() => setShowDropDown(true)}
+                    onDismiss={() => setShowDropDown(false)}
+                    value={group}
+                    setValue={setGroup}
+                    list={groupList}
+                  />
                 </View>
 
                 <Button
@@ -447,9 +454,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     color: "#E9E9E1",
   },
-  font:{
-    fontFamily: "RobotoSlab_400Regular"
-  }
+  font: {
+    fontFamily: "RobotoSlab_400Regular",
+  },
 });
 
 export default HomeScreen;
