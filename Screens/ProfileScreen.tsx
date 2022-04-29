@@ -41,7 +41,7 @@ const ProfileScreen: FC<Props> = ({navigation}) => {
     const showGroupModal = () => setShowGroup(true);
     const showConfirmModal = () => setShowConfirm(true);
     const hideConfirmModal = () => setShowConfirm(false);
-    const containerStyle = { backgroundColor: '#303030', padding: 20 };
+    const containerStyle = { backgroundColor: '#2C443A', padding: 20 };
     const [username, setUsername] = useState("");
 
     const handleLogOut = () => {
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     GroupMembersText: {
         marginTop: 20,
         padding: 15,
-        backgroundColor: "#9A9B9A",
+        backgroundColor: "#87AF9E",
         // borderRadius: 25,
         // marginLeft: 30,
         // marginBottom: 10,
