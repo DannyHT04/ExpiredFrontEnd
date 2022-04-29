@@ -61,7 +61,7 @@ const GroceryListScreen: FC = () => {
           <View style={{ flex: 1 }}>
             <IconButton
               icon="sort-variant"
-              color={Colors.red500}
+              color='#2C443A'
               size={45}
               onPress={showSortModal}
             />
@@ -78,7 +78,7 @@ const GroceryListScreen: FC = () => {
           <View style={{ flex: 1, alignItems: "flex-end" }}>
             <IconButton
               icon="plus-circle-outline"
-              color={Colors.red500}
+              color='#2C443A'
               size={45}
               onPress={showAddItemModal}
             />
