@@ -18,19 +18,20 @@ import Logo from '../assets/Logo.png'
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { DoesUserExist, AddUser } from "../Services/DataService";
 import createUser from "../interfaces/userModelInterfaces";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 type RootStackParamList = {
-    Home: undefined;
-    Login: undefined;
-    CreateAccount: undefined;
-    Profile: undefined;
-    Splash: undefined;
-    GroceryList: undefined;
-    Footer: undefined;
-  };
-  type Props = NativeStackScreenProps<RootStackParamList, "CreateAccount">;
+  Home: undefined;
+  Login: undefined;
+  CreateAccount: undefined;
+  Profile: undefined;
+  Splash: undefined;
+  GroceryList: undefined;
+  Footer: undefined;
+};
+type Props = NativeStackScreenProps<RootStackParamList, "CreateAccount">;
 
-const CreateAccountScreen: FC <Props> = ({navigation}) => {
+const CreateAccountScreen: FC<Props> = ({ navigation }) => {
   const [Username, setUsername] = useState<string>("");
   const [Password, setPassword] = useState<string>("");
   const [Email, setEmail] = useState<string>("");
@@ -51,35 +52,36 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-  let userData :createUser ={
+  let userData: createUser = {
     Id: 0,
     GroupId: 0,
-    Username : Username,
-    Password : Password,
-    FirstName : FirstName,
-    LastName : LastName,
-    Email : Email
-    
+    Username: Username,
+    Password: Password,
+    FirstName: FirstName,
+    LastName: LastName,
+    Email: Email
+
   }
   const handleSubmit = async () => {
     let result = await DoesUserExist(Username);
     console.log(result);
-    if(result === false){
+    if (result === false) {
       console.log("im pressed")
-     
+
       AddUser(userData)
       Alert.alert("success");
-     
-    }else{
+
+    } else {
       console.log("Already exist")
       Alert.alert(
         "Unable to Create Account",
         "The username is already taken");
     }
   }
-  
+
 
   return (
+    <KeyboardAwareScrollView>
     <View style={styles.Center}>
       <View style={[styles.BoxBg]}>
         <View>
@@ -91,30 +93,30 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
         </View>
         <Text style={[styles.Fontsize]}>Create Account</Text>
         <View>
-          <TextInput
-            style={[styles.Mt1, styles.textInputSizng]}
-            autoComplete="off"
-            label="First Name"
-            theme={{ colors: { primary: "#4B4B4B" } }}
-            value={FirstName}
-            onChangeText={setFirstName}
-          />
-          <TextInput
-            style={[styles.Mt1, styles.textInputSizng]}
-            theme={{ colors: { primary: "#4B4B4B" } }}
-            autoComplete="off"
-            label="Last Name"
-            value={LastName}
-            onChangeText={setLastName}
-          />
-          <TextInput
-            style={[styles.Mt1, styles.textInputSizng]}
-            theme={{ colors: { primary: "#4B4B4B" } }}
-            autoComplete="off"
-            label="Email"
-            value={Email}
-            onChangeText={setEmail}
-          />
+            <TextInput
+              style={[styles.Mt1, styles.textInputSizng]}
+              autoComplete="off"
+              label="First Name"
+              theme={{ colors: { primary: "#4B4B4B" } }}
+              value={FirstName}
+              onChangeText={setFirstName}
+            />
+            <TextInput
+              style={[styles.Mt1, styles.textInputSizng]}
+              theme={{ colors: { primary: "#4B4B4B" } }}
+              autoComplete="off"
+              label="Last Name"
+              value={LastName}
+              onChangeText={setLastName}
+            />
+            <TextInput
+              style={[styles.Mt1, styles.textInputSizng]}
+              theme={{ colors: { primary: "#4B4B4B" } }}
+              autoComplete="off"
+              label="Email"
+              value={Email}
+              onChangeText={setEmail}
+            />
         </View>
         <View>
           <TextInput
@@ -130,25 +132,26 @@ const CreateAccountScreen: FC <Props> = ({navigation}) => {
             theme={{ colors: { primary: "#4B4B4B" } }}
             style={[styles.Mt1, styles.textInputSizng]}
             label="Password"
-            secureTextEntry = {true}
+            secureTextEntry={true}
             value={Password}
             onChangeText={setPassword}
           />
-        </View>
-        <View style={styles.Mt2}>
-          <Button color="#2C443A" mode="contained">
-            <Text style={styles.Font} onPress={handleSubmit}>Create</Text>
-          </Button>
-        </View>
-        <View>
-          <Button onPress={() => {
-            navigation.navigate('Login')
-          }}  color="#405CBB">
-            Already have an account?
-          </Button>
-        </View>
+      </View>
+      <View style={styles.Mt2}>
+        <Button color="#2C443A" mode="contained">
+          <Text style={styles.Font} onPress={handleSubmit}>Create</Text>
+        </Button>
+      </View>
+      <View>
+        <Button onPress={() => {
+          navigation.navigate('Login')
+        }} color="#405CBB">
+          Already have an account?
+        </Button>
       </View>
     </View>
+    </View >
+    </KeyboardAwareScrollView>
   );
 };
 

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Alert } from "react-native";
+import { View, Text, StyleSheet, Image, Alert, } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FC, useState } from "react";
 import { TextInput, Button } from "react-native-paper";
@@ -21,6 +21,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 import { useToast } from "react-native-paper-toast";
 import IuserData from "../interfaces/LoginInterfaces"
+
 type RootStackParamList = {
   Home: undefined;
   Login: undefined;
