@@ -21,6 +21,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 import { useToast } from "react-native-paper-toast";
 import IuserData from "../interfaces/LoginInterfaces"
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 type RootStackParamList = {
   Home: undefined;
@@ -41,7 +42,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
   const toaster = useToast();
 
   const handleSubmit = async () => {
-    let userInfo : IuserData = {
+    let userInfo: IuserData = {
       Username: username,
       Password: password,
     };
@@ -74,61 +75,64 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
   }
 
   return (
+
     <View style={styles.Center}>
-      <View style={[styles.BoxBg]}>
-        {/* <View>
+      <KeyboardAwareScrollView>
+        <View style={[styles.BoxBg]}>
+          {/* <View>
       <SuccessComponent/>
       </View> */}
-        <View>
-          <Image
-            source={Logo}
-            style={styles.SplashLogo}
-            accessibilityLabel="Expired Logo"
-          />
-        </View>
-        <Text style={[styles.Fontsize]}>Login</Text>
+          <View>
+            <Image
+              source={Logo}
+              style={styles.SplashLogo}
+              accessibilityLabel="Expired Logo"
+            />
+          </View>
+          <Text style={[styles.Fontsize]}>Login</Text>
 
-        <View style={[styles.Mt2]}>
-          <TextInput
-            style={[styles.Mt1]}
-            theme={{ colors: { primary: "#4B4B4B" } }}
-            autoComplete="off"
-            label="Username"
-            value={username}
-            onChangeText={setUsername}
-          />
-          <TextInput
-            autoComplete="off"
-            theme={{ colors: { primary: "#4B4B4B" } }}
-            style={[styles.Mt1]}
-            secureTextEntry={true}
-            label="Password"
-            value={password}
-            onChangeText={setPassword}
-          />
-        </View>
-        <View style={styles.Mt2}>
-          <Button onPress={handleSubmit} color="#2C443A" mode="contained">
-            <Text style={styles.Font}>Log In</Text>
-          </Button>
-          <Button
-            onPress={() => {
-              navigation.navigate("CreateAccount");
-            }}
-            style={{ marginTop: 20 }}
-            color="#405CBB"
-          >
-            Create Account?
-          </Button>
+          <View style={[styles.Mt2]}>
+            <TextInput
+              style={[styles.Mt1]}
+              theme={{ colors: { primary: "#4B4B4B" } }}
+              autoComplete="off"
+              label="Username"
+              value={username}
+              onChangeText={setUsername}
+            />
+            <TextInput
+              autoComplete="off"
+              theme={{ colors: { primary: "#4B4B4B" } }}
+              style={[styles.Mt1]}
+              secureTextEntry={true}
+              label="Password"
+              value={password}
+              onChangeText={setPassword}
+            />
+          </View>
+          <View style={styles.Mt2}>
+            <Button onPress={handleSubmit} color="#2C443A" mode="contained">
+              <Text style={styles.Font}>Log In</Text>
+            </Button>
+            <Button
+              onPress={() => {
+                navigation.navigate("CreateAccount");
+              }}
+              style={{ marginTop: 20 }}
+              color="#405CBB"
+            >
+              Create Account?
+            </Button>
 
-          <Button
-            mode="contained"
-            onPress={() => toaster.show({message:'Success!'})}
-          >
-            Press me
-          </Button>
+            <Button
+              mode="contained"
+              onPress={() => toaster.show({ message: 'Success!' })}
+            >
+              Press me
+            </Button>
+          </View>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 };
@@ -157,7 +161,7 @@ const styles = StyleSheet.create({
     width: 350,
     alignItems: "center",
     marginTop: 40,
-    marginBottom: 40,
+    paddingBottom: 40
   },
   Font: {
     fontFamily: "RobotoSlab_400Regular",

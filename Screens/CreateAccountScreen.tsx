@@ -81,8 +81,8 @@ const CreateAccountScreen: FC<Props> = ({ navigation }) => {
 
 
   return (
-    <KeyboardAwareScrollView>
     <View style={styles.Center}>
+      <KeyboardAwareScrollView>
       <View style={[styles.BoxBg]}>
         <View>
           <Image
@@ -150,8 +150,8 @@ const CreateAccountScreen: FC<Props> = ({ navigation }) => {
         </Button>
       </View>
     </View>
-    </View >
     </KeyboardAwareScrollView>
+    </View >
   );
 };
 
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     width: 350,
     alignItems: "center",
     marginTop: 40,
-    marginBottom: 40,
+    paddingBottom: 40,
   },
   Font: {
     fontFamily: "RobotoSlab_400Regular",

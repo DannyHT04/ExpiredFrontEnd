@@ -32,7 +32,6 @@ import { useFonts } from "@expo-google-fonts/roboto-slab";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DatePickerInput } from "react-native-paper-dates";
 import DropDown from "react-native-paper-dropdown";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const HomeScreen: FC = () => {
   const [showShort, setShowSort] = useState(false);
@@ -94,7 +93,7 @@ const HomeScreen: FC = () => {
   };
 
   return (
-    <KeyboardAwareScrollView>
+    <>
     <Provider theme={theme}>
       <SafeAreaView style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
         <View style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
@@ -436,7 +435,7 @@ const HomeScreen: FC = () => {
         </Portal>
       </SafeAreaView>
     </Provider>
-    </KeyboardAwareScrollView>
+    </>
   );
 };
 
