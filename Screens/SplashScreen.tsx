@@ -16,12 +16,12 @@ const SplashScreen: FC = () => {
 
 const styles = StyleSheet.create({
   Bg: {
-    backgroundColor: "#4B4B4B",
+    backgroundColor: "#2C443A",
     flex: 1,
   },
   SplashLogo:{
     height:175, 
-    width:180,  
+    width:182,  
   },
   Container:{
     alignItems:"center", 

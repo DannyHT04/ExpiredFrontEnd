@@ -88,7 +88,7 @@ const HomeScreen: FC = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: "#4B4B4B",
+      primary: "#2C443A",
     },
   };
 
