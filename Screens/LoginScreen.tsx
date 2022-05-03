@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image, Alert, } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FC, useState } from "react";
+import { FC, useState, useContext } from "react";
 import { TextInput, Button } from "react-native-paper";
 import { UserLogin, DoesUserExist } from "../Services/DataService";
 import {
@@ -20,7 +20,7 @@ import Logo from "../assets/Logo.png";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 import { useToast } from "react-native-paper-toast";
-import IuserData from "../interfaces/LoginInterfaces"
+import iUserData from "../interfaces/LoginInterfaces"
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 type RootStackParamList = {
@@ -33,21 +33,26 @@ type RootStackParamList = {
   Footer: undefined;
 };
 
+import UserContext from "../Context/UserContext"
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
 const LoginScreen: FC<Props> = ({ navigation }) => {
-  const [username, setUsername] = useState<string>("");
+  const [usernameTest, setUsernameTest] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
+  let {userData, setUserData, username, setUsername} = useContext(UserContext);
   const toaster = useToast();
 
   const handleSubmit = async () => {
-    let userInfo: IuserData = {
-      Username: username,
+    let userInfo: iUserData = {
+      Username: usernameTest,
       Password: password,
-    };
+    }
+    // setUsername(usernameTest);
 
+
+  
     let token = await UserLogin(userInfo);
+
     console.log(token.status);
     if (token.status == 401) {
       Alert.alert("Unable to Login", "Username or password is incorrect");
@@ -55,6 +60,8 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
     if (token.token != null) {
       AsyncStorage.setItem("Token", token.token);
       navigation.navigate("Footer");
+      username = userInfo.Username;
+      AsyncStorage.setItem("userName", username);
     }
     setPassword("");
   };
@@ -97,8 +104,8 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
               theme={{ colors: { primary: "#4B4B4B" } }}
               autoComplete="off"
               label="Username"
-              value={username}
-              onChangeText={setUsername}
+              value={usernameTest}
+              onChangeText={setUsernameTest}
             />
             <TextInput
               autoComplete="off"

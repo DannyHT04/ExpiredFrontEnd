@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
-import { FC, useState } from "react";
+import { FC, useState, useContext, useEffect } from "react";
 import {
   IconButton,
   List,
@@ -32,8 +32,14 @@ import { useFonts } from "@expo-google-fonts/roboto-slab";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DatePickerInput } from "react-native-paper-dates";
 import DropDown from "react-native-paper-dropdown";
+import UserContext from "../Context/UserContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const HomeScreen: FC = () => {
+const HomeScreen: FC = () => {  
+  useEffect(async () => {
+    const value = await AsyncStorage.getItem('userName');
+    console.log(value);
+  }, []);
   const [showShort, setShowSort] = useState(false);
   const [showAddItem, setShowAddItem] = useState(false);
 
@@ -51,7 +57,7 @@ const HomeScreen: FC = () => {
 
   const [showDropDown, setShowDropDown] = useState(false);
   const [group, setGroup] = useState("");
-
+  let username = useContext(UserContext);
   const groupList = [
     {
       label: "Group 1",
@@ -191,7 +197,7 @@ const HomeScreen: FC = () => {
                       descriptionStyle={{ color: "white", marginTop: 8 }}
                     /> */}
                     <View style={styles.Pill}>
-                      <Pressable onPress={() => console.log("i work")}>
+                      <Pressable onPress={() => console.log(username)}>
                       <View style={[{ flexDirection: "row" }]}>
                         <Image source={Logo} style={{ width: 75, height: 72 }} />
                         <View style={{justifyContent: 'space-evenly', marginLeft: 20}}>
