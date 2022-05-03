@@ -38,4 +38,16 @@ async function DoesUserExist(Username: String){
     return data;
 }
 
-export { UserLogin, AddUser, DoesUserExist};
+async function GetUserInfoByUsername(Username: String){
+    let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/User/GetUserInfoByUsername/${Username}`);
+    let data = await res.json();
+    return data;
+}
+
+async function GetAllUserItems(userId: number){
+    let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/Item/GetAllUserItems/${userId}`);
+    let data = await res.json();
+    return data;
+}
+
+export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems};

@@ -34,15 +34,47 @@ import { DatePickerInput } from "react-native-paper-dates";
 import DropDown from "react-native-paper-dropdown";
 import UserContext from "../Context/UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { GetUserInfoByUsername, GetAllUserItems } from "../Services/DataService";
 
-const HomeScreen: FC = () => {  
-  useEffect(async () => {
-    const value = await AsyncStorage.getItem('userName');
-    console.log(value);
+type RootStackParamList = {
+  Home: undefined;
+  Login: undefined;
+  CreateAccount: undefined;
+  Profile: undefined;
+  Splash: undefined;
+  GroceryList: undefined;
+  Footer: undefined;
+};
+
+type Props = NativeStackScreenProps<RootStackParamList, "Home">;
+
+const HomeScreen: FC<Props> = ({ navigation }) => {
+  let { username, setUsername, storedUser, setStoredUser, userInfo, setUserInfo, userItems, setUserItems } =
+    useContext(UserContext);
+
+  useEffect(() => {
+    let token = AsyncStorage.getItem("Token");
+    if (token == null) {
+      navigation.navigate("Login");
+    } else {
+      // console.log(username);
+      if (username != null) {
+        const fetchData = async () => {
+          // console.log(username);
+          userInfo = await GetUserInfoByUsername(username);
+          userItems = await GetAllUserItems(userInfo.id)
+          setStoredUser(userItems)
+          console.log(storedUser[0].productName)
+        };
+        fetchData().catch(console.error);
+      }
+    }
   }, []);
   const [showShort, setShowSort] = useState(false);
   const [showAddItem, setShowAddItem] = useState(false);
 
+  //modal
   const [value, setValue] = useState("first");
 
   const showSortModal = () => setShowSort(true);
@@ -57,7 +89,6 @@ const HomeScreen: FC = () => {
 
   const [showDropDown, setShowDropDown] = useState(false);
   const [group, setGroup] = useState("");
-  let username = useContext(UserContext);
   const groupList = [
     {
       label: "Group 1",
@@ -100,49 +131,49 @@ const HomeScreen: FC = () => {
 
   return (
     <>
-    <Provider theme={theme}>
-      <SafeAreaView style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
-        <View style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
-          >
-            <View style={{ flex: 1 }}>
-              <IconButton
-                icon="sort-variant"
-                color="#2C443A"
-                size={45}
-                onPress={showSortModal}
-              />
+      <Provider theme={theme}>
+        <SafeAreaView style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
+          <View style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+            >
+              <View style={{ flex: 1 }}>
+                <IconButton
+                  icon="sort-variant"
+                  color="#2C443A"
+                  size={45}
+                  onPress={showSortModal}
+                />
+              </View>
+
+              <View style={{ alignItems: "center" }}>
+                <Image
+                  source={Logo}
+                  style={[styles.LogoStyle]}
+                  accessibilityLabel="Expired Logo"
+                />
+              </View>
+
+              <View style={{ flex: 1, alignItems: "flex-end" }}>
+                <IconButton
+                  icon="plus-circle-outline"
+                  color="#2C443A"
+                  size={45}
+                  onPress={showAddItemModal}
+                />
+              </View>
             </View>
 
-            <View style={{ alignItems: "center" }}>
-              <Image
-                source={Logo}
-                style={[styles.LogoStyle]}
-                accessibilityLabel="Expired Logo"
-              />
-            </View>
-
-            <View style={{ flex: 1, alignItems: "flex-end" }}>
-              <IconButton
-                icon="plus-circle-outline"
-                color="#2C443A"
-                size={45}
-                onPress={showAddItemModal}
-              />
-            </View>
-          </View>
-
-          <View
-            style={{
-              marginTop: 50,
-              backgroundColor: "#7FC8A9",
-              flex: 1,
-              alignItems: "center",
-            }}
-          >
-            <View style={[styles.row]}>
-              {/* <Text>Instructions</Text>
+            <View
+              style={{
+                marginTop: 50,
+                backgroundColor: "#7FC8A9",
+                flex: 1,
+                alignItems: "center",
+              }}
+            >
+              <View style={[styles.row]}>
+                {/* <Text>Instructions</Text>
 
               <Text>1. Select the plus icon in the top right corner </Text>
               <Text>
@@ -155,7 +186,7 @@ const HomeScreen: FC = () => {
                 add to your Grocery List select the icon on
               </Text> */}
 
-              {/* <Card style={{width:350, backgroundColor:'#2C443A'}}>
+                {/* <Card style={{width:350, backgroundColor:'#2C443A'}}>
                 <Card.Title
                   title="Instructions"
                   titleStyle={{color:"#E9E9E1"}}
@@ -170,25 +201,25 @@ const HomeScreen: FC = () => {
                 add to your Grocery List select the icon on</Text>
                 </Card.Content>
               </Card> */}
-            </View>
+              </View>
 
-            {/* list according */}
-            <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
-              <List.AccordionGroup>
-                <List.Accordion
-                  theme={{
-                    colors: { background: "#2C443A", primary: "#4B4B4B" },
-                  }}
-                  title="Personal Items"
-                  titleStyle={{
-                    color: "#E9E9E1",
-                    fontFamily: "RobotoSlab_400Regular",
-                    fontSize: 20
-                  }}
-                  id="1"
-                >
-                  <View style={{ backgroundColor: "#87AF9E" }}>
-                    {/* <List.Item
+              {/* list according */}
+              <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+                <List.AccordionGroup>
+                  <List.Accordion
+                    theme={{
+                      colors: { background: "#2C443A", primary: "#4B4B4B" },
+                    }}
+                    title="Personal Items"
+                    titleStyle={{
+                      color: "#E9E9E1",
+                      fontFamily: "RobotoSlab_400Regular",
+                      fontSize: 20,
+                    }}
+                    id="1"
+                  >
+                    <View style={{ backgroundColor: "#87AF9E" }}>
+                      {/* <List.Item
                       title="eggs"
                       titleStyle={{ color: "white" }}
                       style={styles.Pill}
@@ -196,49 +227,69 @@ const HomeScreen: FC = () => {
                       description={"Best used by: 3/19/2022"}
                       descriptionStyle={{ color: "white", marginTop: 8 }}
                     /> */}
-                    <View style={styles.Pill}>
-                      <Pressable onPress={() => console.log(username)}>
-                      <View style={[{ flexDirection: "row" }]}>
-                        <Image source={Logo} style={{ width: 75, height: 72 }} />
-                        <View style={{justifyContent: 'space-evenly', marginLeft: 20}}>
-                          <Text style={styles.pillText}>Eggs</Text>
-                          <Text style={styles.pillText2}>
-                            Expires in: 1678 days
-                          </Text>
+                      <View style={styles.Pill}>
+                        <Pressable onPress={() => console.log(storedUser[0].productName)}>
+                          <View style={[{ flexDirection: "row" }]}>
+                            <Image
+                              source={Logo}
+                              style={{ width: 75, height: 72 }}
+                            />
+                            <View
+                              style={{
+                                justifyContent: "space-evenly",
+                                marginLeft: 20,
+                              }}
+                            >
+                              <Text style={styles.pillText}>{storedUser[0].productName}</Text>
+                              <Text style={styles.pillText2}>
+                                Expires in: 1678 days
+                              </Text>
+                            </View>
+                          </View>
+                        </Pressable>
+                      </View>
+
+                      <View style={styles.Pill}>
+                        <View style={[{ flexDirection: "row" }]}>
+                          <Image
+                            source={Logo}
+                            style={{ width: 75, height: 72 }}
+                          />
+                          <View
+                            style={{
+                              justifyContent: "space-evenly",
+                              marginLeft: 20,
+                            }}
+                          >
+                            <Text style={styles.pillText}>Steak</Text>
+                            <Text style={styles.pillText2}>
+                              Expires in: 78 days
+                            </Text>
+                          </View>
                         </View>
                       </View>
-                      </Pressable>
-                    </View>
 
-
-                    <View style={styles.Pill} >
-                      <View style={[{ flexDirection: "row" }]}>
-                        <Image source={Logo} style={{ width: 75, height: 72 }} />
-                        <View style={{justifyContent: 'space-evenly', marginLeft: 20}}>
-                          <Text style={styles.pillText}>Steak</Text>
-                          <Text style={styles.pillText2}>
-                            Expires in: 78 days
-                          </Text>
+                      <View style={styles.Pill}>
+                        <View style={[{ flexDirection: "row" }]}>
+                          <Image
+                            source={Logo}
+                            style={{ width: 75, height: 72 }}
+                          />
+                          <View
+                            style={{
+                              justifyContent: "space-evenly",
+                              marginLeft: 20,
+                            }}
+                          >
+                            <Text style={styles.pillText}>Egg</Text>
+                            <Text style={styles.pillText2}>
+                              Expires in: 1678 days
+                            </Text>
+                          </View>
                         </View>
                       </View>
-                    </View>
 
-
-                    <View style={styles.Pill} >
-                      <View style={[{ flexDirection: "row" }]}>
-                        <Image source={Logo} style={{ width: 75, height: 72 }} />
-                        <View style={{justifyContent: 'space-evenly', marginLeft: 20}}>
-                          <Text style={styles.pillText}>Eggs</Text>
-                          <Text style={styles.pillText2}>
-                            Expires in: 1678 days
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-
-                    
-
-                    {/* <List.Item
+                      {/* <List.Item
                       title="Steak"
                       titleStyle={{ color: "white" }}
                       style={styles.Pill}
@@ -250,197 +301,201 @@ const HomeScreen: FC = () => {
                       style={styles.Pill}
                       onPress={() => console.log("Me Milk")}
                     /> */}
-                  </View>
-                </List.Accordion>
-                <List.Accordion
-                  theme={{
-                    colors: { background: "#2C443A", primary: "#4B4B4B" },
-                  }}
-                  title="House Fridge"
-                  titleStyle={{
-                    color: "#E9E9E1",
-                    fontFamily: "RobotoSlab_400Regular",
-                    fontSize: 20
-                  }}
-                  id="2"
-                >
-                  <View style={{ backgroundColor: "#87AF9E" }}>
-                    <List.Item
-                      title="eggs"
-                      titleStyle={{ color: "white" }}
-                      style={styles.Pill}
-                      onPress={() => console.log("Me eggs")}
-                    />
-                    <List.Item
-                      title="Steak"
-                      titleStyle={{ color: "white" }}
-                      style={styles.Pill}
-                      onPress={() => console.log("Me Steak")}
-                    />
-                    <List.Item
-                      title="Milk"
-                      titleStyle={{ color: "white" }}
-                      style={styles.Pill}
-                      onPress={() => console.log("Me Milk")}
-                    />
-                  </View>
-                </List.Accordion>
-                <List.Accordion
-                  theme={{
-                    colors: { background: "#2C443A", primary: "#4B4B4B" },
-                  }}
-                  title="Work Fridge"
-                  titleStyle={{
-                    color: "#E9E9E1",
-                    fontFamily: "RobotoSlab_400Regular",
-                    fontSize: 20
-                  }}
-                  id="3"
-                >
-                  <View style={{ backgroundColor: "#87AF9E" }}>
-                    <List.Item
-                      title="eggs"
-                      titleStyle={{ color: "white" }}
-                      style={styles.Pill}
-                      onPress={() => console.log("Me eggs")}
-                    />
-                    <List.Item
-                      title="Steak"
-                      titleStyle={{ color: "white" }}
-                      style={styles.Pill}
-                      onPress={() => console.log("Me Steak")}
-                    />
-                    <List.Item
-                      title="Milk"
-                      titleStyle={{ color: "white" }}
-                      style={styles.Pill}
-                      onPress={() => console.log("Me Milk")}
-                    />
-                  </View>
-                </List.Accordion>
-              </List.AccordionGroup>
+                    </View>
+                  </List.Accordion>
+                  <List.Accordion
+                    theme={{
+                      colors: { background: "#2C443A", primary: "#4B4B4B" },
+                    }}
+                    title="House Fridge"
+                    titleStyle={{
+                      color: "#E9E9E1",
+                      fontFamily: "RobotoSlab_400Regular",
+                      fontSize: 20,
+                    }}
+                    id="2"
+                  >
+                    <View style={{ backgroundColor: "#87AF9E" }}>
+                      <List.Item
+                        title="eggs"
+                        titleStyle={{ color: "white" }}
+                        style={styles.Pill}
+                        onPress={() => console.log("Me eggs")}
+                      />
+                      <List.Item
+                        title="Steak"
+                        titleStyle={{ color: "white" }}
+                        style={styles.Pill}
+                        onPress={() => console.log("Me Steak")}
+                      />
+                      <List.Item
+                        title="Milk"
+                        titleStyle={{ color: "white" }}
+                        style={styles.Pill}
+                        onPress={() => console.log("Me Milk")}
+                      />
+                    </View>
+                  </List.Accordion>
+                  <List.Accordion
+                    theme={{
+                      colors: { background: "#2C443A", primary: "#4B4B4B" },
+                    }}
+                    title="Work Fridge"
+                    titleStyle={{
+                      color: "#E9E9E1",
+                      fontFamily: "RobotoSlab_400Regular",
+                      fontSize: 20,
+                    }}
+                    id="3"
+                  >
+                    <View style={{ backgroundColor: "#87AF9E" }}>
+                      <List.Item
+                        title="eggs"
+                        titleStyle={{ color: "white" }}
+                        style={styles.Pill}
+                        onPress={() => console.log("Me eggs")}
+                      />
+                      <List.Item
+                        title="Steak"
+                        titleStyle={{ color: "white" }}
+                        style={styles.Pill}
+                        onPress={() => console.log("Me Steak")}
+                      />
+                      <List.Item
+                        title="Milk"
+                        titleStyle={{ color: "white" }}
+                        style={styles.Pill}
+                        onPress={() => console.log("Me Milk")}
+                      />
+                    </View>
+                  </List.Accordion>
+                </List.AccordionGroup>
+              </View>
             </View>
           </View>
-        </View>
 
-        {/* **** VIEW SORT MODAL **** */}
+          {/* **** VIEW SORT MODAL **** */}
 
-        <Portal>
-          <Modal
-            visible={showShort}
-            onDismiss={hideSortModal}
-            contentContainerStyle={containerStyle}
-          >
-            <View>
-              <View style={{ alignItems: "center" }}>
-                <Text style={styles.Text}>Sort Grocery Items</Text>
-              </View>
-              <Text style={styles.SortText}> Item Name</Text>
-              <RadioButton.Group
-                onValueChange={(newValue) => setValue(newValue)}
-                value={value}
-              >
-                <RadioButton.Item label="A-Z" value="first" color="#E9E9E1" />
-                <RadioButton.Item label="Z-A" value="second" color="#E9E9E1" />
-                <Text style={styles.SortText}>Best By Date</Text>
-                <RadioButton.Item
-                  label="Closest to Farthest"
-                  value="third"
-                  color="#E9E9E1"
-                />
-                <RadioButton.Item
-                  label="Farthest to Closest"
-                  value="fourth"
-                  color="#E9E9E1"
-                />
-              </RadioButton.Group>
-              <View style={{ alignItems: "center" }}>
-                <Button
-                  style={{ marginTop: 20 }}
-                  color="#505050"
-                  mode="contained"
-                  onPress={hideSortModal}
+          <Portal>
+            <Modal
+              visible={showShort}
+              onDismiss={hideSortModal}
+              contentContainerStyle={containerStyle}
+            >
+              <View>
+                <View style={{ alignItems: "center" }}>
+                  <Text style={styles.Text}>Sort Grocery Items</Text>
+                </View>
+                <Text style={styles.SortText}> Item Name</Text>
+                <RadioButton.Group
+                  onValueChange={(newValue) => setValue(newValue)}
+                  value={value}
                 >
-                  Save
-                </Button>
+                  <RadioButton.Item label="A-Z" value="first" color="#E9E9E1" />
+                  <RadioButton.Item
+                    label="Z-A"
+                    value="second"
+                    color="#E9E9E1"
+                  />
+                  <Text style={styles.SortText}>Best By Date</Text>
+                  <RadioButton.Item
+                    label="Closest to Farthest"
+                    value="third"
+                    color="#E9E9E1"
+                  />
+                  <RadioButton.Item
+                    label="Farthest to Closest"
+                    value="fourth"
+                    color="#E9E9E1"
+                  />
+                </RadioButton.Group>
+                <View style={{ alignItems: "center" }}>
+                  <Button
+                    style={{ marginTop: 20 }}
+                    color="#505050"
+                    mode="contained"
+                    onPress={hideSortModal}
+                  >
+                    Save
+                  </Button>
+                </View>
               </View>
-            </View>
-          </Modal>
-        </Portal>
+            </Modal>
+          </Portal>
 
-        {/* **** VIEW ADD ITEM MODAL **** */}
+          {/* **** VIEW ADD ITEM MODAL **** */}
 
-        <Portal>
-          <Modal
-            visible={showAddItem}
-            onDismiss={hideAddItemModal}
-            contentContainerStyle={containerStyle}
-          >
-            <View>
-              <View style={{ alignItems: "center" }}>
-                <Text style={styles.Text}>Add Item</Text>
-                <TextInput
-                  style={{ width: 300, marginTop: 20 }}
-                  theme={{ colors: { primary: "#4B4B4B" } }}
-                  autoComplete="off"
-                  label="Product Name"
-                />
-
-                <View style={{ width: 300, marginTop: 20 }}>
-                  <DatePickerInput
-                    locale="en"
+          <Portal>
+            <Modal
+              visible={showAddItem}
+              onDismiss={hideAddItemModal}
+              contentContainerStyle={containerStyle}
+            >
+              <View>
+                <View style={{ alignItems: "center" }}>
+                  <Text style={styles.Text}>Add Item</Text>
+                  <TextInput
+                    style={{ width: 300, marginTop: 20 }}
+                    theme={{ colors: { primary: "#4B4B4B" } }}
                     autoComplete="off"
-                    label="Expiration Date"
-                    value={inputDate}
-                    onChange={(d) => setInputDate(d)}
-                    inputMode="start"
+                    label="Product Name"
                   />
-                </View>
 
-                <TextInput
-                  style={{ width: 300 }}
-                  theme={{ colors: { primary: "#4B4B4B" } }}
-                  autoComplete="off"
-                  label="Owner"
-                />
+                  <View style={{ width: 300, marginTop: 20 }}>
+                    <DatePickerInput
+                      locale="en"
+                      autoComplete="off"
+                      label="Expiration Date"
+                      value={inputDate}
+                      onChange={(d) => setInputDate(d)}
+                      inputMode="start"
+                    />
+                  </View>
 
-                <View style={{ width: 300, marginTop: 20 }}>
-                  <DatePickerInput
-                    locale="en"
+                  <TextInput
+                    style={{ width: 300 }}
+                    theme={{ colors: { primary: "#4B4B4B" } }}
                     autoComplete="off"
-                    label="Set Notification"
-                    value={remindDate}
-                    onChange={(d) => setRemindDate(d)}
-                    inputMode="start"
+                    label="Owner"
                   />
-                </View>
-                <View style={{ width: 300 }}>
-                  <DropDown
-                    label={"Select Group"}
-                    mode={"outlined"}
-                    visible={showDropDown}
-                    showDropDown={() => setShowDropDown(true)}
-                    onDismiss={() => setShowDropDown(false)}
-                    value={group}
-                    setValue={setGroup}
-                    list={groupList}
-                  />
-                </View>
 
-                <Button
-                  style={{ marginTop: 20 }}
-                  color="#505050"
-                  mode="contained"
-                  onPress={hideAddItemModal}
-                >
-                  Add
-                </Button>
+                  <View style={{ width: 300, marginTop: 20 }}>
+                    <DatePickerInput
+                      locale="en"
+                      autoComplete="off"
+                      label="Set Notification"
+                      value={remindDate}
+                      onChange={(d) => setRemindDate(d)}
+                      inputMode="start"
+                    />
+                  </View>
+                  <View style={{ width: 300 }}>
+                    <DropDown
+                      label={"Select Group"}
+                      mode={"outlined"}
+                      visible={showDropDown}
+                      showDropDown={() => setShowDropDown(true)}
+                      onDismiss={() => setShowDropDown(false)}
+                      value={group}
+                      setValue={setGroup}
+                      list={groupList}
+                    />
+                  </View>
+
+                  <Button
+                    style={{ marginTop: 20 }}
+                    color="#505050"
+                    mode="contained"
+                    onPress={hideAddItemModal}
+                  >
+                    Add
+                  </Button>
+                </View>
               </View>
-            </View>
-          </Modal>
-        </Portal>
-      </SafeAreaView>
-    </Provider>
+            </Modal>
+          </Portal>
+        </SafeAreaView>
+      </Provider>
     </>
   );
 };
@@ -499,14 +554,14 @@ const styles = StyleSheet.create({
   },
   pillText: {
     fontFamily: "RobotoSlab_400Regular",
-    color: 'white',
-    fontSize: 20
+    color: "white",
+    fontSize: 20,
   },
   pillText2: {
     fontFamily: "RobotoSlab_400Regular",
-    color: 'white',
-    fontSize: 18
-  }
+    color: "white",
+    fontSize: 18,
+  },
 });
 
 export default HomeScreen;

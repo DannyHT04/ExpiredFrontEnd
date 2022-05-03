@@ -20,11 +20,13 @@ import ProfileScreen from "./Screens/ProfileScreen";
 import SplashScreen from "./Screens/SplashScreen";
 import GroceryListScreen from "./Screens/GroceryListScreen";
 import FooterComponent from "./Components/FooterComponent";
+import UserContext, { UserProvider } from './Context/UserContext';
 
 import React from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-paper-toast';
+import  UseUser  from './Hooks/UseUser';
 
 
 type RootStackParamList = {
@@ -43,6 +45,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
   
   return (
+    <UserProvider>
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
     <PaperProvider theme={DefaultTheme}>
       <ToastProvider>    
@@ -85,6 +88,7 @@ export default function App() {
     </ToastProvider>
     </PaperProvider>
     </SafeAreaProvider>
+    </UserProvider>
   );
 }
 
