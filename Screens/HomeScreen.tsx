@@ -167,10 +167,15 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     };
 
     await AddItem(newItem);
+    userItems = await GetAllUserItems(userInfo.id);
+    await setStoredUser(userItems);
   };
 
   const handleDeleteItem = async () => {
+    console.log("success");
     await DeleteItem(itemIndex.id);
+    userItems = await GetAllUserItems(userInfo.id);
+    await setStoredUser(userItems);
   };
 
   return (
