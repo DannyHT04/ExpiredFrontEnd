@@ -389,6 +389,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
             </View>
           </View>
 
+
           <Portal>
             <Modal
               visible={showItem}
@@ -458,7 +459,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     color="red"
                     mode="contained"
                     onPress={() => {
-                      hideItemModal;
+                      hideItemModal();
                       handleDeleteItem();
                     }}
                   >
@@ -576,7 +577,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     color="#505050"
                     mode="contained"
                     onPress={() => {
-                      hideAddItemModal;
+                      hideAddItemModal();
                       handleAddItem();
                       console.log("added");
                     }}
