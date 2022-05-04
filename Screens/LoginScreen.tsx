@@ -61,6 +61,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
       AsyncStorage.setItem("Token", token.token);
       setUsername(usernameTest);
       navigation.navigate("Footer");
+
       // username = userInfo.Username;
       // AsyncStorage.setItem("userName", username);
     }
