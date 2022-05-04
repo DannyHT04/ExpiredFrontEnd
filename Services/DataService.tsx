@@ -1,5 +1,6 @@
 import createUser from "../interfaces/userModelInterfaces";
 import IuserData from "../interfaces/LoginInterfaces";
+import iAddItem from '../interfaces/ItemInterface';
 
 
 async function AddUser(newUser: createUser){
@@ -50,4 +51,38 @@ async function GetAllUserItems(userId: number){
     return data;
 }
 
-export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems};
+async function AddItem(newItem: iAddItem){
+    let res= await fetch('https://expiredbackendapi2.azurewebsites.net/Item/AddItem/', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newItem)
+    });
+    if(!res.ok)
+    {
+        const message = `An Error has Occurred ${res.status}`
+        throw new Error (message)
+    }
+    let data = await res.json();
+   return data;
+}
+
+async function DeleteItem(itemId: number){
+    let res= await fetch(`https://expiredbackendapi2.azurewebsites.net/Item/DeleteItem/${itemId}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(itemId)
+    });
+    if(!res.ok)
+    {
+        const message = `An Error has Occurred ${res.status}`
+        throw new Error (message)
+    }
+    let data = await res.json();
+   return data;
+}
+
+export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem};

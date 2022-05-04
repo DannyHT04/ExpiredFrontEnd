@@ -53,7 +53,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
   
     let token = await UserLogin(userInfo);
 
-    console.log(token.status);
+    // console.log(token.status);
     if (token.status == 401) {
       Alert.alert("Unable to Login", "Username or password is incorrect");
     }

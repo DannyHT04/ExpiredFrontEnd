@@ -35,7 +35,13 @@ import DropDown from "react-native-paper-dropdown";
 import UserContext from "../Context/UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { GetUserInfoByUsername, GetAllUserItems } from "../Services/DataService";
+import {
+  GetUserInfoByUsername,
+  GetAllUserItems,
+  AddItem,
+  DeleteItem,
+} from "../Services/DataService";
+import iAddItem from "../interfaces/ItemInterface";
 
 type RootStackParamList = {
   Home: undefined;
@@ -50,8 +56,16 @@ type RootStackParamList = {
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
 const HomeScreen: FC<Props> = ({ navigation }) => {
-  let { username, setUsername, storedUser, setStoredUser, userInfo, setUserInfo, userItems, setUserItems } =
-    useContext(UserContext);
+  let {
+    username,
+    setUsername,
+    storedUser,
+    setStoredUser,
+    userInfo,
+    setUserInfo,
+    userItems,
+    setUserItems,
+  } = useContext(UserContext);
 
   useEffect(() => {
     let token = AsyncStorage.getItem("Token");
@@ -63,16 +77,24 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
         const fetchData = async () => {
           // console.log(username);
           userInfo = await GetUserInfoByUsername(username);
-          userItems = await GetAllUserItems(userInfo.id)
-          setStoredUser(userItems)
-          console.log(storedUser[0].productName)
+          userItems = await GetAllUserItems(userInfo.id);
+          setStoredUser(userItems);
+          setUserInfo(userInfo);
         };
         fetchData().catch(console.error);
       }
     }
   }, []);
-  const [showShort, setShowSort] = useState(false);
-  const [showAddItem, setShowAddItem] = useState(false);
+  const [showShort, setShowSort] = useState<boolean>(false);
+  const [showAddItem, setShowAddItem] = useState<boolean>(false);
+  const [showItem, setShowItem] = useState<boolean>(false);
+  const [itemIndex, setItemIndex] = useState<any>([]);
+  const [productName, setProductName] = useState<string>("");
+  const [dateOfExpiration, setDateOfExpiration] = useState<string>("");
+  const [image, setImage] = useState<string>("");
+  const [isGroceryList, setIsGroceryList] = useState<boolean>(false);
+  const [isDeleted, setIsDeleted] = useState<boolean>(false);
+  const [itemId, setItemId] = useState<number>(0);
 
   //modal
   const [value, setValue] = useState("first");
@@ -81,6 +103,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const hideSortModal = () => setShowSort(false);
   const showAddItemModal = () => setShowAddItem(true);
   const hideAddItemModal = () => setShowAddItem(false);
+  const showItemModal = () => setShowItem(true);
+  const hideItemModal = () => setShowItem(false);
 
   const [inputDate, setInputDate] = useState<Date | undefined>(undefined);
   const [remindDate, setRemindDate] = useState<Date | undefined>(undefined);
@@ -127,6 +151,26 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       ...DefaultTheme.colors,
       primary: "#2C443A",
     },
+  };
+
+  const handleAddItem = async () => {
+    let newItem: iAddItem = {
+      Id: 0,
+      UserId: userInfo.id,
+      GroupId: 0,
+      ProductName: productName,
+      DateOfExpiration: dateOfExpiration,
+      Owner: username,
+      ProductImage: image,
+      isGroceryList: false,
+      isDeleted: false,
+    };
+
+    await AddItem(newItem);
+  };
+
+  const handleDeleteItem = async () => {
+    await DeleteItem(itemIndex.id);
   };
 
   return (
@@ -227,80 +271,46 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       description={"Best used by: 3/19/2022"}
                       descriptionStyle={{ color: "white", marginTop: 8 }}
                     /> */}
-                      <View style={styles.Pill}>
-                        <Pressable onPress={() => console.log(storedUser[0].productName)}>
-                          <View style={[{ flexDirection: "row" }]}>
-                            <Image
-                              source={Logo}
-                              style={{ width: 75, height: 72 }}
-                            />
-                            <View
-                              style={{
-                                justifyContent: "space-evenly",
-                                marginLeft: 20,
-                              }}
-                            >
-                              <Text style={styles.pillText}>{storedUser[0].productName}</Text>
-                              <Text style={styles.pillText2}>
-                                Expires in: 1678 days
-                              </Text>
-                            </View>
-                          </View>
-                        </Pressable>
-                      </View>
 
-                      <View style={styles.Pill}>
-                        <View style={[{ flexDirection: "row" }]}>
-                          <Image
-                            source={Logo}
-                            style={{ width: 75, height: 72 }}
-                          />
-                          <View
-                            style={{
-                              justifyContent: "space-evenly",
-                              marginLeft: 20,
-                            }}
-                          >
-                            <Text style={styles.pillText}>Steak</Text>
-                            <Text style={styles.pillText2}>
-                              Expires in: 78 days
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-
-                      <View style={styles.Pill}>
-                        <View style={[{ flexDirection: "row" }]}>
-                          <Image
-                            source={Logo}
-                            style={{ width: 75, height: 72 }}
-                          />
-                          <View
-                            style={{
-                              justifyContent: "space-evenly",
-                              marginLeft: 20,
-                            }}
-                          >
-                            <Text style={styles.pillText}>Egg</Text>
-                            <Text style={styles.pillText2}>
-                              Expires in: 1678 days
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-
-                      {/* <List.Item
-                      title="Steak"
-                      titleStyle={{ color: "white" }}
-                      style={styles.Pill}
-                      onPress={() => console.log("Me Steak")}
-                    />
-                    <List.Item
-                      title="Milk"
-                      titleStyle={{ color: "white" }}
-                      style={styles.Pill}
-                      onPress={() => console.log("Me Milk")}
-                    /> */}
+                      {storedUser && storedUser != null ? (
+                        storedUser.map((item: any, i: any) => {
+                          return (
+                            <>
+                              <View style={styles.Pill}>
+                                <Pressable
+                                  key={i}
+                                  onPress={() => {
+                                    setItemIndex(item);
+                                    showItemModal();
+                                  }}
+                                >
+                                  <View style={[{ flexDirection: "row" }]}>
+                                    <Image
+                                      source={Logo}
+                                      style={{ width: 75, height: 72 }}
+                                    />
+                                    <View
+                                      style={{
+                                        justifyContent: "space-evenly",
+                                        marginLeft: 20,
+                                      }}
+                                    >
+                                      <Text style={styles.pillText}>
+                                        {item.productName}
+                                      </Text>
+                                      <Text style={styles.pillText2}>
+                                        Expiration: {item.dateOfExpiration}
+                                      </Text>
+                                    </View>
+                                  </View>
+                                </Pressable>
+                              </View>
+                            </>
+                          );
+                        })
+                      ) : (
+                        <Text>Is Empty</Text>
+                      )}
                     </View>
                   </List.Accordion>
                   <List.Accordion
@@ -374,6 +384,85 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
             </View>
           </View>
 
+          <Portal>
+            <Modal
+              visible={showItem}
+              onDismiss={hideItemModal}
+              contentContainerStyle={containerStyle}
+            >
+              <View>
+                <View style={{ alignItems: "center" }}>
+                  <Text style={styles.Text}>Edit Item</Text>
+                  <Text style={styles.Text}>{itemIndex.productName}</Text>
+                  <TextInput
+                    style={{ width: 300, marginTop: 20 }}
+                    theme={{ colors: { primary: "#4B4B4B" } }}
+                    autoComplete="off"
+                    label="Product Name"
+                    value={itemIndex.productName}
+                  />
+
+                  <View style={{ width: 300, marginTop: 20 }}>
+                    <DatePickerInput
+                      locale="en"
+                      autoComplete="off"
+                      label="Expiration Date"
+                      value={inputDate}
+                      onChange={(d) => setInputDate(d)}
+                      inputMode="start"
+                    />
+                  </View>
+
+                  <TextInput
+                    style={{ width: 300 }}
+                    theme={{ colors: { primary: "#4B4B4B" } }}
+                    autoComplete="off"
+                    label="Owner"
+                    value={itemIndex.owner}
+                  />
+
+                  <View style={{ width: 300, marginTop: 20 }}>
+                    <DatePickerInput
+                      locale="en"
+                      autoComplete="off"
+                      label="Change Notification Date"
+                      value={remindDate}
+                      onChange={(d) => setRemindDate(d)}
+                      inputMode="start"
+                    />
+                  </View>
+                  <Button
+                    style={{ marginTop: 20 }}
+                    color="#505050"
+                    mode="contained"
+                    onPress={hideItemModal}
+                  >
+                    Add to Grocery List
+                  </Button>
+
+                  <Button
+                    style={{ marginTop: 20 }}
+                    color="#505050"
+                    mode="contained"
+                    onPress={hideItemModal}
+                  >
+                    Save
+                  </Button>
+                  <Button
+                    style={{ marginTop: 20 }}
+                    color="red"
+                    mode="contained"
+                    onPress={() => {
+                      hideItemModal;
+                      handleDeleteItem();
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </View>
+              </View>
+            </Modal>
+          </Portal>
           {/* **** VIEW SORT MODAL **** */}
 
           <Portal>
@@ -423,7 +512,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
             </Modal>
           </Portal>
 
-          {/* **** VIEW ADD ITEM MODAL **** */}
+          {/* ****  ADD ITEM MODAL **** */}
 
           <Portal>
             <Modal
@@ -439,6 +528,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     theme={{ colors: { primary: "#4B4B4B" } }}
                     autoComplete="off"
                     label="Product Name"
+                    onChangeText={setProductName}
+                    value={productName}
                   />
 
                   <View style={{ width: 300, marginTop: 20 }}>
@@ -452,14 +543,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     />
                   </View>
 
-                  <TextInput
-                    style={{ width: 300 }}
-                    theme={{ colors: { primary: "#4B4B4B" } }}
-                    autoComplete="off"
-                    label="Owner"
-                  />
-
-                  <View style={{ width: 300, marginTop: 20 }}>
+                  <View style={{ width: 300 }}>
                     <DatePickerInput
                       locale="en"
                       autoComplete="off"
@@ -486,7 +570,11 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     style={{ marginTop: 20 }}
                     color="#505050"
                     mode="contained"
-                    onPress={hideAddItemModal}
+                    onPress={() => {
+                      hideAddItemModal;
+                      handleAddItem();
+                      console.log("added");
+                    }}
                   >
                     Add
                   </Button>
