@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, Image } from 'react-native';
-import { FC, useState } from 'react';
+import { FC, useState, useContext, useEffect } from 'react';
 import { Modal, Portal, Button, Provider, TextInput } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Logo from '../assets/Logo.png';
@@ -18,6 +18,8 @@ import {
 } from "@expo-google-fonts/roboto-slab";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
+import UserContext from "../Context/UserContext";
+import { GetUserInfoByUsername, UpdateUsername } from '../Services/DataService';
 
 type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 type RootStackParamList = {
@@ -31,6 +33,37 @@ type RootStackParamList = {
   };
 
 const ProfileScreen: FC<Props> = ({navigation}) => {
+    let {
+        username,
+        setUsername,
+        userInfo,
+        setUserInfo
+      } = useContext(UserContext);
+
+      useEffect(() => {
+        let token = AsyncStorage.getItem("Token");
+        if (token == null) {
+          navigation.navigate("Login");
+        } else {
+          // console.log(username);
+          if (username != null) {
+            const fetchData = async () => {
+              // console.log(username);
+              userInfo = await GetUserInfoByUsername(username);
+              setUserInfo(userInfo);
+            };
+            fetchData().catch(console.error);
+          }
+        }
+      }, []);
+
+      const handleUpdateUsername = async () => {
+        await UpdateUsername(userInfo.id, newUsername);
+        userInfo = await GetUserInfoByUsername(newUsername);
+        setUserInfo(userInfo);
+      }
+
+
     const [visible, setVisible] = useState(false);
     const [showGroup, setShowGroup] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
@@ -42,7 +75,7 @@ const ProfileScreen: FC<Props> = ({navigation}) => {
     const showConfirmModal = () => setShowConfirm(true);
     const hideConfirmModal = () => setShowConfirm(false);
     const containerStyle = { backgroundColor: '#2C443A', padding: 20 };
-    const [username, setUsername] = useState("");
+    const [newUsername, setNewUsername] = useState("");
 
     const handleLogOut = () => {
         AsyncStorage.clear();
@@ -75,7 +108,7 @@ const ProfileScreen: FC<Props> = ({navigation}) => {
             </View>
             <View style={{ alignItems: "center" }}>
                 <View style={styles.Pill}>
-                    <Text style={styles.Text} onPress={showModal}>Bobby</Text>
+                    <Text style={styles.Text} onPress={showModal}>{userInfo.username}</Text>
                 </View>
             </View>
             <View style={{ alignItems: "flex-start", paddingTop: 50 }}>
@@ -109,10 +142,11 @@ const ProfileScreen: FC<Props> = ({navigation}) => {
                                     theme={{ colors: { primary: "#4B4B4B" } }}
                                     autoComplete="off"
                                     label="Type New Name"
-                                    value={username}
-                                    onChangeText={setUsername}
+                                    value={newUsername}
+                                    onChangeText={setNewUsername}
                                 />
-                                <Button style={{ marginTop: 20 }} color="#505050" mode="contained" onPress={hideModal}>
+                                <Button style={{ marginTop: 20 }} color="#505050" mode="contained" onPress= {() =>{hideModal();
+                                handleUpdateUsername()}}>
                                     Save
                                 </Button>
                             </View>

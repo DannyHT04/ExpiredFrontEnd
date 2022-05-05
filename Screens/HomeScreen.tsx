@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
-import { FC, useState, useContext, useEffect } from "react";
+import { FC, useState, useContext, useEffect, useCallback } from "react";
 import {
   IconButton,
   List,
@@ -40,6 +40,7 @@ import {
   GetAllUserItems,
   AddItem,
   DeleteItem,
+  UpdateItem,
 } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
 
@@ -95,6 +96,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const [isGroceryList, setIsGroceryList] = useState<boolean>(false);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
   const [itemId, setItemId] = useState<number>(0);
+  const [notificationDate, setNotificationDate] = useState<any>("");
+  const [owner, setOwner] = useState<string>("");
 
   //modal
   const [value, setValue] = useState("first");
@@ -160,6 +163,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       GroupId: 0,
       ProductName: productName,
       DateOfExpiration: dateOfExpiration,
+      NotificationDate: notificationDate,
       Owner: username,
       ProductImage: image,
       isGroceryList: false,
@@ -177,6 +181,40 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     userItems = await GetAllUserItems(userInfo.id);
     await setStoredUser(userItems);
   };
+
+  const handleUpdateItem = async () => {
+    let updateItem: iAddItem = {
+      Id: itemIndex.id,
+      UserId: userInfo.id,
+      GroupId: itemIndex.groupId,
+      ProductName: productName,
+      DateOfExpiration: dateOfExpiration,
+      NotificationDate: notificationDate,
+      Owner: username,
+      ProductImage: image,
+      isGroceryList: false,
+      isDeleted: false,
+    };
+    console.log("updated item");
+    await UpdateItem(updateItem);
+    userItems = await GetAllUserItems(userInfo.id);
+    await setStoredUser(userItems);
+  };
+
+  const handleDateOfExpiration = async () => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    let d = dateOfExpiration;
+    let splArr = d.split(" ")
+    let month = splArr.slice(1, 2).join(" ")
+    let day = splArr.slice(2, 3).join(" ")
+    let year = splArr.slice(3, 4).join(" ")
+    let monthIndex = months.indexOf(month);
+    // setDateOfExpiration( monthIndex+1+'/'+day +'/'+year );
+    // console.log(inputDate);
+    // console.log(d);
+    // console.log(splArr);
+  };
+  
 
   return (
     <>
@@ -389,7 +427,6 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
             </View>
           </View>
 
-
           <Portal>
             <Modal
               visible={showItem}
@@ -406,6 +443,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     autoComplete="off"
                     label="Product Name"
                     value={itemIndex.productName}
+                    onChangeText={setProductName}
                   />
 
                   <View style={{ width: 300, marginTop: 20 }}>
@@ -414,7 +452,11 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       autoComplete="off"
                       label="Expiration Date"
                       value={inputDate}
-                      onChange={(d) => setInputDate(d)}
+                      onChange={() => {
+                        setInputDate(inputDate)
+                        console.log(inputDate)
+                        // handleDateOfExpiration()
+                      }}
                       inputMode="start"
                     />
                   </View>
@@ -425,6 +467,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     autoComplete="off"
                     label="Owner"
                     value={itemIndex.owner}
+                    onChangeText={setOwner}
                   />
 
                   <View style={{ width: 300, marginTop: 20 }}>
@@ -450,7 +493,10 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     style={{ marginTop: 20 }}
                     color="#505050"
                     mode="contained"
-                    onPress={hideItemModal}
+                    onPress={() => {
+                      hideItemModal();
+                      handleUpdateItem();
+                    }}
                   >
                     Save
                   </Button>

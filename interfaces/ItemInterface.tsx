@@ -4,6 +4,7 @@ export default interface iAddItem {
     GroupId: number,
     ProductName: string,
     DateOfExpiration: string,
+    NotificationDate: string,
     Owner: string,
     ProductImage: string,
     isGroceryList: boolean,
