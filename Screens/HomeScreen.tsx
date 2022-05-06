@@ -202,17 +202,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   };
 
   const handleDateOfExpiration = async () => {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    let d = dateOfExpiration;
-    let splArr = d.split(" ")
-    let month = splArr.slice(1, 2).join(" ")
-    let day = splArr.slice(2, 3).join(" ")
-    let year = splArr.slice(3, 4).join(" ")
-    let monthIndex = months.indexOf(month);
-    // setDateOfExpiration( monthIndex+1+'/'+day +'/'+year );
-    // console.log(inputDate);
-    // console.log(d);
-    // console.log(splArr);
+    let oldDate = inputDate;
+    let newDate = inputDate
   };
   
 
