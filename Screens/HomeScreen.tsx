@@ -452,8 +452,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       autoComplete="off"
                       label="Expiration Date"
                       value={inputDate}
-                      onChange={() => {
-                        setInputDate(inputDate)
+                      onChange={(d) => {
+                        setInputDate(d)
                         console.log(inputDate)
                         // handleDateOfExpiration()
                       }}
