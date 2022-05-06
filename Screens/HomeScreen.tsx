@@ -91,7 +91,9 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const [showItem, setShowItem] = useState<boolean>(false);
   const [itemIndex, setItemIndex] = useState<any>([]);
   const [productName, setProductName] = useState<string>("");
-  const [dateOfExpiration, setDateOfExpiration] = useState<string | undefined>("");
+  const [dateOfExpiration, setDateOfExpiration] = useState<string | undefined>(
+    ""
+  );
   const [image, setImage] = useState<string>("");
   const [isGroceryList, setIsGroceryList] = useState<boolean>(false);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
@@ -110,9 +112,13 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const hideItemModal = () => setShowItem(false);
 
   const [inputDate, setInputDate] = useState<Date | undefined>(undefined);
-  const [editInputDate, setEditInputDate] = useState<Date | undefined>(undefined);
+  const [editInputDate, setEditInputDate] = useState<Date | undefined>(
+    undefined
+  );
   const [remindDate, setRemindDate] = useState<Date | undefined>(undefined);
-  const [editRemindDate, setEditRemindDate] = useState<Date | undefined>(undefined);
+  const [editRemindDate, setEditRemindDate] = useState<Date | undefined>(
+    undefined
+  );
 
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
 
@@ -220,7 +226,6 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     };
     await UpdateItem(updateItem);
   };
-  
 
   return (
     <>
@@ -589,13 +594,13 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                   />
 
                   <View style={{ width: 300, marginTop: 20 }}>
-                  <DatePickerInput
+                    <DatePickerInput
                       locale="en"
                       autoComplete="off"
                       label="Expiration Date"
                       value={inputDate}
                       onChange={(d) => {
-                        setInputDate(d)
+                        setInputDate(d);
                         // console.log(inputDate)
                         // handleDateOfExpiration()
                       }}
