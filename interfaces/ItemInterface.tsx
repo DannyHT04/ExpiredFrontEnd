@@ -3,7 +3,7 @@ export default interface iAddItem {
     UserId: number,
     GroupId: number,
     ProductName: string,
-    DateOfExpiration: string,
+    DateOfExpiration: string | undefined,
     NotificationDate: string,
     Owner: string,
     ProductImage: string,

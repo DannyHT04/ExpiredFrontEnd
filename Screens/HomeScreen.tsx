@@ -91,7 +91,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const [showItem, setShowItem] = useState<boolean>(false);
   const [itemIndex, setItemIndex] = useState<any>([]);
   const [productName, setProductName] = useState<string>("");
-  const [dateOfExpiration, setDateOfExpiration] = useState<string>("");
+  const [dateOfExpiration, setDateOfExpiration] = useState<string | undefined>("");
   const [image, setImage] = useState<string>("");
   const [isGroceryList, setIsGroceryList] = useState<boolean>(false);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
@@ -110,7 +110,9 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const hideItemModal = () => setShowItem(false);
 
   const [inputDate, setInputDate] = useState<Date | undefined>(undefined);
+  const [editInputDate, setEditInputDate] = useState<Date | undefined>(undefined);
   const [remindDate, setRemindDate] = useState<Date | undefined>(undefined);
+  const [editRemindDate, setEditRemindDate] = useState<Date | undefined>(undefined);
 
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
 
@@ -157,12 +159,13 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   };
 
   const handleAddItem = async () => {
+    let newDate = inputDate?.toLocaleDateString().toString();
     let newItem: iAddItem = {
       Id: 0,
       UserId: userInfo.id,
       GroupId: 0,
       ProductName: productName,
-      DateOfExpiration: dateOfExpiration,
+      DateOfExpiration: newDate,
       NotificationDate: notificationDate,
       Owner: username,
       ProductImage: image,
@@ -202,8 +205,20 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   };
 
   const handleDateOfExpiration = async () => {
-    let oldDate = inputDate;
-    let newDate = inputDate
+    let newDate = editInputDate?.toLocaleDateString().toString();
+    let updateItem: iAddItem = {
+      Id: itemIndex.id,
+      UserId: userInfo.id,
+      GroupId: itemIndex.groupId,
+      ProductName: productName,
+      DateOfExpiration: newDate,
+      NotificationDate: notificationDate,
+      Owner: username,
+      ProductImage: image,
+      isGroceryList: false,
+      isDeleted: false,
+    };
+    await UpdateItem(updateItem);
   };
   
 
@@ -442,11 +457,9 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       locale="en"
                       autoComplete="off"
                       label="Expiration Date"
-                      value={inputDate}
+                      value={editInputDate}
                       onChange={(d) => {
-                        setInputDate(d)
-                        console.log(inputDate)
-                        // handleDateOfExpiration()
+                        setEditInputDate(d);
                       }}
                       inputMode="start"
                     />
@@ -487,6 +500,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     onPress={() => {
                       hideItemModal();
                       handleUpdateItem();
+                      handleDateOfExpiration();
                     }}
                   >
                     Save
@@ -572,16 +586,19 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     autoComplete="off"
                     label="Product Name"
                     onChangeText={setProductName}
-                    value={productName}
                   />
 
                   <View style={{ width: 300, marginTop: 20 }}>
-                    <DatePickerInput
+                  <DatePickerInput
                       locale="en"
                       autoComplete="off"
                       label="Expiration Date"
                       value={inputDate}
-                      onChange={(d) => setInputDate(d)}
+                      onChange={(d) => {
+                        setInputDate(d)
+                        // console.log(inputDate)
+                        // handleDateOfExpiration()
+                      }}
                       inputMode="start"
                     />
                   </View>
