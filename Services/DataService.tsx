@@ -1,5 +1,5 @@
 import createUser from "../interfaces/userModelInterfaces";
-import IuserData from "../interfaces/LoginInterfaces";
+import iUserData from "../interfaces/LoginInterfaces";
 import iAddItem from '../interfaces/ItemInterface';
 
 
@@ -20,7 +20,7 @@ async function AddUser(newUser: createUser){
    return data;
 }
 
-async function UserLogin(userInfo: IuserData){
+async function UserLogin(userInfo: iUserData){
     let res= await fetch('https://expiredbackendapi2.azurewebsites.net/User/Login', {
         method: "POST",
         headers: {
@@ -92,3 +92,38 @@ async function GetUsersFromGroup(aNumber: String){
 }
 
 export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, GetUsersFromGroup};
+async function UpdateItem(updateItem: iAddItem){
+    let res= await fetch(`https://expiredbackendapi2.azurewebsites.net/Item/UpdateItem`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updateItem)
+    });
+    if(!res.ok)
+    {
+        const message = `An Error has Occurred ${res.status}`
+        throw new Error (message)
+    }
+    let data = await res.json();
+   return data;
+}
+
+async function UpdateUsername(id : number, newUsername: any){
+    let res= await fetch(`https://expiredbackendapi2.azurewebsites.net/User/UpdateUser/${id}/${newUsername}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({})
+    });
+    if(!res.ok)
+    {
+        const message = `An Error has Occurred ${res.status}`
+        throw new Error (message)
+    }
+    let data = await res.json();
+   return data;
+}
+
+export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername};

@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, Image, Pressable } from "react-native";
-import { FC, useState, useContext, useEffect } from "react";
+import { FC, useState, useContext, useEffect, useCallback } from "react";
 import {
   IconButton,
   List,
@@ -40,6 +40,7 @@ import {
   GetAllUserItems,
   AddItem,
   DeleteItem,
+  UpdateItem,
 } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
 
@@ -90,11 +91,15 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const [showItem, setShowItem] = useState<boolean>(false);
   const [itemIndex, setItemIndex] = useState<any>([]);
   const [productName, setProductName] = useState<string>("");
-  const [dateOfExpiration, setDateOfExpiration] = useState<string>("");
+  const [dateOfExpiration, setDateOfExpiration] = useState<string | undefined>(
+    ""
+  );
   const [image, setImage] = useState<string>("");
   const [isGroceryList, setIsGroceryList] = useState<boolean>(false);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
   const [itemId, setItemId] = useState<number>(0);
+  const [notificationDate, setNotificationDate] = useState<any>("");
+  const [owner, setOwner] = useState<string>("");
 
   //modal
   const [value, setValue] = useState("first");
@@ -107,7 +112,13 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const hideItemModal = () => setShowItem(false);
 
   const [inputDate, setInputDate] = useState<Date | undefined>(undefined);
+  const [editInputDate, setEditInputDate] = useState<Date | undefined>(
+    undefined
+  );
   const [remindDate, setRemindDate] = useState<Date | undefined>(undefined);
+  const [editRemindDate, setEditRemindDate] = useState<Date | undefined>(
+    undefined
+  );
 
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
 
@@ -154,12 +165,14 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   };
 
   const handleAddItem = async () => {
+    let newDate = inputDate?.toLocaleDateString().toString();
     let newItem: iAddItem = {
       Id: 0,
       UserId: userInfo.id,
       GroupId: 0,
       ProductName: productName,
-      DateOfExpiration: dateOfExpiration,
+      DateOfExpiration: newDate,
+      NotificationDate: notificationDate,
       Owner: username,
       ProductImage: image,
       isGroceryList: false,
@@ -176,6 +189,42 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     await DeleteItem(itemIndex.id);
     userItems = await GetAllUserItems(userInfo.id);
     await setStoredUser(userItems);
+  };
+
+  const handleUpdateItem = async () => {
+    let updateItem: iAddItem = {
+      Id: itemIndex.id,
+      UserId: userInfo.id,
+      GroupId: itemIndex.groupId,
+      ProductName: productName,
+      DateOfExpiration: dateOfExpiration,
+      NotificationDate: notificationDate,
+      Owner: username,
+      ProductImage: image,
+      isGroceryList: false,
+      isDeleted: false,
+    };
+    console.log("updated item");
+    await UpdateItem(updateItem);
+    userItems = await GetAllUserItems(userInfo.id);
+    await setStoredUser(userItems);
+  };
+
+  const handleDateOfExpiration = async () => {
+    let newDate = editInputDate?.toLocaleDateString().toString();
+    let updateItem: iAddItem = {
+      Id: itemIndex.id,
+      UserId: userInfo.id,
+      GroupId: itemIndex.groupId,
+      ProductName: productName,
+      DateOfExpiration: newDate,
+      NotificationDate: notificationDate,
+      Owner: username,
+      ProductImage: image,
+      isGroceryList: false,
+      isDeleted: false,
+    };
+    await UpdateItem(updateItem);
   };
 
   return (
@@ -389,7 +438,6 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
             </View>
           </View>
 
-
           <Portal>
             <Modal
               visible={showItem}
@@ -406,6 +454,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     autoComplete="off"
                     label="Product Name"
                     value={itemIndex.productName}
+                    onChangeText={setProductName}
                   />
 
                   <View style={{ width: 300, marginTop: 20 }}>
@@ -413,8 +462,10 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       locale="en"
                       autoComplete="off"
                       label="Expiration Date"
-                      value={inputDate}
-                      onChange={(d) => setInputDate(d)}
+                      value={editInputDate}
+                      onChange={(d) => {
+                        setEditInputDate(d);
+                      }}
                       inputMode="start"
                     />
                   </View>
@@ -425,6 +476,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     autoComplete="off"
                     label="Owner"
                     value={itemIndex.owner}
+                    onChangeText={setOwner}
                   />
 
                   <View style={{ width: 300, marginTop: 20 }}>
@@ -450,7 +502,11 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     style={{ marginTop: 20 }}
                     color="#505050"
                     mode="contained"
-                    onPress={hideItemModal}
+                    onPress={() => {
+                      hideItemModal();
+                      handleUpdateItem();
+                      handleDateOfExpiration();
+                    }}
                   >
                     Save
                   </Button>
@@ -535,7 +591,6 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     autoComplete="off"
                     label="Product Name"
                     onChangeText={setProductName}
-                    value={productName}
                   />
 
                   <View style={{ width: 300, marginTop: 20 }}>
@@ -544,7 +599,11 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       autoComplete="off"
                       label="Expiration Date"
                       value={inputDate}
-                      onChange={(d) => setInputDate(d)}
+                      onChange={(d) => {
+                        setInputDate(d);
+                        // console.log(inputDate)
+                        // handleDateOfExpiration()
+                      }}
                       inputMode="start"
                     />
                   </View>
