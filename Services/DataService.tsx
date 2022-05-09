@@ -85,13 +85,6 @@ async function DeleteItem(itemId: number){
    return data;
 }
 
-async function GetUsersFromGroup(aNumber: String){
-    let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/User/GetUsersFromGroup/${aNumber}`);
-    let data = await res.json();
-    return data; 
-}
-
-export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, GetUsersFromGroup};
 async function UpdateItem(updateItem: iAddItem){
     let res= await fetch(`https://expiredbackendapi2.azurewebsites.net/Item/UpdateItem`, {
         method: "POST",
@@ -126,4 +119,10 @@ async function UpdateUsername(id : number, newUsername: any){
    return data;
 }
 
-export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername};
+async function GetUsersFromGroup(aNumber: String){
+    let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/User/GetUsersFromGroup/${aNumber}`);
+    let data = await res.json();
+    return data; 
+}
+
+export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup};
