@@ -85,4 +85,10 @@ async function DeleteItem(itemId: number){
    return data;
 }
 
-export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem};
+async function GetUsersFromGroup(aNumber: String){
+    let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/User/GetUsersFromGroup/${aNumber}`);
+    let data = await res.json();
+    return data; 
+}
+
+export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, GetUsersFromGroup};
