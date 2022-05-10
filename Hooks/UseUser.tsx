@@ -7,5 +7,6 @@ export default function UseUser(){
     const [storedUser, setStoredUser] = useState("");
     const [userInfo, setUserInfo] = useState([]);
     const [userItems, setUserItems] = useState([]);
-    return {userData, setUserData, setUsername, username, storedUser, setStoredUser, userInfo, setUserInfo, userItems, setUserItems}
+    const [usersGroup, setUserGroups] = useState([]);
+    return {userData, setUserData, setUsername, username, storedUser, setStoredUser, userInfo, setUserInfo, userItems, setUserItems, usersGroup, setUserGroups}
 }
