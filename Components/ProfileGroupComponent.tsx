@@ -43,9 +43,8 @@ const ProfileGroupComponent: FC = () => {
         </Button>
       </View>
       {groupArrayId && groupArrayId != null ? (
-        groupArrayId.map(async(groupID: any, index : any) => {
-            let groupInfo = await GetGroupById(groupID)
-            console.log(groupInfo)
+        groupArrayId.map((groupID: any, index : any) => {
+    
           return (
             <>
               <View style={{ alignItems: "center" }}>
@@ -64,7 +63,7 @@ const ProfileGroupComponent: FC = () => {
 
       {/* ****VIEW GROUP MODAL**** */}
 
-      {/*       
+            
       <Provider>
         <Portal>
           <Modal
@@ -99,7 +98,7 @@ const ProfileGroupComponent: FC = () => {
           </Modal>
         </Portal>
       </Provider>
-      **** LEAVE GROUP MODAL ****
+      {/* **** LEAVE GROUP MODAL **** */}
       <Provider>
         <Portal>
           <Modal visible={showConfirm} contentContainerStyle={containerStyle}>
@@ -126,7 +125,7 @@ const ProfileGroupComponent: FC = () => {
             </View>
           </Modal>
         </Portal>
-      </Provider> */}
+      </Provider>
     </>
   );
 };
