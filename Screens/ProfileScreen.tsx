@@ -26,6 +26,8 @@ import {
   GetGroupById,
 } from "../Services/DataService";
 
+import ProfileNameComponent from "../Components/ProfileNameComponent";
+
 type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 type RootStackParamList = {
   Home: undefined;
@@ -55,7 +57,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
       navigation.navigate("Login");
     } else {
       if (username != null) {
-        test();
+        // test();
         // const fetchData = async () => {};
         // fetchData().catch(console.error);
       }
@@ -68,32 +70,32 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
     setGroupArray(groupData);
   };
 
-  const [names, setNames] = useState("");
+  // const [names, setNames] = useState("");
+  // // const getNames = async (groupID: string) => {
   // const getNames = async (groupID: string) => {
-  const getNames = async (groupID: string) => {
-    let groupInfo = await GetGroupById(parseInt(groupID));
-    console.log(groupInfo);
-    setNames(groupInfo.groupName)
-  };
+  //   let groupInfo = await GetGroupById(parseInt(groupID));
+  //   console.log(groupInfo);
+  //   setNames(groupInfo.groupName)
+  // };
 
-  const handleUpdateUsername = async () => {
-    await UpdateUsername(userInfo.id, newUsername);
-    userInfo = await GetUserInfoByUsername(newUsername);
-    setUserInfo(userInfo);
-  };
+  // const handleUpdateUsername = async () => {
+  //   await UpdateUsername(userInfo.id, newUsername);
+  //   userInfo = await GetUserInfoByUsername(newUsername);
+  //   setUserInfo(userInfo);
+  // };
 
   const [visible, setVisible] = useState(false);
   const [showGroup, setShowGroup] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+  // const showModal = () => setVisible(true);
+  // const hideModal = () => setVisible(false);
   const hideGroupModal = () => setShowGroup(false);
   const showGroupModal = () => setShowGroup(true);
   const showConfirmModal = () => setShowConfirm(true);
   const hideConfirmModal = () => setShowConfirm(false);
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
-  const [newUsername, setNewUsername] = useState("");
+  // const [newUsername, setNewUsername] = useState("");
 
   const handleLogOut = () => {
     AsyncStorage.clear();
@@ -121,20 +123,9 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
         <Image source={Logo} style={{ width: 105, height: 101 }} />
       </View>
 
-      <View style={{ alignItems: "flex-start", paddingTop: 50 }}>
-        <Button icon="account-edit" color="#E9E9E1">
-          {" "}
-          Name{" "}
-        </Button>
-      </View>
-      <View style={{ alignItems: "center" }}>
-        <View style={styles.Pill}>
-          <Text style={styles.Text} onPress={showModal}>
-            {userInfo.username}
-          </Text>
-        </View>
-      </View>
-      <View style={{ alignItems: "flex-start", paddingTop: 50 }}>
+      <ProfileNameComponent/>
+    
+      <View style={{ alignItems: "flex-start", paddingTop: 0 }}>
         <Button icon="account-multiple-plus" color="#E9E9E1">
           {" "}
           Groups{" "}
@@ -152,6 +143,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
           <Text style={styles.Text}>Group 2</Text>
         </View>
       </View> */}
+     
 
       <View style={{ alignItems: "center", marginTop: 50 }}>
         <Button icon="logout" color="#E9E9E1" onPress={handleLogOut}>
@@ -160,7 +152,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
         </Button>
       </View>
 
-      {/* ****EDIT NAME MODAL**** */}
+      {/* ****EDIT NAME MODAL****
       <Provider>
         <Portal>
           <Modal
@@ -194,7 +186,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
             </View>
           </Modal>
         </Portal>
-      </Provider>
+      </Provider> */}
 
       {/* ****VIEW GROUP MODAL**** */}
 
@@ -203,7 +195,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
         groupArray.map( (groupID, index) => {
           // console.log(Object.values(groupInfo));
           // let name = await groupInfo.groupName;
-          getNames(groupID);
+          // getNames(groupID);
           // console.log(groupInfo);
           //   let usersInGroup = GetUsersFromGroup(groupArray[index]);
           return (
@@ -211,7 +203,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
               <View style={{ alignItems: "center" }}>
                 <View style={styles.Pill}>
                   <Text style={styles.Text} onPress={showGroupModal}>
-                    {names}
+                    
                   </Text>
                 </View>
               </View>
