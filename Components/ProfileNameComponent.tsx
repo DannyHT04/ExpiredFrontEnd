@@ -6,8 +6,12 @@ import {
     GetUserInfoByUsername,
     UpdateUsername,
   } from "../Services/DataService";
+  import { useFonts } from "@expo-google-fonts/roboto-slab";
+  import AppLoading from "expo-app-loading";
+
 
 const ProfileNameComponent: FC = () => {
+
   let {
     username,
     setUsername,
@@ -28,7 +32,7 @@ const ProfileNameComponent: FC = () => {
     setUserInfo(userInfo);
   };
   return (
-    <>
+    <View>
       <View style={{ alignItems: "flex-start", paddingTop: 50 }}>
         <Button icon="account-edit" color="#E9E9E1">
           {" "}
@@ -78,7 +82,7 @@ const ProfileNameComponent: FC = () => {
           </Modal>
         </Portal>
       </Provider>
-    </>
+    </View>
   );
 };
 
