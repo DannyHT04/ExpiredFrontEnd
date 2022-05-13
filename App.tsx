@@ -27,6 +27,9 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-paper-toast';
 import  UseUser  from './Hooks/UseUser';
+import CameraOpenerComp from "./Components/CameraOpenerComp";
+import CameraComp from "./Components/CameraComp";
+import CameraPreview from "./Components/CameraPreview";
 
 
 type RootStackParamList = {
@@ -37,6 +40,9 @@ type RootStackParamList = {
   Splash: undefined;
   GroceryList: undefined;
   Footer: undefined;
+  CameraOpenerComp: undefined,
+  CameraComp: undefined,
+  CameraPreview: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -82,6 +88,18 @@ export default function App() {
           name="Profile"
           component={ProfileScreen}
           options={{ title: "Profile" }}
+        />
+        <Stack.Screen
+          name="CameraOpenerComp"
+          component={CameraOpenerComp}
+        />
+        <Stack.Screen
+          name="CameraComp"
+          component={CameraComp}
+        />
+        <Stack.Screen
+          name="CameraPreview"
+          component={CameraPreview}
         />
       </Stack.Navigator>
     </NavigationContainer> 
