@@ -43,7 +43,6 @@ import {
   UpdateItem,
 } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
-import Dashboard from "../Components/CameraOpenerComp";
 import CameraOpenerComp from "../Components/CameraOpenerComp";
 
 type RootStackParamList = {
@@ -595,7 +594,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     onChangeText={setProductName}
                   />
 
-                  {/* <CameraOpenerComp {...navigation: any} /> */}
+                  <CameraOpenerComp />
 
                   <View style={{ width: 300, marginTop: 20 }}>
                     <DatePickerInput
