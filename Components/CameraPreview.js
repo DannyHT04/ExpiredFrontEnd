@@ -28,17 +28,17 @@ const CameraPreview = ({ navigation, route }) => {
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground
-        style={{ height: 800, width: 500 }}
+        style={{ height: 800, width: 400 }}
         source={{ uri: route.params.pic }}
       >
         <View style={{ flex: 1, flexDirection: "row" }}>
           <TouchableOpacity
             style={{ flex: 1, justifyContent: "flex-end", marginBottom: 100 }}
-            onPress={() => {reTake}}
+            onPress={reTake}
           >
             <Text
               style={{
-                backgroundColor: "blue",
+                backgroundColor: "red",
                 color: "white",
                 alignSelf: "center",
                 padding: 10,
@@ -49,7 +49,7 @@ const CameraPreview = ({ navigation, route }) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={{ flex: 1, justifyContent: "flex-end", marginBottom: 100 }}
-            onPress={() => {saveImage}}
+            onPress={saveImage}
           >
             <Text
               style={{

@@ -2,7 +2,7 @@ import { React, useEffect, useRef } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 
-const CameraComp = ({navigation}) => {
+const CameraComp = ({ navigation }) => {
   //This code block will be used to gain access to use the uers camera using the  requestCameraPermissionsAsync function provided by the camera object.
   useEffect(() => {
     __StartCamera();
@@ -21,12 +21,12 @@ const CameraComp = ({navigation}) => {
 
   const __takePicture = async () => {
     const photo = await camera.takePictureAsync();
-    navigation.navigate("CameraPreview", {pic:photo.uri})
+    navigation.navigate("CameraPreview", { pic: photo.uri })
   }
 
   return (
     <>
-      <Camera style={{flex:1, width:'100%'}} ref={(r) => {camera = r }}></Camera>
+      <Camera style={{ flex: 1, width: '100%' }} ref={(r) => { camera = r }}></Camera>
 
       <View
         style={{
@@ -53,7 +53,7 @@ const CameraComp = ({navigation}) => {
               height: 70,
               bottom: 0,
               borderRadius: 50,
-              backgroundColor: "#fff",
+              backgroundColor: "#2C443A",
             }}
           />
         </View>

@@ -590,6 +590,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
                 <View style={{ alignItems: "center" }}>
                   <Text style={styles.Text}>Add Item</Text>
+
+                {/* camera */}
                   <View>
                     <Button icon="camera" mode="contained" onPress={() => navigation.navigate("CameraComp")}>Add Picture</Button>
                   </View>
