@@ -131,4 +131,10 @@ async function GetGroupById(Id:number) {
     return data; 
     
 }
-export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById};
+
+async function GetGroupsByUserId(userId: string){
+    let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/Item/GetGroupsByUserId/{userId}`);
+    let data = await res.json();
+    return data;
+}
+export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId};

@@ -20,7 +20,8 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import UserContext from "../Context/UserContext";
 import {
-  GetUserInfoByUsername
+  GetUserInfoByUsername,
+  GetGroupsByUserId
 } from "../Services/DataService";
 
 import ProfileNameComponent from "../Components/ProfileNameComponent";
@@ -67,7 +68,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
     setUserInfo(userInfoData);
     let groupData = userInfo.groupId.split(",");
     setgroupArrayId(groupData);
-    
+    let groupInfoArray = await GetGroupsByUserId(userInfoData.id)
   };
 
 
