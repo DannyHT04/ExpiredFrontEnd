@@ -133,7 +133,7 @@ async function GetGroupById(Id:number) {
 }
 
 async function GetGroupsByUserId(userId: string){
-    let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/Item/GetGroupsByUserId/{userId}`);
+    let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/Group/GetGroupsByUserId/${userId}`);
     let data = await res.json();
     return data;
 }

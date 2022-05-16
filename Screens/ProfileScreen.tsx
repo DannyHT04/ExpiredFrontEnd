@@ -67,8 +67,9 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
     let userInfoData = await GetUserInfoByUsername(username);
     setUserInfo(userInfoData);
     let groupData = userInfo.groupId.split(",");
-    setgroupArrayId(groupData);
+    // setgroupArrayId(groupData);
     let groupInfoArray = await GetGroupsByUserId(userInfoData.id)
+    setgroupArrayId(groupInfoArray)
   };
 
 

@@ -19,7 +19,9 @@ const ProfileGroupComponent: FC = () => {
     usersGroup,
     setUsersGroup,
     groupArrayId,
-    setgroupArrayId
+    setgroupArrayId,
+    groupInfoForModal,
+    setGroupInfoForModal
   } = useContext(UserContext);
 
   const [groupArray, setGroupArray] = useState([]);
@@ -29,7 +31,7 @@ const ProfileGroupComponent: FC = () => {
   const hideConfirmModal = () => setShowConfirm(false);
   const [showGroup, setShowGroup] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-
+  const [usernameArray, setUserNameArray] = useState([]);
 
 
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
@@ -43,14 +45,15 @@ const ProfileGroupComponent: FC = () => {
         </Button>
       </View>
       {groupArrayId && groupArrayId != null ? (
-        groupArrayId.map((groupID: any, index : any) => {
-    
+        groupArrayId.map((group: any, index : any) => {
           return (
             <>
               <View style={{ alignItems: "center" }}>
                 <View style={styles.Pill}>
-                  <Text style={styles.Text} onPress={showGroupModal}>
-                  {groupID}
+                  <Text style={styles.Text} onPress={() =>{showGroupModal();
+                  setUserNameArray(group.userNameInGroup.split(","))
+                  }}>
+                  {group.groupName}
                   </Text>
                 </View>
               </View>
@@ -74,16 +77,26 @@ const ProfileGroupComponent: FC = () => {
             <View>
               <View style={{ alignItems: "center" }}>
                 <Text style={styles.Text}>Group Members</Text>
-
-                <View style={styles.GroupMembersText}>
-                  <Text style={styles.Text}>Bobby</Text>
-                </View>
-                <View style={styles.GroupMembersText}>
+                {
+                  usernameArray && usernameArray != null ? (
+                    usernameArray.map((name: any, index : any) => {
+                
+                      return (
+                        <View style={styles.GroupMembersText}>
+                        <Text style={styles.Text}>{name}</Text>
+                      </View>
+                      );
+                    })
+                  ) : (
+                    <Text>Is Empty</Text>
+                  )}
+            
+                {/* <View style={styles.GroupMembersText}>
                   <Text style={styles.Text}>Ryan</Text>
                 </View>
                 <View style={styles.GroupMembersText}>
                   <Text style={styles.Text}>Chris</Text>
-                </View>
+                </View> */}
 
                 <Button
                   style={{ marginTop: 20 }}
