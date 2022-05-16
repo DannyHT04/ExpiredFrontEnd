@@ -27,7 +27,6 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context';
 import { ToastProvider } from 'react-native-paper-toast';
 import  UseUser  from './Hooks/UseUser';
-import CameraOpenerComp from "./Components/CameraOpenerComp";
 import CameraComp from "./Components/CameraComp";
 import CameraPreview from "./Components/CameraPreview";
 
@@ -88,10 +87,6 @@ export default function App() {
           name="Profile"
           component={ProfileScreen}
           options={{ title: "Profile" }}
-        />
-        <Stack.Screen
-          name="CameraOpenerComp"
-          component={CameraOpenerComp}
         />
         <Stack.Screen
           name="CameraComp"

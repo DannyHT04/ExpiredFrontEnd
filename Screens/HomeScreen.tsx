@@ -43,7 +43,7 @@ import {
   UpdateItem,
 } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
-import CameraOpenerComp from "../Components/CameraOpenerComp";
+
 
 type RootStackParamList = {
   Home: undefined;
@@ -53,7 +53,10 @@ type RootStackParamList = {
   Splash: undefined;
   GroceryList: undefined;
   Footer: undefined;
-};
+  CameraOpenerComp: undefined,
+  CameraComp: undefined,
+  CameraPreview: undefined
+}
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
@@ -584,8 +587,14 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
               contentContainerStyle={containerStyle}
             >
               <View>
+
                 <View style={{ alignItems: "center" }}>
                   <Text style={styles.Text}>Add Item</Text>
+                  <View>
+                    <Button icon="camera" mode="contained" onPress={() => navigation.navigate("CameraComp")}>Add Picture</Button>
+                  </View>
+
+
                   <TextInput
                     style={{ width: 300, marginTop: 20 }}
                     theme={{ colors: { primary: "#4B4B4B" } }}
@@ -593,8 +602,6 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     label="Product Name"
                     onChangeText={setProductName}
                   />
-
-                  <CameraOpenerComp />
 
                   <View style={{ width: 300, marginTop: 20 }}>
                     <DatePickerInput

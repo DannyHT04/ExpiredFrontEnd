@@ -43,7 +43,7 @@ const CameraComp = ({navigation}) => {
           style={{
             alignSelf: "center",
             flex: 1,
-            alignItems: "cenrer",
+            alignItems: "center",
           }}
         >
           <TouchableOpacity
