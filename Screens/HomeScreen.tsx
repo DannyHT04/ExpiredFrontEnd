@@ -41,9 +41,9 @@ import {
   AddItem,
   DeleteItem,
   UpdateItem,
+  GetGroupsByUserId,
 } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
-
 
 type RootStackParamList = {
   Home: undefined;
@@ -53,10 +53,10 @@ type RootStackParamList = {
   Splash: undefined;
   GroceryList: undefined;
   Footer: undefined;
-  CameraOpenerComp: undefined,
-  CameraComp: undefined,
-  CameraPreview: undefined
-}
+  CameraOpenerComp: undefined;
+  CameraComp: undefined;
+  CameraPreview: undefined;
+};
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
@@ -72,6 +72,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     setUserItems,
   } = useContext(UserContext);
 
+  const [userGroups, setUserGroup] = useState([]);
+
   useEffect(() => {
     let token = AsyncStorage.getItem("Token");
     if (token == null) {
@@ -83,6 +85,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
           // console.log(username);
           userInfo = await GetUserInfoByUsername(username);
           userItems = await GetAllUserItems(userInfo.id);
+          setUserGroup(await GetGroupsByUserId(userInfo.id));
           setStoredUser(userItems);
           setUserInfo(userInfo);
         };
@@ -340,6 +343,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                   onPress={() => {
                                     setItemIndex(item);
                                     showItemModal();
+                                    console.log(userGroups);
                                   }}
                                 >
                                   <View style={[{ flexDirection: "row" }]}>
@@ -371,6 +375,9 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       )}
                     </View>
                   </List.Accordion>
+                  {
+                    
+                  }
                   <List.Accordion
                     theme={{
                       colors: { background: "#2C443A", primary: "#4B4B4B" },
@@ -587,15 +594,19 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
               contentContainerStyle={containerStyle}
             >
               <View>
-
                 <View style={{ alignItems: "center" }}>
                   <Text style={styles.Text}>Add Item</Text>
 
-                {/* camera */}
+                  {/* camera */}
                   <View>
-                    <Button icon="camera" mode="contained" onPress={() => navigation.navigate("CameraComp")}>Add Picture</Button>
+                    <Button
+                      icon="camera"
+                      mode="contained"
+                      onPress={() => navigation.navigate("CameraComp")}
+                    >
+                      Add Picture
+                    </Button>
                   </View>
-
 
                   <TextInput
                     style={{ width: 300, marginTop: 20 }}
