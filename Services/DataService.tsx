@@ -1,6 +1,7 @@
 import createUser from "../interfaces/userModelInterfaces";
 import iUserData from "../interfaces/LoginInterfaces";
 import iAddItem from '../interfaces/ItemInterface';
+import createGroup from "../interfaces/GroupInterface";
 
 
 async function AddUser(newUser: createUser){
@@ -137,4 +138,21 @@ async function GetGroupsByUserId(userId: string){
     let data = await res.json();
     return data;
 }
-export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId};
+
+async function AddGroup(newGroup: createGroup){
+    let res= await fetch('https://expiredbackendapi2.azurewebsites.net/Group/AddGroup/', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newGroup)
+    });
+    if(!res.ok)
+    {
+        const message = `An Error has Occurred ${res.status}`
+        throw new Error (message)
+    }
+    let data = await res.json();
+   return data;
+}
+export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId, AddGroup};
