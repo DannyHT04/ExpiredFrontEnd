@@ -8,6 +8,7 @@ if (Platform.OS === "android") {
     }
 }
 
+import {NativeBaseProvider} from "native-base";
 import "intl/locale-data/jsonp/en";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
@@ -55,6 +56,7 @@ export default function App() {
     <PaperProvider theme={DefaultTheme}>
       <ToastProvider>    
     <NavigationContainer>
+    <NativeBaseProvider>
       <Stack.Navigator>  
         <Stack.Screen
           name="Login"
@@ -97,6 +99,7 @@ export default function App() {
           component={CameraPreview}
         />
       </Stack.Navigator>
+      </NativeBaseProvider>
     </NavigationContainer> 
     </ToastProvider>
     </PaperProvider>

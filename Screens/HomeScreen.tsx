@@ -44,6 +44,8 @@ import {
   GetGroupsByUserId,
 } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
+import { Select, CheckIcon } from "native-base";
+import {NativeBaseProvider} from "native-base";
 
 type RootStackParamList = {
   Home: undefined;
@@ -72,7 +74,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     setUserItems,
   } = useContext(UserContext);
 
-  const [userGroups, setUserGroup] = useState([]);
+  const [userGroups, setUserGroups] = useState([]);
 
   useEffect(() => {
     let token = AsyncStorage.getItem("Token");
@@ -81,18 +83,19 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     } else {
       // console.log(username);
       if (username != null) {
-        const fetchData = async () => {
-          // console.log(username);
-          userInfo = await GetUserInfoByUsername(username);
-          userItems = await GetAllUserItems(userInfo.id);
-          setUserGroup(await GetGroupsByUserId(userInfo.id));
-          setStoredUser(userItems);
-          setUserInfo(userInfo);
-        };
-        fetchData().catch(console.error);
+        fetchData();
       }
     }
   }, []);
+
+  const fetchData = async () => {
+    // console.log(username);
+    userInfo = await GetUserInfoByUsername(username);
+    userItems = await GetAllUserItems(userInfo.id);
+    setUserGroups(await GetGroupsByUserId(userInfo.id));
+    setStoredUser(userItems);
+    setUserInfo(userInfo);
+  };
   const [showShort, setShowSort] = useState<boolean>(false);
   const [showAddItem, setShowAddItem] = useState<boolean>(false);
   const [showItem, setShowItem] = useState<boolean>(false);
@@ -131,7 +134,13 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
   const [showDropDown, setShowDropDown] = useState(false);
   const [group, setGroup] = useState("");
-  const groupList = [
+
+
+  const [service, setService] = useState("");
+  const groupList = 
+  
+
+  [
     {
       label: "Group 1",
       value: "group1",
@@ -236,6 +245,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
   return (
     <>
+    <NativeBaseProvider>
       <Provider theme={theme}>
         <SafeAreaView style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
           <View style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
@@ -324,15 +334,6 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     id="1"
                   >
                     <View style={{ backgroundColor: "#87AF9E" }}>
-                      {/* <List.Item
-                      title="eggs"
-                      titleStyle={{ color: "white" }}
-                      style={styles.Pill}
-                      onPress={() => console.log("Me eggs")}
-                      description={"Best used by: 3/19/2022"}
-                      descriptionStyle={{ color: "white", marginTop: 8 }}
-                    /> */}
-
                       {storedUser && storedUser != null ? (
                         storedUser.map((item: any, i: any) => {
                           return (
@@ -375,10 +376,79 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       )}
                     </View>
                   </List.Accordion>
-                  {
-                    
-                  }
-                  <List.Accordion
+                  {userGroups && userGroups != null
+                    ? userGroups.map((group: any, i: any) => {
+                        return (
+                          <List.Accordion
+                            theme={{
+                              colors: {
+                                background: "#2C443A",
+                                primary: "#4B4B4B",
+                              },
+                            }}
+                            title={group.groupName}
+                            titleStyle={{
+                              color: "#E9E9E1",
+                              fontFamily: "RobotoSlab_400Regular",
+                              fontSize: 20,
+                            }}
+                            id="2"
+                          >
+                            <View style={{ backgroundColor: "#87AF9E" }}>
+                              {storedUser && storedUser != null ? (
+                                storedUser.map((item: any, i: any) => {
+                                  if(item.groupId == group.id){
+                                    return (
+                                      <>
+                                        <View style={styles.Pill}>
+                                          <Pressable
+                                            key={i}
+                                            onPress={() => {
+                                              setItemIndex(item);
+                                              showItemModal();
+                                              console.log(userGroups);
+                                            }}
+                                          >
+                                            <View
+                                              style={[{ flexDirection: "row" }]}
+                                            >
+                                              <Image
+                                                source={Logo}
+                                                style={{ width: 75, height: 72 }}
+                                              />
+                                              <View
+                                                style={{
+                                                  justifyContent: "space-evenly",
+                                                  marginLeft: 20,
+                                                }}
+                                              >
+                                                <Text style={styles.pillText}>
+                                                  {item.productName}
+                                                </Text>
+                                                <Text style={styles.pillText2}>
+                                                  Expiration:{" "}
+                                                  {item.dateOfExpiration}
+                                                </Text>
+                                              </View>
+                                            </View>
+                                          </Pressable>
+                                        </View>
+                                      </>
+                                    )
+                                  }
+                                  
+                                  ;
+                                })
+                              ) : (
+                                <Text>Is Empty</Text>
+                              )}
+                            </View>
+                          </List.Accordion>
+                        );
+                      })
+                    : null}
+
+                  {/* <List.Accordion
                     theme={{
                       colors: { background: "#2C443A", primary: "#4B4B4B" },
                     }}
@@ -410,8 +480,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                         onPress={() => console.log("Me Milk")}
                       />
                     </View>
-                  </List.Accordion>
-                  <List.Accordion
+                  </List.Accordion> */}
+                  {/* <List.Accordion
                     theme={{
                       colors: { background: "#2C443A", primary: "#4B4B4B" },
                     }}
@@ -443,7 +513,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                         onPress={() => console.log("Me Milk")}
                       />
                     </View>
-                  </List.Accordion>
+                  </List.Accordion> */}
                 </List.AccordionGroup>
               </View>
             </View>
@@ -615,7 +685,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     label="Product Name"
                     onChangeText={setProductName}
                   />
-                  
+
                   <View style={{ width: 300, marginTop: 20 }}>
                     <DatePickerInput
                       locale="en"
@@ -642,16 +712,23 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     />
                   </View>
                   <View style={{ width: 300 }}>
-                    <DropDown
-                      label={"Select Group"}
-                      mode={"outlined"}
-                      visible={showDropDown}
-                      showDropDown={() => setShowDropDown(true)}
-                      onDismiss={() => setShowDropDown(false)}
-                      value={group}
-                      setValue={setGroup}
-                      list={groupList}
-                    />
+                  <Select selectedValue={service} minWidth="200" accessibilityLabel="Select Group" placeholder="Select Group" _selectedItem={{
+                              bg: "teal.600",
+                              endIcon: <CheckIcon size="5" />
+                            }} mt={1} onValueChange={itemValue => setService(itemValue)}>
+                  {userGroups && userGroups != null ? (
+                        userGroups.map((group: any, i: any) => {
+                          return (
+                                <Select.Item label={group.groupName} value={group.groupName} />
+                              
+                          );
+                        })
+                      ) : (
+                        <Text>Is Empty</Text>
+                      )}
+                         
+                    
+                         </Select>
                   </View>
 
                   <Button
@@ -672,6 +749,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
           </Portal>
         </SafeAreaView>
       </Provider>
+      </NativeBaseProvider>
     </>
   );
 };

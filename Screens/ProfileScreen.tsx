@@ -72,6 +72,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
     // setgroupArrayId(groupData);
     let groupInfoArray = await GetGroupsByUserId(userInfoData.id)
     setgroupArrayId(groupInfoArray)
+    
   };
 
   const [showModal, setShowModal] = useState<boolean>(false);

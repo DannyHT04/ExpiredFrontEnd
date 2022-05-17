@@ -155,4 +155,6 @@ async function AddGroup(newGroup: createGroup){
     let data = await res.json();
    return data;
 }
+
+
 export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId, AddGroup};
