@@ -615,7 +615,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     label="Product Name"
                     onChangeText={setProductName}
                   />
-
+                  
                   <View style={{ width: 300, marginTop: 20 }}>
                     <DatePickerInput
                       locale="en"
