@@ -113,14 +113,11 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
     let newGroup: createGroup = {
       Id: 0,
       GroupName: groupName,
-      UsersIdInGroup: userInfo.id,
+      UsersIdInGroup: userInfo.id.toString(),
       UserNameInGroup: userInfo.username,
       GroupPassword: groupPassword,
       IsGroupDeleted: false
     };
-    // console.log(userInfo.id)
-    // console.log(userInfo.username)
-    // console.log(newGroup)
     await AddGroup(newGroup)
   }
 
