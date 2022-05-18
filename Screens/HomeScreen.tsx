@@ -42,6 +42,7 @@ import {
   DeleteItem,
   UpdateItem,
   GetGroupsByUserId,
+  GetAllGroupItems,
 } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
 import { Select, CheckIcon } from "native-base";
@@ -87,15 +88,33 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       }
     }
   }, []);
-
+  const [allPeopleItemInGroups, setAllPeopleItemInGroups]= useState<any>([]);
+  
   const fetchData = async () => {
     // console.log(username);
     userInfo = await GetUserInfoByUsername(username);
     userItems = await GetAllUserItems(userInfo.id);
-    setUserGroups(await GetGroupsByUserId(userInfo.id));
+    let test =await GetGroupsByUserId(userInfo.id);
+    setUserGroups(test);
     setStoredUser(userItems);
     setUserInfo(userInfo);
+    // let test1 = await GetAllGroupItems(1)
+    // console.log(test1)
+    for(let i = 0; i< test.length; i++){
+      
+    
+      let itemsGroupInfo = await GetAllGroupItems(test[i].id);
+      
+     
+        allPeopleItemInGroups.push(itemsGroupInfo);
+       
+        // setAllPeopleItemInGroups(allPeopleItemInGroups);
+     
+      
+    }
+    
   };
+
   const [showShort, setShowSort] = useState<boolean>(false);
   const [showAddItem, setShowAddItem] = useState<boolean>(false);
   const [showItem, setShowItem] = useState<boolean>(false);
@@ -325,7 +344,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                       onPress={() => {
                                         setItemIndex(item);
                                         showItemModal();
-                                        console.log(userGroups);
+                                        console.log(allPeopleItemInGroups)
                                       }}
                                     >
                                       <View style={[{ flexDirection: "row" }]}>
@@ -390,7 +409,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                               onPress={() => {
                                                 setItemIndex(item);
                                                 showItemModal();
-                                                console.log(userGroups);
+                                                // console.log(userGroups);
+                                                console.log(allPeopleItemInGroups[0][0].groupId)
                                               }}
                                             >
                                               <View
