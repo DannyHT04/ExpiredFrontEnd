@@ -45,7 +45,7 @@ import {
 } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
 import { Select, CheckIcon } from "native-base";
-import {NativeBaseProvider} from "native-base";
+import { NativeBaseProvider } from "native-base";
 
 type RootStackParamList = {
   Home: undefined;
@@ -137,6 +137,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
 
   const [service, setService] = useState("");
+
+
   let [fontsLoaded, error] = useFonts({
     RobotoSlab_100Thin,
     RobotoSlab_200ExtraLight,
@@ -227,50 +229,50 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
   return (
     <>
-    <NativeBaseProvider>
-      <Provider theme={theme}>
-        <SafeAreaView style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
-          <View style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-evenly" }}
-            >
-              <View style={{ flex: 1 }}>
-                <IconButton
-                  icon="sort-variant"
-                  color="#2C443A"
-                  size={45}
-                  onPress={showSortModal}
-                />
+      <NativeBaseProvider>
+        <Provider theme={theme}>
+          <SafeAreaView style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
+            <View style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
+              <View
+                style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+              >
+                <View style={{ flex: 1 }}>
+                  <IconButton
+                    icon="sort-variant"
+                    color="#2C443A"
+                    size={45}
+                    onPress={showSortModal}
+                  />
+                </View>
+
+                <View style={{ alignItems: "center" }}>
+                  <Image
+                    source={Logo}
+                    style={[styles.LogoStyle]}
+                    accessibilityLabel="Expired Logo"
+                  />
+                </View>
+
+                <View style={{ flex: 1, alignItems: "flex-end" }}>
+                  <IconButton
+                    icon="plus-circle-outline"
+                    color="#2C443A"
+                    size={45}
+                    onPress={showAddItemModal}
+                  />
+                </View>
               </View>
 
-              <View style={{ alignItems: "center" }}>
-                <Image
-                  source={Logo}
-                  style={[styles.LogoStyle]}
-                  accessibilityLabel="Expired Logo"
-                />
-              </View>
-
-              <View style={{ flex: 1, alignItems: "flex-end" }}>
-                <IconButton
-                  icon="plus-circle-outline"
-                  color="#2C443A"
-                  size={45}
-                  onPress={showAddItemModal}
-                />
-              </View>
-            </View>
-
-            <View
-              style={{
-                marginTop: 50,
-                backgroundColor: "#7FC8A9",
-                flex: 1,
-                alignItems: "center",
-              }}
-            >
-              {/* <View style={[styles.row]}> */}
-                {/* <Text>Instructions</Text>
+              <View
+                style={{
+                  marginTop: 50,
+                  backgroundColor: "#7FC8A9",
+                  flex: 1,
+                  alignItems: "center",
+                }}
+              >
+                <View style={[styles.row]}>
+                  {/* <Text>Instructions</Text>
 
               <Text>1. Select the plus icon in the top right corner </Text>
               <Text>
@@ -283,7 +285,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 add to your Grocery List select the icon on
               </Text> */}
 
-                {/* <Card style={{width:350, backgroundColor:'#2C443A'}}>
+                  {/* <Card style={{width:350, backgroundColor:'#2C443A'}}>
                 <Card.Title
                   title="Instructions"
                   titleStyle={{color:"#E9E9E1"}}
@@ -298,68 +300,68 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 add to your Grocery List select the icon on</Text>
                 </Card.Content>
               </Card> */}
-              {/* </View> */}
+                </View>
 
-              {/* list according */}
-              <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
-                <List.AccordionGroup>
-                  <List.Accordion
-                    theme={{
-                      colors: { background: "#2C443A", primary: "#4B4B4B" },
-                    }}
-                    title="Personal Items"
-                    titleStyle={{
-                      color: "#E9E9E1",
-                      fontFamily: "RobotoSlab_400Regular",
-                      fontSize: 20,
-                    }}
-                    id="1"
-                  >
-                    <View style={{ backgroundColor: "#87AF9E" }}>
-                      {storedUser && storedUser != null ? (
-                        storedUser.map((item: any, i: any) => {
-                          return (
-                            <>
-                              <View style={styles.Pill}>
-                                <Pressable
-                                  key={i}
-                                  onPress={() => {
-                                    setItemIndex(item);
-                                    showItemModal();
-                                    console.log(userGroups);
-                                  }}
-                                >
-                                  <View style={[{ flexDirection: "row" }]}>
-                                    <Image
-                                      source={Logo}
-                                      style={{ width: 75, height: 72 }}
-                                    />
-                                    <View
-                                      style={{
-                                        justifyContent: "space-evenly",
-                                        marginLeft: 20,
-                                      }}
-                                    >
-                                      <Text style={styles.pillText}>
-                                        {item.productName}
-                                      </Text>
-                                      <Text style={styles.pillText2}>
-                                        Expiration: {item.dateOfExpiration}
-                                      </Text>
+                {/* list according */}
+                <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+                  <List.AccordionGroup>
+                    <List.Accordion
+                      theme={{
+                        colors: { background: "#2C443A", primary: "#4B4B4B" },
+                      }}
+                      title="Personal Items"
+                      titleStyle={{
+                        color: "#E9E9E1",
+                        fontFamily: "RobotoSlab_400Regular",
+                        fontSize: 20,
+                      }}
+                      id="1"
+                    >
+                      <View style={{ backgroundColor: "#87AF9E" }}>
+                        {storedUser && storedUser != null ? (
+                          storedUser.map((item: any, i: any) => {
+                            return (
+                              <>
+                                <View style={styles.Pill}>
+                                  <Pressable
+                                    key={i}
+                                    onPress={() => {
+                                      setItemIndex(item);
+                                      showItemModal();
+                                      console.log(userGroups);
+                                    }}
+                                  >
+                                    <View style={[{ flexDirection: "row" }]}>
+                                      <Image
+                                        source={Logo}
+                                        style={{ width: 75, height: 72 }}
+                                      />
+                                      <View
+                                        style={{
+                                          justifyContent: "space-evenly",
+                                          marginLeft: 20,
+                                        }}
+                                      >
+                                        <Text style={styles.pillText}>
+                                          {item.productName}
+                                        </Text>
+                                        <Text style={styles.pillText2}>
+                                          Expiration: {item.dateOfExpiration}
+                                        </Text>
+                                      </View>
                                     </View>
-                                  </View>
-                                </Pressable>
-                              </View>
-                            </>
-                          );
-                        })
-                      ) : (
-                        <Text>Is Empty</Text>
-                      )}
-                    </View>
-                  </List.Accordion>
-                  {userGroups && userGroups != null
-                    ? userGroups.map((group: any, i: any) => {
+                                  </Pressable>
+                                </View>
+                              </>
+                            );
+                          })
+                        ) : (
+                          <Text>Is Empty</Text>
+                        )}
+                      </View>
+                    </List.Accordion>
+                    {userGroups && userGroups != null
+                      ? userGroups.map((group: any, i: any) => {
                         return (
                           <List.Accordion
                             theme={{
@@ -379,7 +381,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                             <View style={{ backgroundColor: "#87AF9E" }}>
                               {storedUser && storedUser != null ? (
                                 storedUser.map((item: any, i: any) => {
-                                  if(item.groupId == group.id){
+                                  if (item.groupId == group.id) {
                                     return (
                                       <>
                                         <View style={styles.Pill}>
@@ -418,7 +420,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                       </>
                                     )
                                   }
-                                  
+
                                   ;
                                 })
                               ) : (
@@ -428,9 +430,9 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                           </List.Accordion>
                         );
                       })
-                    : null}
+                      : null}
 
-                  {/* <List.Accordion
+                    {/* <List.Accordion
                     theme={{
                       colors: { background: "#2C443A", primary: "#4B4B4B" },
                     }}
@@ -463,7 +465,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       />
                     </View>
                   </List.Accordion> */}
-                  {/* <List.Accordion
+                    {/* <List.Accordion
                     theme={{
                       colors: { background: "#2C443A", primary: "#4B4B4B" },
                     }}
@@ -496,201 +498,176 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       />
                     </View>
                   </List.Accordion> */}
-                </List.AccordionGroup>
+                  </List.AccordionGroup>
+                </View>
               </View>
             </View>
-          </View>
 
-          <Portal>
-            <Modal
-              visible={showItem}
-              onDismiss={hideItemModal}
-              contentContainerStyle={containerStyle}
-            >
-              <View>
-                <View style={{ alignItems: "center" }}>
-                  <Text style={styles.Text}>Edit Item</Text>
-                  <Text style={styles.Text}>{itemIndex.productName}</Text>
-                  <TextInput
-                    style={{ width: 300, marginTop: 20 }}
-                    theme={{ colors: { primary: "#4B4B4B" } }}
-                    autoComplete="off"
-                    label="Product Name"
-                    value={itemIndex.productName}
-                    onChangeText={setProductName}
-                  />
-
-                  <View style={{ width: 300, marginTop: 20 }}>
-                    <DatePickerInput
-                      locale="en"
+            <Portal>
+              <Modal
+                visible={showItem}
+                onDismiss={hideItemModal}
+                contentContainerStyle={containerStyle}
+              >
+                <View>
+                  <View style={{ alignItems: "center" }}>
+                    <Text style={styles.Text}>Edit Item</Text>
+                    <Text style={styles.Text}>{itemIndex.productName}</Text>
+                    <TextInput
+                      style={{ width: 300, marginTop: 20 }}
+                      theme={{ colors: { primary: "#4B4B4B" } }}
                       autoComplete="off"
-                      label="Expiration Date"
-                      value={editInputDate}
-                      onChange={(d) => {
-                        setEditInputDate(d);
-                      }}
-                      inputMode="start"
+                      label="Product Name"
+                      value={itemIndex.productName}
+                      onChangeText={setProductName}
                     />
-                  </View>
 
-                  <TextInput
-                    style={{ width: 300 }}
-                    theme={{ colors: { primary: "#4B4B4B" } }}
-                    autoComplete="off"
-                    label="Owner"
-                    value={itemIndex.owner}
-                    onChangeText={setOwner}
-                  />
+                    <View style={{ width: 300, marginTop: 20 }}>
+                      <DatePickerInput
+                        locale="en"
+                        autoComplete="off"
+                        label="Expiration Date"
+                        value={editInputDate}
+                        onChange={(d) => {
+                          setEditInputDate(d);
+                        }}
+                        inputMode="start"
+                      />
+                    </View>
 
-                  <View style={{ width: 300, marginTop: 20 }}>
-                    <DatePickerInput
-                      locale="en"
+                    <TextInput
+                      style={{ width: 300 }}
+                      theme={{ colors: { primary: "#4B4B4B" } }}
                       autoComplete="off"
-                      label="Change Notification Date"
-                      value={remindDate}
-                      onChange={(d) => setRemindDate(d)}
-                      inputMode="start"
+                      label="Owner"
+                      value={itemIndex.owner}
+                      onChangeText={setOwner}
                     />
-                  </View>
-                  <Button
-                    style={{ marginTop: 20 }}
-                    color="#505050"
-                    mode="contained"
-                    onPress={hideItemModal}
-                  >
-                    Add to Grocery List
-                  </Button>
 
-                  <Button
-                    style={{ marginTop: 20 }}
-                    color="#505050"
-                    mode="contained"
-                    onPress={() => {
-                      hideItemModal();
-                      handleUpdateItem();
-                      handleDateOfExpiration();
-                    }}
-                  >
-                    Save
-                  </Button>
-                  <Button
-                    style={{ marginTop: 20 }}
-                    color="red"
-                    mode="contained"
-                    onPress={() => {
-                      hideItemModal();
-                      handleDeleteItem();
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </View>
-              </View>
-            </Modal>
-          </Portal>
-          {/* **** VIEW SORT MODAL **** */}
-
-          <Portal>
-            <Modal
-              visible={showShort}
-              onDismiss={hideSortModal}
-              contentContainerStyle={containerStyle}
-            >
-              <View>
-                <View style={{ alignItems: "center" }}>
-                  <Text style={styles.Text}>Sort Grocery Items</Text>
-                </View>
-                <Text style={styles.SortText}> Item Name</Text>
-                <RadioButton.Group
-                  onValueChange={(newValue) => setValue(newValue)}
-                  value={value}
-                >
-                  <RadioButton.Item label="A-Z" value="first" color="#E9E9E1" />
-                  <RadioButton.Item
-                    label="Z-A"
-                    value="second"
-                    color="#E9E9E1"
-                  />
-                  <Text style={styles.SortText}>Best By Date</Text>
-                  <RadioButton.Item
-                    label="Closest to Farthest"
-                    value="third"
-                    color="#E9E9E1"
-                  />
-                  <RadioButton.Item
-                    label="Farthest to Closest"
-                    value="fourth"
-                    color="#E9E9E1"
-                  />
-                </RadioButton.Group>
-                <View style={{ alignItems: "center" }}>
-                  <Button
-                    style={{ marginTop: 20 }}
-                    color="#505050"
-                    mode="contained"
-                    onPress={hideSortModal}
-                  >
-                    Save
-                  </Button>
-                </View>
-              </View>
-            </Modal>
-          </Portal>
-
-          {/* ****  ADD ITEM MODAL **** */}
-
-          <Portal>
-            <Modal
-              visible={showAddItem}
-              onDismiss={hideAddItemModal}
-              contentContainerStyle={containerStyle}
-            >
-              <View>
-                <View style={{ alignItems: "center" }}>
-                  <Text style={styles.Text}>Add Item</Text>
-
-                  {/* camera */}
-                  <View>
+                    <View style={{ width: 300, marginTop: 20 }}>
+                      <DatePickerInput
+                        locale="en"
+                        autoComplete="off"
+                        label="Change Notification Date"
+                        value={remindDate}
+                        onChange={(d) => setRemindDate(d)}
+                        inputMode="start"
+                      />
+                    </View>
                     <Button
-                      icon="camera"
+                      style={{ marginTop: 20 }}
+                      color="#505050"
                       mode="contained"
-                      onPress={() => navigation.navigate("CameraComp")}
+                      onPress={hideItemModal}
                     >
-                      Add Picture
+                      Add to Grocery List
+                    </Button>
+
+                    <Button
+                      style={{ marginTop: 20 }}
+                      color="#505050"
+                      mode="contained"
+                      onPress={() => {
+                        hideItemModal();
+                        handleUpdateItem();
+                        handleDateOfExpiration();
+                      }}
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      style={{ marginTop: 20 }}
+                      color="red"
+                      mode="contained"
+                      onPress={() => {
+                        hideItemModal();
+                        handleDeleteItem();
+                      }}
+                    >
+                      Delete
                     </Button>
                   </View>
+                </View>
+              </Modal>
+            </Portal>
+            {/* **** VIEW SORT MODAL **** */}
 
-                  <TextInput
-                    style={{ width: 300, marginTop: 20 }}
-                    theme={{ colors: { primary: "#4B4B4B" } }}
-                    autoComplete="off"
-                    label="Product Name"
-                    onChangeText={setProductName}
-                  />
-
-                  <View style={{ width: 300, marginTop: 20 }}>
-                    <DatePickerInput
-                      locale="en"
-                      autoComplete="off"
-                      label="Expiration Date"
-                      value={inputDate}
-                      onChange={(d) => {
-                        setInputDate(d);
-                        // console.log(inputDate)
-                        // handleDateOfExpiration()
-                      }}
-                      inputMode="start"
-                    />
+            <Portal>
+              <Modal
+                visible={showShort}
+                onDismiss={hideSortModal}
+                contentContainerStyle={containerStyle}
+              >
+                <View>
+                  <View style={{ alignItems: "center" }}>
+                    <Text style={styles.Text}>Sort Grocery Items</Text>
                   </View>
+                  <Text style={styles.SortText}> Item Name</Text>
+                  <RadioButton.Group
+                    onValueChange={(newValue) => setValue(newValue)}
+                    value={value}
+                  >
+                    <RadioButton.Item label="A-Z" value="first" color="#E9E9E1" />
+                    <RadioButton.Item
+                      label="Z-A"
+                      value="second"
+                      color="#E9E9E1"
+                    />
+                    <Text style={styles.SortText}>Best By Date</Text>
+                    <RadioButton.Item
+                      label="Closest to Farthest"
+                      value="third"
+                      color="#E9E9E1"
+                    />
+                    <RadioButton.Item
+                      label="Farthest to Closest"
+                      value="fourth"
+                      color="#E9E9E1"
+                    />
+                  </RadioButton.Group>
+                  <View style={{ alignItems: "center" }}>
+                    <Button
+                      style={{ marginTop: 20 }}
+                      color="#505050"
+                      mode="contained"
+                      onPress={hideSortModal}
+                    >
+                      Save
+                    </Button>
+                  </View>
+                </View>
+              </Modal>
+            </Portal>
 
-                  <View style={{ width: 300 }}>
-                    <DatePickerInput
-                      locale="en"
+            {/* ****  ADD ITEM MODAL **** */}
+
+            <Portal>
+              <Modal
+                visible={showAddItem}
+                onDismiss={hideAddItemModal}
+                contentContainerStyle={containerStyle}
+              >
+                <View>
+                  <View style={{ alignItems: "center" }}>
+                    <Text style={styles.Text}>Add Item</Text>
+
+                    {/* camera */}
+                    <View>
+                      <Button
+                        icon="camera"
+                        mode="contained"
+                        onPress={() => navigation.navigate("CameraComp")}
+                      >
+                        Add Picture
+                      </Button>
+                    </View>
+
+                    <TextInput
+                      style={{ width: 300, marginTop: 20 }}
+                      theme={{ colors: { primary: "#4B4B4B" } }}
                       autoComplete="off"
-                      label="Set Notification"
-                      value={remindDate}
-                      onChange={(d) => setRemindDate(d)}
-                      inputMode="start"
+                      label="Product Name"
+                      onChangeText={setProductName}
                     />
                   </View>
                   <View style={{ width: 300 }}>
@@ -714,24 +691,28 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                          </Select>
                   </View>
 
-                  <Button
-                    style={{ marginTop: 20 }}
-                    color="#505050"
-                    mode="contained"
-                    onPress={() => {
-                      hideAddItemModal();
-                      handleAddItem();
-                      console.log("added");
-                    }}
-                  >
-                    Add
-                  </Button>
+
+                      </Select>
+                    </View>
+
+                    <Button
+                      style={{ marginTop: 20 }}
+                      color="#505050"
+                      mode="contained"
+                      onPress={() => {
+                        hideAddItemModal();
+                        handleAddItem();
+                        console.log("added");
+                      }}
+                    >
+                      Add
+                    </Button>
+                  </View>
                 </View>
-              </View>
-            </Modal>
-          </Portal>
-        </SafeAreaView>
-      </Provider>
+              </Modal>
+            </Portal>
+          </SafeAreaView>
+        </Provider>
       </NativeBaseProvider>
     </>
   );
