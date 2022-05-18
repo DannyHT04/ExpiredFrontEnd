@@ -169,7 +169,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     let newItem: iAddItem = {
       Id: 0,
       UserId: userInfo.id,
-      GroupId: 0,
+      GroupId: parseInt(service),
       ProductName: productName,
       DateOfExpiration: newDate,
       NotificationDate: notificationDate,
@@ -704,7 +704,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                           userGroups.map((group: any, i: any) => {
                             return (
                               <Select.Item label={group.groupName} value={group.id} />
-                              
+
                             );
                           })
                         ) : (
