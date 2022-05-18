@@ -409,8 +409,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                               onPress={() => {
                                                 setItemIndex(item);
                                                 showItemModal();
-                                                console.log(userGroups);
-                                                console.log(allPeopleItemInGroups)
+                                                // console.log(userGroups);
+                                                console.log(allPeopleItemInGroups[0][0].groupId)
                                               }}
                                             >
                                               <View
