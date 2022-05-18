@@ -44,7 +44,7 @@ import {
   GetGroupsByUserId,
 } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
-import { Select, CheckIcon } from "native-base";
+import { Select, CheckIcon, ScrollView } from "native-base";
 import { NativeBaseProvider } from "native-base";
 
 type RootStackParamList = {
@@ -269,10 +269,10 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                   backgroundColor: "#7FC8A9",
                   flex: 1,
                   alignItems: "center",
-                }}
-              >
-                <View style={[styles.row]}>
-                  {/* <Text>Instructions</Text>
+                }}>
+                <ScrollView style={{ width: "100%", height: "100%" }}>
+                  <View style={[styles.row]}>
+                    {/* <Text>Instructions</Text>
 
               <Text>1. Select the plus icon in the top right corner </Text>
               <Text>
@@ -285,7 +285,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 add to your Grocery List select the icon on
               </Text> */}
 
-                  {/* <Card style={{width:350, backgroundColor:'#2C443A'}}>
+                    {/* <Card style={{width:350, backgroundColor:'#2C443A'}}>
                 <Card.Title
                   title="Instructions"
                   titleStyle={{color:"#E9E9E1"}}
@@ -300,139 +300,139 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 add to your Grocery List select the icon on</Text>
                 </Card.Content>
               </Card> */}
-                </View>
+                  </View>
 
-                {/* list according */}
-                <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
-                  <List.AccordionGroup>
-                    <List.Accordion
-                      theme={{
-                        colors: { background: "#2C443A", primary: "#4B4B4B" },
-                      }}
-                      title="Personal Items"
-                      titleStyle={{
-                        color: "#E9E9E1",
-                        fontFamily: "RobotoSlab_400Regular",
-                        fontSize: 20,
-                      }}
-                      id="1"
-                    >
-                      <View style={{ backgroundColor: "#87AF9E" }}>
-                        {storedUser && storedUser != null ? (
-                          storedUser.map((item: any, i: any) => {
-                            return (
-                              <>
-                                <View style={styles.Pill}>
-                                  <Pressable
-                                    key={i}
-                                    onPress={() => {
-                                      setItemIndex(item);
-                                      showItemModal();
-                                      console.log(userGroups);
-                                    }}
-                                  >
-                                    <View style={[{ flexDirection: "row" }]}>
-                                      <Image
-                                        source={Logo}
-                                        style={{ width: 75, height: 72 }}
-                                      />
-                                      <View
-                                        style={{
-                                          justifyContent: "space-evenly",
-                                          marginLeft: 20,
-                                        }}
-                                      >
-                                        <Text style={styles.pillText}>
-                                          {item.productName}
-                                        </Text>
-                                        <Text style={styles.pillText2}>
-                                          Expiration: {item.dateOfExpiration}
-                                        </Text>
-                                      </View>
-                                    </View>
-                                  </Pressable>
-                                </View>
-                              </>
-                            );
-                          })
-                        ) : (
-                          <Text>Is Empty</Text>
-                        )}
-                      </View>
-                    </List.Accordion>
-                    {userGroups && userGroups != null
-                      ? userGroups.map((group: any, i: any) => {
-                        return (
-                          <List.Accordion
-                            theme={{
-                              colors: {
-                                background: "#2C443A",
-                                primary: "#4B4B4B",
-                              },
-                            }}
-                            title={group.groupName}
-                            titleStyle={{
-                              color: "#E9E9E1",
-                              fontFamily: "RobotoSlab_400Regular",
-                              fontSize: 20,
-                            }}
-                            id={i +1}
-                          >
-                            <View style={{ backgroundColor: "#87AF9E" }}>
-                              {storedUser && storedUser != null ? (
-                                storedUser.map((item: any, i: any) => {
-                                  if (item.groupId == group.id) {
-                                    return (
-                                      <>
-                                        <View style={styles.Pill}>
-                                          <Pressable
-                                            key={i}
-                                            onPress={() => {
-                                              setItemIndex(item);
-                                              showItemModal();
-                                              console.log(userGroups);
-                                            }}
-                                          >
-                                            <View
-                                              style={[{ flexDirection: "row" }]}
-                                            >
-                                              <Image
-                                                source={Logo}
-                                                style={{ width: 75, height: 72 }}
-                                              />
-                                              <View
-                                                style={{
-                                                  justifyContent: "space-evenly",
-                                                  marginLeft: 20,
-                                                }}
-                                              >
-                                                <Text style={styles.pillText}>
-                                                  {item.productName}
-                                                </Text>
-                                                <Text style={styles.pillText2}>
-                                                  Expiration:{" "}
-                                                  {item.dateOfExpiration}
-                                                </Text>
-                                              </View>
-                                            </View>
-                                          </Pressable>
+                  {/* list according */}
+                  <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+                    <List.AccordionGroup>
+                      <List.Accordion
+                        theme={{
+                          colors: { background: "#2C443A", primary: "#4B4B4B" },
+                        }}
+                        title="Personal Items"
+                        titleStyle={{
+                          color: "#E9E9E1",
+                          fontFamily: "RobotoSlab_400Regular",
+                          fontSize: 20,
+                        }}
+                        id="1"
+                      >
+                        <View style={{ backgroundColor: "#87AF9E" }}>
+                          {storedUser && storedUser != null ? (
+                            storedUser.map((item: any, i: any) => {
+                              return (
+                                <>
+                                  <View style={styles.Pill}>
+                                    <Pressable
+                                      key={i}
+                                      onPress={() => {
+                                        setItemIndex(item);
+                                        showItemModal();
+                                        console.log(userGroups);
+                                      }}
+                                    >
+                                      <View style={[{ flexDirection: "row" }]}>
+                                        <Image
+                                          source={Logo}
+                                          style={{ width: 75, height: 72 }}
+                                        />
+                                        <View
+                                          style={{
+                                            justifyContent: "space-evenly",
+                                            marginLeft: 20,
+                                          }}
+                                        >
+                                          <Text style={styles.pillText}>
+                                            {item.productName}
+                                          </Text>
+                                          <Text style={styles.pillText2}>
+                                            Expiration: {item.dateOfExpiration}
+                                          </Text>
                                         </View>
-                                      </>
-                                    )
-                                  }
+                                      </View>
+                                    </Pressable>
+                                  </View>
+                                </>
+                              );
+                            })
+                          ) : (
+                            <Text>Is Empty</Text>
+                          )}
+                        </View>
+                      </List.Accordion>
+                      {userGroups && userGroups != null
+                        ? userGroups.map((group: any, i: any) => {
+                          return (
+                            <List.Accordion
+                              theme={{
+                                colors: {
+                                  background: "#2C443A",
+                                  primary: "#4B4B4B",
+                                },
+                              }}
+                              title={group.groupName}
+                              titleStyle={{
+                                color: "#E9E9E1",
+                                fontFamily: "RobotoSlab_400Regular",
+                                fontSize: 20,
+                              }}
+                              id={i + 1}
+                            >
+                              <View style={{ backgroundColor: "#87AF9E" }}>
+                                {storedUser && storedUser != null ? (
+                                  storedUser.map((item: any, i: any) => {
+                                    if (item.groupId == group.id) {
+                                      return (
+                                        <>
+                                          <View style={styles.Pill}>
+                                            <Pressable
+                                              key={i}
+                                              onPress={() => {
+                                                setItemIndex(item);
+                                                showItemModal();
+                                                console.log(userGroups);
+                                              }}
+                                            >
+                                              <View
+                                                style={[{ flexDirection: "row" }]}
+                                              >
+                                                <Image
+                                                  source={Logo}
+                                                  style={{ width: 75, height: 72 }}
+                                                />
+                                                <View
+                                                  style={{
+                                                    justifyContent: "space-evenly",
+                                                    marginLeft: 20,
+                                                  }}
+                                                >
+                                                  <Text style={styles.pillText}>
+                                                    {item.productName}
+                                                  </Text>
+                                                  <Text style={styles.pillText2}>
+                                                    Expiration:{" "}
+                                                    {item.dateOfExpiration}
+                                                  </Text>
+                                                </View>
+                                              </View>
+                                            </Pressable>
+                                          </View>
+                                        </>
+                                      )
+                                    }
 
-                                  ;
-                                })
-                              ) : (
-                                <Text>Is Empty</Text>
-                              )}
-                            </View>
-                          </List.Accordion>
-                        );
-                      })
-                      : null}
+                                    ;
+                                  })
+                                ) : (
+                                  <Text>Is Empty</Text>
+                                )}
+                              </View>
+                            </List.Accordion>
+                          );
+                        })
+                        : null}
 
-                    {/* <List.Accordion
+                      {/* <List.Accordion
                     theme={{
                       colors: { background: "#2C443A", primary: "#4B4B4B" },
                     }}
@@ -465,7 +465,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       />
                     </View>
                   </List.Accordion> */}
-                    {/* <List.Accordion
+                      {/* <List.Accordion
                     theme={{
                       colors: { background: "#2C443A", primary: "#4B4B4B" },
                     }}
@@ -498,8 +498,9 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       />
                     </View>
                   </List.Accordion> */}
-                  </List.AccordionGroup>
-                </View>
+                    </List.AccordionGroup>
+                  </View>
+                </ScrollView>
               </View>
             </View>
 
