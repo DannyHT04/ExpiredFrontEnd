@@ -669,27 +669,47 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       label="Product Name"
                       onChangeText={setProductName}
                     />
-                  </View>
-                  <View style={{ width: 300 }}>
-                  <Select selectedValue={service} minWidth="200" accessibilityLabel="Select Group" placeholder="Select Group" _selectedItem={{
-                              bg: "teal.600",
-                              endIcon: <CheckIcon size="5" />
-                            }} mt={1} onValueChange={itemValue => setService(itemValue)}>
-                  {userGroups && userGroups != null ? (
-                        userGroups.map((group: any, i: any) => {
-                          return (
-                              
-                                <Select.Item label={group.groupName} value={group.id} />
-                             
-                              
-                          );
-                        })
-                      ) : (
-                        <Text>Is Empty</Text>
-                      )}
-                         
-                         </Select>
-                  </View>
+
+                    <View style={{ width: 300, marginTop: 20 }}>
+                      <DatePickerInput
+                        locale="en"
+                        autoComplete="off"
+                        label="Expiration Date"
+                        value={inputDate}
+                        onChange={(d) => {
+                          setInputDate(d);
+                          // console.log(inputDate)
+                          // handleDateOfExpiration()
+                        }}
+                        inputMode="start"
+                      />
+                    </View>
+
+                    <View style={{ width: 300 }}>
+                      <DatePickerInput
+                        locale="en"
+                        autoComplete="off"
+                        label="Set Notification"
+                        value={remindDate}
+                        onChange={(d) => setRemindDate(d)}
+                        inputMode="start"
+                      />
+                    </View>
+                    <View style={{ width: 300 }}>
+                      <Select selectedValue={service} minWidth="200" accessibilityLabel="Select Group" placeholder="Select Group" _selectedItem={{
+                        bg: "teal.600",
+                        endIcon: <CheckIcon size="5" />
+                      }} mt={1} onValueChange={itemValue => setService(itemValue)}>
+                        {userGroups && userGroups != null ? (
+                          userGroups.map((group: any, i: any) => {
+                            return (
+                              <Select.Item label={group.groupName} value={group.id} />
+
+                            );
+                          })
+                        ) : (
+                          <Text>No Groups Exist to Add Item</Text>
+                        )}
 
 
                       </Select>
