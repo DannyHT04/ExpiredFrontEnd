@@ -376,7 +376,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                               fontFamily: "RobotoSlab_400Regular",
                               fontSize: 20,
                             }}
-                            id="2"
+                            id={i +1}
                           >
                             <View style={{ backgroundColor: "#87AF9E" }}>
                               {storedUser && storedUser != null ? (
