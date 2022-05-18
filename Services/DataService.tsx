@@ -46,7 +46,7 @@ async function GetUserInfoByUsername(Username: String){
     return data;
 }
 
-async function GetAllUserItems(userId: number){
+async function GetAllUserItems(userId: Number){
     let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/Item/GetAllUserItems/${userId}`);
     let data = await res.json();
     return data;
@@ -69,7 +69,7 @@ async function AddItem(newItem: iAddItem){
    return data;
 }
 
-async function DeleteItem(itemId: number){
+async function DeleteItem(itemId: Number){
     let res= await fetch(`https://expiredbackendapi2.azurewebsites.net/Item/DeleteItem/${itemId}`, {
         method: "POST",
         headers: {
@@ -103,7 +103,7 @@ async function UpdateItem(updateItem: iAddItem){
    return data;
 }
 
-async function UpdateUsername(id : number, newUsername: any){
+async function UpdateUsername(id : Number, newUsername: any){
     let res= await fetch(`https://expiredbackendapi2.azurewebsites.net/User/UpdateUser/${id}/${newUsername}`, {
         method: "POST",
         headers: {
@@ -126,14 +126,14 @@ async function GetUsersFromGroup(aNumber: String){
     return data; 
 }
 
-async function GetGroupById(Id:number) {
+async function GetGroupById(Id: Number) {
     let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/Group/GetGroupById/${Id}`);
     let data = await res.json();
     return data; 
     
 }
 
-async function GetGroupsByUserId(userId: string){
+async function GetGroupsByUserId(userId: String){
     let res = await fetch(`https://expiredbackendapi2.azurewebsites.net/Group/GetGroupsByUserId/${userId}`);
     let data = await res.json();
     return data;
@@ -156,5 +156,11 @@ async function AddGroup(newGroup: createGroup){
    return data;
 }
 
+async function GetAllGroupItems(GroupId : Number){
+    let res = await fetch (`https://expiredbackendapi2.azurewebsites.net/Group/GetAllGroupItems/${GroupId}`);
+    let data = await res.json();
+    return data;
+}
 
-export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId, AddGroup};
+
+export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId, AddGroup, GetAllGroupItems};
