@@ -132,6 +132,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
   const [service, setService] = useState("");
+  const [toGroceryList, setToGroceryList] = useState<boolean>(false);
 
 
   let [fontsLoaded, error] = useFonts({
@@ -196,7 +197,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       NotificationDate: notificationDate,
       Owner: username,
       ProductImage: image,
-      isGroceryList: false,
+      isGroceryList: toGroceryList,
       isDeleted: false,
     };
     console.log("updated item");
@@ -558,7 +559,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       style={{ marginTop: 20 }}
                       color="#505050"
                       mode="contained"
-                      onPress={hideItemModal}
+                      onPress={() => setToGroceryList(true)}
                     >
                       Add to Grocery List
                     </Button>

@@ -111,13 +111,16 @@ const GroceryListScreen: FC = () => {
                 titleStyle={{
                   color: "#E9E9E1",
                   fontFamily: "RobotoSlab_400Regular",
+                  fontSize: 20
                 }}
                 id="1"
               >
                 <View style={{ backgroundColor: "#87AF9E" }}>
                   <List.Item
                     title="eggs"
-                    titleStyle={{color:'white'}}
+                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
+                    color: "white",
+                    fontSize: 20, }}
                     style={styles.Pill}
                     onPress={() => console.log("Me eggs")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
@@ -146,27 +149,34 @@ const GroceryListScreen: FC = () => {
                 titleStyle={{
                   color: "#E9E9E1",
                   fontFamily: "RobotoSlab_400Regular",
+                  fontSize: 20,
                 }}
                 id="2"
               >
                 <View style={{ backgroundColor: "#87AF9E" }}>
                   <List.Item
                     title="eggs"
-                    titleStyle={{color:'white'}}
+                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
+                    color: "white",
+                    fontSize: 20, }}
                     style={styles.Pill}
                     onPress={() => console.log("Me eggs")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
                   />
                   <List.Item
                     title="Steak"
-                    titleStyle={{color:'white'}}
+                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
+                    color: "white",
+                    fontSize: 20, }}
                     style={styles.Pill}
                     onPress={() => console.log("Me Steak")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
                   />
                   <List.Item
                     title="Milk"
-                    titleStyle={{color:'white'}}
+                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
+                    color: "white",
+                    fontSize: 20, }}
                     style={styles.Pill}
                     onPress={() => console.log("Me Milk")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
@@ -181,20 +191,25 @@ const GroceryListScreen: FC = () => {
                 titleStyle={{
                   color: "#E9E9E1",
                   fontFamily: "RobotoSlab_400Regular",
+                  fontSize: 20,
                 }}
                 id="3"
               >
                 <View style={{ backgroundColor: "#87AF9E" }}>
                   <List.Item
                     title="eggs"
-                    titleStyle={{color:'white'}}
+                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
+                    color: "white",
+                    fontSize: 20, }}
                     style={styles.Pill}
                     onPress={() => console.log("Me eggs")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
                   />
                   <List.Item
                     title="Steak"
-                    titleStyle={{color:'white'}}
+                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
+                    color: "white",
+                    fontSize: 20, }}
                     style={styles.Pill}
                     onPress={() => console.log("Me Steak")}
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
@@ -250,12 +265,12 @@ const GroceryListScreen: FC = () => {
           >
             <View>
               <View style={{ alignItems: "center" }}>
-                <Text style={styles.Text}>ADD ITEM MODAL</Text>
+                <Text style={styles.Text}>Add Item To Grocery List</Text>
                 <TextInput
                   style={{ width: 300, marginTop: 20 }}
                   theme={{ colors: { primary: "#4B4B4B" } }}
                   autoComplete="off"
-                  label="Type New Name"
+                  label="Enter Item Name"
                 />
                 <Button
                   style={{ marginTop: 20 }}
@@ -263,7 +278,7 @@ const GroceryListScreen: FC = () => {
                   mode="contained"
                   onPress={hideAddItemModal}
                 >
-                  Save
+                  Add
                 </Button>
               </View>
             </View>
