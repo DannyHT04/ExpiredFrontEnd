@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image, Pressable } from "react-native";
+import { Text, View, StyleSheet, Image, Pressable, ScrollView } from "react-native";
 import { FC, useState, useContext, useEffect, useCallback } from "react";
 import {
   IconButton,
@@ -45,7 +45,7 @@ import {
   GetAllGroupItems,
 } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
-import { Select, CheckIcon, ScrollView } from "native-base";
+import { Select, CheckIcon } from "native-base";
 import { NativeBaseProvider } from "native-base";
 
 type RootStackParamList = {
@@ -150,11 +150,6 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   );
 
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
-
-  const [showDropDown, setShowDropDown] = useState(false);
-  const [group, setGroup] = useState("");
-
-
   const [service, setService] = useState("");
 
 
@@ -289,7 +284,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                   flex: 1,
                   alignItems: "center",
                 }}>
-                <ScrollView style={{ width: "100%", height: "100%" }}>
+
                   <View style={[styles.row]}>
                     {/* <Text>Instructions</Text>
 
@@ -336,9 +331,10 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                         }}
                         id="1"
                       >
+                        <ScrollView style={{ height:"50%" }}>
                         <View style={{ backgroundColor: "#87AF9E" }}>
                           {storedUser && storedUser != null ? (
-                            storedUser.map((item: any, i: any) => {
+                            storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {
                               return (
                                 <>
                                   <View style={styles.Pill}>
@@ -377,7 +373,9 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                           ) : (
                             <Text>Is Empty</Text>
                           )}
+                          
                         </View>
+                        </ScrollView>
                       </List.Accordion>
                       {userGroups && userGroups != null
                         ? userGroups.map((group: any, i: any) => {
@@ -397,6 +395,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                               }}
                               id={i + 1}
                             >
+                              <ScrollView style={{ flexGrow:1 }}>
                               <View style={{ backgroundColor: "#87AF9E" }}>
                                 {storedUser && storedUser != null ? (
                                   storedUser.map((item: any, i: any) => {
@@ -447,6 +446,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                   <Text>Is Empty</Text>
                                 )}
                               </View>
+                              </ScrollView>
                             </List.Accordion>
                           );
                         })
@@ -520,7 +520,6 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                   </List.Accordion> */}
                     </List.AccordionGroup>
                   </View>
-                </ScrollView>
               </View>
             </View>
 
