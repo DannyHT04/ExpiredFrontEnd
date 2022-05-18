@@ -312,10 +312,10 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                         }}
                         id="1"
                       >
-                        <ScrollView style={{ flexGrow:1 }}>
+                        <ScrollView style={{ height:"50%" }}>
                         <View style={{ backgroundColor: "#87AF9E" }}>
                           {storedUser && storedUser != null ? (
-                            storedUser.map((item: any, i: any) => {
+                            storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {
                               return (
                                 <>
                                   <View style={styles.Pill}>
