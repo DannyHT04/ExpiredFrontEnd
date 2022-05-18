@@ -137,24 +137,6 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
 
   const [service, setService] = useState("");
-  const groupList = 
-  
-
-  [
-    {
-      label: "Group 1",
-      value: "group1",
-    },
-    {
-      label: "Group 2",
-      value: "group2",
-    },
-    {
-      label: "Group 3",
-      value: "group3",
-    },
-  ];
-
   let [fontsLoaded, error] = useFonts({
     RobotoSlab_100Thin,
     RobotoSlab_200ExtraLight,
@@ -185,7 +167,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     let newItem: iAddItem = {
       Id: 0,
       UserId: userInfo.id,
-      GroupId: 0,
+      GroupId: parseInt(service),
       ProductName: productName,
       DateOfExpiration: newDate,
       NotificationDate: notificationDate,
@@ -287,7 +269,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 alignItems: "center",
               }}
             >
-              <View style={[styles.row]}>
+              {/* <View style={[styles.row]}> */}
                 {/* <Text>Instructions</Text>
 
               <Text>1. Select the plus icon in the top right corner </Text>
@@ -316,7 +298,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 add to your Grocery List select the icon on</Text>
                 </Card.Content>
               </Card> */}
-              </View>
+              {/* </View> */}
 
               {/* list according */}
               <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
@@ -719,7 +701,9 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                   {userGroups && userGroups != null ? (
                         userGroups.map((group: any, i: any) => {
                           return (
-                                <Select.Item label={group.groupName} value={group.groupName} />
+                              
+                                <Select.Item label={group.groupName} value={group.id} />
+                             
                               
                           );
                         })
@@ -727,7 +711,6 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                         <Text>Is Empty</Text>
                       )}
                          
-                    
                          </Select>
                   </View>
 
