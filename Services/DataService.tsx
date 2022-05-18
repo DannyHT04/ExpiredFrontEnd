@@ -156,8 +156,8 @@ async function AddGroup(newGroup: createGroup){
    return data;
 }
 
-async function GetAllGroupItems(GroupId : Number){
-    let res = await fetch (`https://expiredbackendapi2.azurewebsites.net/Group/GetAllGroupItems/${GroupId}`);
+async function GetAllGroupItems(GroupId : number){
+    let res = await fetch (`https://expiredbackendapi2.azurewebsites.net/item/GetAllGroupItems/${GroupId}`);
     let data = await res.json();
     return data;
 }
