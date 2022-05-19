@@ -1,4 +1,11 @@
-import { Text, View, StyleSheet, Image, Pressable, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import { FC, useState, useContext, useEffect, useCallback } from "react";
 import {
   IconButton,
@@ -88,31 +95,25 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       }
     }
   }, []);
-  const [allPeopleItemInGroups, setAllPeopleItemInGroups]= useState<any>([]);
-  
+  const [allPeopleItemInGroups, setAllPeopleItemInGroups] = useState<any>([]);
+
   const fetchData = async () => {
     // console.log(username);
     userInfo = await GetUserInfoByUsername(username);
     userItems = await GetAllUserItems(userInfo.id);
-    let test =await GetGroupsByUserId(userInfo.id);
+    let test = await GetGroupsByUserId(userInfo.id);
     setUserGroups(test);
     setStoredUser(userItems);
     setUserInfo(userInfo);
     // let test1 = await GetAllGroupItems(1)
     // console.log(test1)
-    for(let i = 0; i< test.length; i++){
-      
-    
+    for (let i = 0; i < test.length; i++) {
       let itemsGroupInfo = await GetAllGroupItems(test[i].id);
-      
-     
-        allPeopleItemInGroups.push(itemsGroupInfo);
-       
-        // setAllPeopleItemInGroups(allPeopleItemInGroups);
-     
-      
+
+      allPeopleItemInGroups.push(itemsGroupInfo);
+
+      // setAllPeopleItemInGroups(allPeopleItemInGroups);
     }
-    
   };
 
   const [showShort, setShowSort] = useState<boolean>(false);
@@ -152,7 +153,6 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
   const [service, setService] = useState("");
   const [toGroceryList, setToGroceryList] = useState<boolean>(false);
-
 
   let [fontsLoaded, error] = useFonts({
     RobotoSlab_100Thin,
@@ -284,10 +284,10 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                   backgroundColor: "#7FC8A9",
                   flex: 1,
                   alignItems: "center",
-                }}>
-
-                  <View style={[styles.row]}>
-                    {/* <Text>Instructions</Text>
+                }}
+              >
+                <View style={[styles.row]}>
+                  {/* <Text>Instructions</Text>
 
               <Text>1. Select the plus icon in the top right corner </Text>
               <Text>
@@ -300,7 +300,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 add to your Grocery List select the icon on
               </Text> */}
 
-                    {/* <Card style={{width:350, backgroundColor:'#2C443A'}}>
+                  {/* <Card style={{width:350, backgroundColor:'#2C443A'}}>
                 <Card.Title
                   title="Instructions"
                   titleStyle={{color:"#E9E9E1"}}
@@ -315,70 +315,76 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 add to your Grocery List select the icon on</Text>
                 </Card.Content>
               </Card> */}
-                  </View>
+                </View>
 
-                  {/* list according */}
-                  <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
-                    <List.AccordionGroup>
-                      <List.Accordion
-                        theme={{
-                          colors: { background: "#2C443A", primary: "#4B4B4B" },
-                        }}
-                        title="Personal Items"
-                        titleStyle={{
-                          color: "#E9E9E1",
-                          fontFamily: "RobotoSlab_400Regular",
-                          fontSize: 20,
-                        }}
-                        id="1"
-                      >
-                        <ScrollView style={{ height:"50%" }}>
+                {/* list according */}
+                <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+                  <List.AccordionGroup>
+                    <List.Accordion
+                      theme={{
+                        colors: { background: "#2C443A", primary: "#4B4B4B" },
+                      }}
+                      title="Personal Items"
+                      titleStyle={{
+                        color: "#E9E9E1",
+                        fontFamily: "RobotoSlab_400Regular",
+                        fontSize: 20,
+                      }}
+                      id="1"
+                    >
+                      <ScrollView style={{ height: "50%" }}>
                         <View style={{ backgroundColor: "#87AF9E" }}>
                           {storedUser && storedUser != null ? (
-                            storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {
-                              return (
-                                <>
-                                  <View style={styles.Pill}>
-                                    <Pressable
-                                      key={i}
-                                      onPress={() => {
-                                        setItemIndex(item);
-                                        showItemModal();
-                                        console.log(allPeopleItemInGroups)
-                                      }}
-                                    >
-                                      <View style={[{ flexDirection: "row" }]}>
-                                        <Image
-                                          source={Logo}
-                                          style={{ width: 75, height: 72 }}
-                                        />
+                            storedUser
+                              .sort((a: any, b: any) =>
+                                a.productName.localeCompare(b.productName)
+                              )
+                              .map((item: any, i: any) => {
+                                return (
+                                  <>
+                                    <View style={styles.Pill}>
+                                      <Pressable
+                                        key={i}
+                                        onPress={() => {
+                                          setItemIndex(item);
+                                          showItemModal();
+                                          console.log(allPeopleItemInGroups);
+                                        }}
+                                      >
                                         <View
-                                          style={{
-                                            justifyContent: "space-evenly",
-                                            marginLeft: 20,
-                                          }}
+                                          style={[{ flexDirection: "row" }]}
                                         >
-                                          <Text style={styles.pillText}>
-                                            {item.productName}
-                                          </Text>
-                                          <Text style={styles.pillText2}>
-                                            Expiration: {item.dateOfExpiration}
-                                          </Text>
+                                          <Image
+                                            source={Logo}
+                                            style={{ width: 75, height: 72 }}
+                                          />
+                                          <View
+                                            style={{
+                                              justifyContent: "space-evenly",
+                                              marginLeft: 20,
+                                            }}
+                                          >
+                                            <Text style={styles.pillText}>
+                                              {item.productName}
+                                            </Text>
+                                            <Text style={styles.pillText2}>
+                                              Expiration:{" "}
+                                              {item.dateOfExpiration}
+                                            </Text>
+                                          </View>
                                         </View>
-                                      </View>
-                                    </Pressable>
-                                  </View>
-                                </>
-                              );
-                            })
+                                      </Pressable>
+                                    </View>
+                                  </>
+                                );
+                              })
                           ) : (
                             <Text>Is Empty</Text>
                           )}
-                          
                         </View>
-                        </ScrollView>
-                      </List.Accordion>
-                      {userGroups && userGroups != null
+                      </ScrollView>
+                    </List.Accordion>
+                    {userGroups && userGroups != null
                         ? userGroups.map((group: any, i: any) => {
                           return (
                             <List.Accordion
@@ -397,51 +403,55 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                               id={i + 1}
                             >
                               <ScrollView style={{ flexGrow:1 }}>
+                                {/* THIS IS MAP FOR GROUP ITEMS */}
                               <View style={{ backgroundColor: "#87AF9E" }}>
-                                {storedUser && storedUser != null ? (
-                                  storedUser.map((item: any, i: any) => {
-                                    if (item.groupId == group.id) {
-                                      return (
-                                        <>
-                                          <View style={styles.Pill}>
-                                            <Pressable
-                                              key={i}
-                                              onPress={() => {
-                                                setItemIndex(item);
-                                                showItemModal();
-                                                // console.log(userGroups);
-                                                console.log(allPeopleItemInGroups[0][0].groupId)
-                                              }}
-                                            >
-                                              <View
-                                                style={[{ flexDirection: "row" }]}
+                                {allPeopleItemInGroups && allPeopleItemInGroups != null ? (
+                                  allPeopleItemInGroups.map((Groups: any, k: any) => {
+                                    return(
+                                      Groups.map((Item: any, j: any) => {
+                                        if(Item.groupId == group.id){
+                                          return (
+                                            <>
+                                            <View style={styles.Pill}>
+                                              
+                                              <Pressable
+                                                key={j}
+                                                onPress={() => {
+                                                  setItemIndex(Item);
+                                                  showItemModal();
+                                                }}
                                               >
-                                                <Image
-                                                  source={Logo}
-                                                  style={{ width: 75, height: 72 }}
-                                                />
                                                 <View
-                                                  style={{
-                                                    justifyContent: "space-evenly",
-                                                    marginLeft: 20,
-                                                  }}
+                                                  style={[{ flexDirection: "row" }]}
                                                 >
-                                                  <Text style={styles.pillText}>
-                                                    {item.productName}
-                                                  </Text>
-                                                  <Text style={styles.pillText2}>
-                                                    Expiration:{" "}
-                                                    {item.dateOfExpiration}
-                                                  </Text>
+                                                  <Image
+                                                    source={Logo}
+                                                    style={{ width: 75, height: 72 }}
+                                                  />
+                                                  <View
+                                                    style={{
+                                                      justifyContent: "space-evenly",
+                                                      marginLeft: 20,
+                                                    }}
+                                                  >
+                                                    <Text style={styles.pillText}>
+                                                      {Item.productName}
+                                                    </Text>
+                                                    <Text style={styles.pillText2}>
+                                                      Expiration:{" "}
+                                                      {Item.dateOfExpiration}
+                                                    </Text>
+                                                  </View>
                                                 </View>
-                                              </View>
-                                            </Pressable>
-                                          </View>
-                                        </>
-                                      )
-                                    }
+                                              </Pressable>
+                                            </View>
+                                          </>
+                                          )
+                                        }
+                                        
+                                      })
+                                    )
 
-                                    ;
                                   })
                                 ) : (
                                   <Text>Is Empty</Text>
@@ -453,7 +463,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                         })
                         : null}
 
-                      {/* <List.Accordion
+                    {/* <List.Accordion
                     theme={{
                       colors: { background: "#2C443A", primary: "#4B4B4B" },
                     }}
@@ -486,7 +496,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       />
                     </View>
                   </List.Accordion> */}
-                      {/* <List.Accordion
+                    {/* <List.Accordion
                     theme={{
                       colors: { background: "#2C443A", primary: "#4B4B4B" },
                     }}
@@ -519,8 +529,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       />
                     </View>
                   </List.Accordion> */}
-                    </List.AccordionGroup>
-                  </View>
+                  </List.AccordionGroup>
+                </View>
               </View>
             </View>
 
@@ -628,7 +638,11 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                     onValueChange={(newValue) => setValue(newValue)}
                     value={value}
                   >
-                    <RadioButton.Item label="A-Z" value="first" color="#E9E9E1" />
+                    <RadioButton.Item
+                      label="A-Z"
+                      value="first"
+                      color="#E9E9E1"
+                    />
                     <RadioButton.Item
                       label="Z-A"
                       value="second"
@@ -717,22 +731,30 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       />
                     </View>
                     <View style={{ width: 300 }}>
-                      <Select selectedValue={service} minWidth="200" accessibilityLabel="Select Group" placeholder="Select Group" _selectedItem={{
-                        bg: "teal.600",
-                        endIcon: <CheckIcon size="5" />
-                      }} mt={1} onValueChange={itemValue => setService(itemValue)}>
+                      <Select
+                        selectedValue={service}
+                        minWidth="200"
+                        accessibilityLabel="Select Group"
+                        placeholder="Select Group"
+                        _selectedItem={{
+                          bg: "teal.600",
+                          endIcon: <CheckIcon size="5" />,
+                        }}
+                        mt={1}
+                        onValueChange={(itemValue) => setService(itemValue)}
+                      >
                         {userGroups && userGroups != null ? (
                           userGroups.map((group: any, i: any) => {
                             return (
-                              <Select.Item label={group.groupName} value={group.id} />
-
+                              <Select.Item
+                                label={group.groupName}
+                                value={group.id}
+                              />
                             );
                           })
                         ) : (
                           <Text>No Groups Exist to Add Item</Text>
                         )}
-
-
                       </Select>
                     </View>
 
