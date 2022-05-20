@@ -162,6 +162,10 @@ async function GetAllGroupItems(GroupId : number){
     return data;
 }
 
+async function GetAllGroups(){
+    let res = await fetch (`https://expiredbackendapi2.azurewebsites.net/Group/GetAllGroups/`);
+    let data = await res.json();
+    return data;
+}
 
-
-export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId, AddGroup, GetAllGroupItems};
+export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId, AddGroup, GetAllGroupItems, GetAllGroups};

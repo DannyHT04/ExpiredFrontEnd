@@ -385,35 +385,35 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       </ScrollView>
                     </List.Accordion>
                     {userGroups && userGroups != null
-                        ? userGroups.map((group: any, i: any) => {
-                          return (
-                            <List.Accordion
-                              theme={{
-                                colors: {
-                                  background: "#2C443A",
-                                  primary: "#4B4B4B",
-                                },
-                              }}
-                              title={group.groupName}
-                              titleStyle={{
-                                color: "#E9E9E1",
-                                fontFamily: "RobotoSlab_400Regular",
-                                fontSize: 20,
-                              }}
-                              id={i + 1}
-                            >
-                              <ScrollView style={{ flexGrow:1 }}>
-                                {/* THIS IS MAP FOR GROUP ITEMS */}
+                      ? (userGroups.map((group: any, i: any) => {
+                        return (
+                          <List.Accordion
+                            theme={{
+                              colors: {
+                                background: "#2C443A",
+                                primary: "#4B4B4B",
+                              },
+                            }}
+                            title={group.groupName}
+                            titleStyle={{
+                              color: "#E9E9E1",
+                              fontFamily: "RobotoSlab_400Regular",
+                              fontSize: 20,
+                            }}
+                            id={i + 1}
+                          >
+                            <ScrollView style={{ flexGrow: 1 }}>
+                              {/* THIS IS MAP FOR GROUP ITEMS */}
                               <View style={{ backgroundColor: "#87AF9E" }}>
-                                {allPeopleItemInGroups && allPeopleItemInGroups != null ? (
-                                  allPeopleItemInGroups.map((Groups: any, k: any) => {
-                                    return(
-                                      Groups.map((Item: any, j: any) => {
-                                        if(Item.groupId == group.id){
-                                          return (
-                                            <>
+                                {/* {allPeopleItemInGroups && allPeopleItemInGroups != null ? ( */}
+                                {allPeopleItemInGroups.map((Groups: any, k: any) => {
+                                  return (
+                                    Groups.map((Item: any, j: any) => {
+                                      if (Item.groupId == group.id) {
+                                        return (
+                                          <>
                                             <View style={styles.Pill}>
-                                              
+
                                               <Pressable
                                                 key={j}
                                                 onPress={() => {
@@ -446,22 +446,22 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                               </Pressable>
                                             </View>
                                           </>
-                                          )
-                                        }
-                                        
-                                      })
-                                    )
+                                        )
+                                      }
 
-                                  })
-                                ) : (
+                                    })
+                                  )
+                                })}
+                                {/* ) : (
                                   <Text>Is Empty</Text>
-                                )}
+                                )} */}
                               </View>
-                              </ScrollView>
-                            </List.Accordion>
-                          );
-                        })
-                        : null}
+                            </ScrollView>
+                          </List.Accordion>
+                        );
+                      })
+                      )
+                      : null}
 
                     {/* <List.Accordion
                     theme={{

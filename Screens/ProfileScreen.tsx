@@ -22,7 +22,8 @@ import UserContext from "../Context/UserContext";
 import {
   GetUserInfoByUsername,
   GetGroupsByUserId,
-  AddGroup
+  AddGroup,
+  GetAllGroups
 } from "../Services/DataService";
 
 import ProfileNameComponent from "../Components/ProfileNameComponent";
@@ -72,12 +73,15 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
     // setgroupArrayId(groupData);
     let groupInfoArray = await GetGroupsByUserId(userInfoData.id)
     setgroupArrayId(groupInfoArray)
-    
+
   };
 
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showJoin, setShowJoin] = useState<boolean>(false);
   const showAddModal = () => setShowModal(true);
+  const showJoinModal = () => setShowJoin(true);
   const hideAddModal = () => setShowModal(false);
+  const hideJoinModal = () => setShowJoin(false);
   const [groupName, setGroupName] = useState<string>("")
   const [groupPassword, setGroupPassword] = useState<string>("")
 
@@ -121,16 +125,21 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
     await AddGroup(newGroup)
   }
 
+  const handleJoinGroup = async () => {
+    let t = await GetAllGroups();
+    console.log(t)
+  }
+
   return (
     <SafeAreaView style={[styles.Bg, { flex: 1 }]}>
       <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
         <View style={{ flex: 1 }}>
           {/* invisible btn lol */}
           <IconButton
-            icon="sort-variant"
-            color="#7FC8A9"
+            icon="account-group"
+            color="#2C443A"
             size={45}
-          // onPress={showSortModal}
+            onPress={showJoinModal}
           />
         </View>
 
@@ -157,7 +166,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
         </Button>
       </View>
 
-      {/* ****  ADD GROUP MODAL **** */}
+      {/* ****  CREATE NEW GROUP MODAL **** */}
       <Provider>
         <Portal>
           <Modal
@@ -199,6 +208,55 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
                   }}
                 >
                   Add Group
+                </Button>
+              </View>
+            </View>
+          </Modal>
+        </Portal>
+      </Provider>
+
+      {/* ****  JOIN EXISTING GROUP MODAL **** */}
+      <Provider>
+        <Portal>
+          <Modal
+            visible={showJoin}
+            onDismiss={hideJoinModal}
+            contentContainerStyle={containerStyle}
+          >
+            <View>
+
+              <View style={{ alignItems: "center" }}>
+                <Text style={styles.Text}>Join Existing Group</Text>
+
+
+                <TextInput
+                  style={{ width: 300, marginTop: 20 }}
+                  theme={{ colors: { primary: "#4B4B4B" } }}
+                  autoComplete="off"
+                  label="Enter Existing Group Name"
+                  onChangeText={setGroupName}
+                />
+                <TextInput
+                  style={{ width: 300, marginTop: 20 }}
+                  theme={{ colors: { primary: "#4B4B4B" } }}
+                  autoComplete="off"
+                  label="Enter Existing Group Password"
+                  secureTextEntry={true}
+                  onChangeText={setGroupPassword}
+                />
+
+
+                <Button
+                  style={{ marginTop: 20 }}
+                  color="#505050"
+                  mode="contained"
+                  onPress={() => {
+                    hideJoinModal();
+                    handleJoinGroup();
+                    // console.log(GetAllGroups);
+                  }}
+                >
+                  Join Group
                 </Button>
               </View>
             </View>
