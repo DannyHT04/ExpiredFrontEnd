@@ -95,10 +95,11 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       }
     }
   }, []);
+
+
   const [allPeopleItemInGroups, setAllPeopleItemInGroups] = useState<any>([]);
 
   const fetchData = async () => {
-    // console.log(username);
     userInfo = await GetUserInfoByUsername(username);
     userItems = await GetAllUserItems(userInfo.id);
     let test = await GetGroupsByUserId(userInfo.id);

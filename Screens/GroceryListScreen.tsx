@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet, Image } from "react-native";
-import { FC, useState } from "react";
+import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
+import { FC, useContext, useEffect, useState } from "react";
 import {
   IconButton,
   List,
@@ -25,8 +25,59 @@ import {
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import UserContext from "../Context/UserContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { GetGroceryListByUserId, GetUserInfoByUsername } from "../Services/DataService";
 
-const GroceryListScreen: FC = () => {
+
+type RootStackParamList = {
+  Home: undefined;
+  Login: undefined;
+  CreateAccount: undefined;
+  Profile: undefined;
+  Splash: undefined;
+  GroceryList: undefined;
+  Footer: undefined;
+  CameraOpenerComp: undefined;
+  CameraComp: undefined;
+  CameraPreview: undefined;
+};
+
+type Props = NativeStackScreenProps<RootStackParamList, "GroceryList">;
+
+const GroceryListScreen: FC<Props> = ({ navigation }) => {
+
+  let {
+    username,
+    setUsername,
+    storedUser,
+    setStoredUser,
+    userInfo,
+    setUserInfo,
+    userItems,
+    setUserItems,
+  } = useContext(UserContext);
+
+  useEffect(() => {
+    let token = AsyncStorage.getItem("Token");
+    if (token == null) {
+      navigation.navigate("Login");
+    } else {
+      if (username != null) {
+        fetchData();
+      }
+    }
+  }, []);
+
+  const fetchData = async () => {
+    userInfo = await GetUserInfoByUsername(username);
+    userItems = await GetGroceryListByUserId(userInfo.id);
+    setStoredUser(userItems);
+    setUserInfo(userInfo);
+  };
+
+
   const [showShort, setShowSort] = useState(false);
   const [showAddItem, setShowAddItem] = useState(false);
 
@@ -55,39 +106,39 @@ const GroceryListScreen: FC = () => {
 
   return (
     <Provider>
-    <SafeAreaView style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
-      <View style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
-        <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-          <View style={{ flex: 1 }}>
-            <IconButton
-              icon="sort-variant"
-              color='#2C443A'
-              size={45}
-              onPress={showSortModal}
-            />
+      <SafeAreaView style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
+        <View style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
+          <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+            <View style={{ flex: 1 }}>
+              <IconButton
+                icon="sort-variant"
+                color='#2C443A'
+                size={45}
+                onPress={showSortModal}
+              />
+            </View>
+
+            <View style={{ alignItems: "center" }}>
+              <Image
+                source={Logo}
+                style={[styles.LogoStyle]}
+                accessibilityLabel="Expired Logo"
+              />
+            </View>
+
+            <View style={{ flex: 1, alignItems: "flex-end" }}>
+              <IconButton
+                icon="plus-circle-outline"
+                color='#2C443A'
+                size={45}
+                onPress={showAddItemModal}
+              />
+            </View>
           </View>
 
-          <View style={{ alignItems: "center" }}>
-            <Image
-              source={Logo}
-              style={[styles.LogoStyle]}
-              accessibilityLabel="Expired Logo"
-            />
-          </View>
 
-          <View style={{ flex: 1, alignItems: "flex-end" }}>
-            <IconButton
-              icon="plus-circle-outline"
-              color='#2C443A'
-              size={45}
-              onPress={showAddItemModal}
-            />
-          </View>
-        </View>
-
-
-        <View style={{ marginTop: 50, backgroundColor: "#7FC8A9", flex: 1, alignItems:'center'}}>
-          {/* <View style={[styles.row, styles.bgBox]}>
+          <View style={{ marginTop: 50, backgroundColor: "#7FC8A9", flex: 1, alignItems: 'center' }}>
+            {/* <View style={[styles.row, styles.bgBox]}>
         <Text>Instructions</Text>
 
         <Text>1. Select the plus icon in the top right corner </Text>
@@ -100,48 +151,50 @@ const GroceryListScreen: FC = () => {
         </Text>
       </View> */}
 
-          {/* list according */}
-          <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
-            <List.AccordionGroup>
-              <List.Accordion
-                theme={{
-                  colors: { background: "#2C443A", primary: "#87AF9E" },
-                }}
-                title="Personal Items"
-                titleStyle={{
-                  color: "#E9E9E1",
-                  fontFamily: "RobotoSlab_400Regular",
-                  fontSize: 20
-                }}
-                id="1"
-              >
-                <View style={{ backgroundColor: "#87AF9E" }}>
-                  <List.Item
-                    title="eggs"
-                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
-                    color: "white",
-                    fontSize: 20, }}
-                    style={styles.Pill}
-                    onPress={() => console.log("Me eggs")}
-                    right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
-                  />
-                  <List.Item
-                    title="Steak"
-                    titleStyle={{color:'white'}}
-                    style={styles.Pill}
-                    onPress={() => console.log("Me Steak")}
-                    right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
-                  />
-                  <List.Item
-                    title="Milk"
-                    titleStyle={{color:'white'}}
-                    style={styles.Pill}
-                    onPress={() => console.log("Me Milk")}
-                    right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
-                  />
-                </View>
-              </List.Accordion>
-              <List.Accordion
+            {/* list according */}
+            <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+              <List.AccordionGroup>
+                <List.Accordion
+                  theme={{
+                    colors: { background: "#2C443A", primary: "#87AF9E" },
+                  }}
+                  title="Grocery List Items"
+                  titleStyle={{
+                    color: "#E9E9E1",
+                    fontFamily: "RobotoSlab_400Regular",
+                    fontSize: 20
+                  }}
+                  id="1"
+
+                >
+                  <ScrollView style={{ height: "50%" }}>
+                    <View style={{ backgroundColor: "#87AF9E" }}>
+                      {storedUser && storedUser != null ? (
+                        storedUser.map((item: any, i: any) => {
+                          return (
+                            <List.Item
+                              title={item.productName}
+                              titleStyle={{
+                                fontFamily: "RobotoSlab_400Regular",
+                                color: "white",
+                                fontSize: 20,
+                              }}
+                              style={styles.Pill}
+                              onPress={() => console.log("Me eggs")}
+                              right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" />}
+
+                            />
+                          )
+                        })
+                      ) : (
+                        <Text>Please add items for Grocery List to display</Text>
+                      )
+                      }
+                    </View>
+                  </ScrollView>
+                </List.Accordion>
+
+                {/* <List.Accordion
                 theme={{
                   colors: { background: "#2C443A", primary: "#4B4B4B" },
                 }}
@@ -182,8 +235,8 @@ const GroceryListScreen: FC = () => {
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
                   />
                 </View>
-              </List.Accordion>
-              <List.Accordion
+              </List.Accordion> */}
+                {/* <List.Accordion
                 theme={{
                   colors: { background: "#2C443A", primary: "#4B4B4B" },
                 }}
@@ -222,14 +275,14 @@ const GroceryListScreen: FC = () => {
                     right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
                   />
                 </View>
-              </List.Accordion>
-            </List.AccordionGroup>
+              </List.Accordion> */}
+              </List.AccordionGroup>
+            </View>
           </View>
         </View>
-      </View>
 
-      {/* **** VIEW SORT MODAL **** */}
-      
+        {/* **** VIEW SORT MODAL **** */}
+
         <Portal>
           <Modal
             visible={showShort}
@@ -239,24 +292,24 @@ const GroceryListScreen: FC = () => {
             <View>
               <View style={{ alignItems: "center" }}>
                 <Text style={styles.Text}>Sort Grocery Items</Text>
-                </View>
-                <Text style={styles.SortText}> Item Name</Text>
-                <Button
-                  style={{ marginTop: 20 }}
-                  color="#505050"
-                  mode="contained"
-                  onPress={hideSortModal}
-                >
-                  Save
-                </Button>
-              
+              </View>
+              <Text style={styles.SortText}> Item Name</Text>
+              <Button
+                style={{ marginTop: 20 }}
+                color="#505050"
+                mode="contained"
+                onPress={hideSortModal}
+              >
+                Save
+              </Button>
+
             </View>
           </Modal>
         </Portal>
-      
 
-      {/* **** VIEW ADD ITEM MODAL **** */}
-      
+
+        {/* **** VIEW ADD ITEM MODAL **** */}
+
         <Portal>
           <Modal
             visible={showAddItem}
@@ -284,8 +337,8 @@ const GroceryListScreen: FC = () => {
             </View>
           </Modal>
         </Portal>
-      
-    </SafeAreaView>
+
+      </SafeAreaView>
     </Provider>
   );
 };

@@ -168,4 +168,10 @@ async function GetAllGroups(){
     return data;
 }
 
-export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId, AddGroup, GetAllGroupItems, GetAllGroups};
+async function GetGroceryListByUserId(UserId : number){
+    let res = await fetch (`https://expiredbackendapi2.azurewebsites.net/Item/GetGroceryListByUserId/${UserId}`);
+    let data = await res.json();
+    return data;
+}
+
+export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId, AddGroup, GetAllGroupItems, GetAllGroups, GetGroceryListByUserId};
