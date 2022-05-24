@@ -334,10 +334,9 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       <ScrollView style={{ height: "50%" }}>
                         <View style={{ backgroundColor: "#87AF9E" }}>
                           {storedUser && storedUser != null ? (
-                            value == "first" ? storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)) : 
-                            value == "second" ? storedUser.sort((a: any, b: any) => b.productName.localeCompare(a.productName)) : 
-                            storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName))
-                              .map((item: any, i: any) => {
+                            // value == "first" ? storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)): 
+                            // value == "second" ? storedUser.sort((a: any, b: any) => b.productName.localeCompare(a.productName)): 
+                            storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {
                                 return (
                                   <>
                                     <View style={styles.Pill}>
@@ -406,7 +405,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                 {/* {allPeopleItemInGroups && allPeopleItemInGroups != null ? ( */}
                                 {allPeopleItemInGroups.map((Groups: any, k: any) => {
                                   return (
-                                    Groups.map((Item: any, j: any) => {
+                                    Groups.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((Item: any, j: any) => {
                                       if (Item.groupId == group.id) {
                                         return (
                                           <>
