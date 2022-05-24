@@ -80,6 +80,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     setUserInfo,
     userItems,
     setUserItems,
+    test,
+    setTest
   } = useContext(UserContext);
 
   const [userGroups, setUserGroups] = useState([]);
@@ -89,9 +91,10 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     if (token == null) {
       navigation.navigate("Login");
     } else {
-      // console.log(username);
+     
       if (username != null) {
         fetchData();
+        console.log(allPeopleItemInGroups)
       }
     }
   }, []);
@@ -102,19 +105,16 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const fetchData = async () => {
     userInfo = await GetUserInfoByUsername(username);
     userItems = await GetAllUserItems(userInfo.id);
-    let test = await GetGroupsByUserId(userInfo.id);
-    setUserGroups(test);
-    setStoredUser(userItems);
-    setUserInfo(userInfo);
-    // let test1 = await GetAllGroupItems(1)
-    // console.log(test1)
+    test = await GetGroupsByUserId(userInfo.id);
+
     for (let i = 0; i < test.length; i++) {
       let itemsGroupInfo = await GetAllGroupItems(test[i].id);
 
       allPeopleItemInGroups.push(itemsGroupInfo);
-
-      // setAllPeopleItemInGroups(allPeopleItemInGroups);
     }
+    setUserGroups(test);
+    setStoredUser(userItems);
+    setUserInfo(userInfo);
   };
 
   const [showShort, setShowSort] = useState<boolean>(false);
@@ -409,7 +409,83 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                 </View>
                               </>
                             );
-                          }): 
+                          }) : 
+                          value == "third" ? storedUser.sort((a: any, b: any) => a.dateOfExpiration.localeCompare(b.dateOfExpiration)).map((item: any, i: any) => {return (
+                            <>
+                              <View style={styles.Pill}>
+                                <Pressable
+                                  key={i}
+                                  onPress={() => {
+                                    setItemIndex(item);
+                                    showItemModal();
+                                    console.log(allPeopleItemInGroups);
+                                  }}
+                                >
+                                  <View
+                                    style={[{ flexDirection: "row" }]}
+                                  >
+                                    <Image
+                                      source={Logo}
+                                      style={{ width: 75, height: 72 }}
+                                    />
+                                    <View
+                                      style={{
+                                        justifyContent: "space-evenly",
+                                        marginLeft: 20,
+                                      }}
+                                    >
+                                      <Text style={styles.pillText}>
+                                        {item.productName}
+                                      </Text>
+                                      <Text style={styles.pillText2}>
+                                        Expiration:{" "}
+                                        {item.dateOfExpiration}
+                                      </Text>
+                                    </View>
+                                  </View>
+                                </Pressable>
+                              </View>
+                            </>
+                          );
+                        }) : 
+                        value == "fourth" ? storedUser.sort((a: any, b: any) => b.dateOfExpiration.localeCompare(a.dateOfExpiration)).map((item: any, i: any) => {return (
+                          <>
+                            <View style={styles.Pill}>
+                              <Pressable
+                                key={i}
+                                onPress={() => {
+                                  setItemIndex(item);
+                                  showItemModal();
+                                  console.log(allPeopleItemInGroups);
+                                }}
+                              >
+                                <View
+                                  style={[{ flexDirection: "row" }]}
+                                >
+                                  <Image
+                                    source={Logo}
+                                    style={{ width: 75, height: 72 }}
+                                  />
+                                  <View
+                                    style={{
+                                      justifyContent: "space-evenly",
+                                      marginLeft: 20,
+                                    }}
+                                  >
+                                    <Text style={styles.pillText}>
+                                      {item.productName}
+                                    </Text>
+                                    <Text style={styles.pillText2}>
+                                      Expiration:{" "}
+                                      {item.dateOfExpiration}
+                                    </Text>
+                                  </View>
+                                </View>
+                              </Pressable>
+                            </View>
+                          </>
+                        );
+                      }) :
                             storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {
                                 return (
                                   <>

@@ -11,5 +11,6 @@ export default function UseUser(){
     const [groupArrayId, setgroupArrayId] = useState([]);
     const [groupInfo, setGroupInfo] = useState([]);
     const [groupInfoForModal, setGroupInfoForModal] = useState([]);
-    return {userData, setUserData, setUsername, username, storedUser, setStoredUser, userInfo, setUserInfo, userItems, setUserItems, usersGroup, setUserGroups, groupArrayId, setgroupArrayId, groupInfo, setGroupInfo, groupInfoForModal, setGroupInfoForModal}
+    const [test, setTest] = useState<any>([]);
+    return {userData, setUserData, setUsername, username, storedUser, setStoredUser, userInfo, setUserInfo, userItems, setUserItems, usersGroup, setUserGroups, groupArrayId, setgroupArrayId, groupInfo, setGroupInfo, groupInfoForModal, setGroupInfoForModal, test, setTest}
 }
