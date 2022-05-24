@@ -28,8 +28,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import UserContext from "../Context/UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { GetGroceryListByUserId, GetUserInfoByUsername } from "../Services/DataService";
-
+import { GetGroceryListByUserId, GetUserInfoByUsername, UpdateItem } from "../Services/DataService";
+import iAddItem from "../interfaces/ItemInterface";
 
 type RootStackParamList = {
   Home: undefined;
@@ -77,6 +77,12 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     setUserInfo(userInfo);
   };
 
+  const [itemIndex, setItemIndex] = useState<any>([]);
+  const [productName, setProductName] = useState<string>("");
+  const [dateOfExpiration, setDateOfExpiration] = useState<string | undefined>("");
+  const [notificationDate, setNotificationDate] = useState<any>("");
+  const [image, setImage] = useState<string>("");
+
 
   const [showShort, setShowSort] = useState(false);
   const [showAddItem, setShowAddItem] = useState(false);
@@ -102,6 +108,24 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
 
   if (!fontsLoaded) {
     return <AppLoading />;
+  }
+
+
+  const handleDeleteFromGroceryList = async () => {
+    let updateItem: iAddItem = {
+      Id: itemIndex.id,
+      UserId: userInfo.id,
+      GroupId: itemIndex.groupId,
+      ProductName: productName,
+      DateOfExpiration: dateOfExpiration,
+      NotificationDate: notificationDate,
+      Owner: username,
+      ProductImage: image,
+      isGroceryList: false,
+      isDeleted: false,
+    };
+    await UpdateItem(updateItem);
+    fetchData();
   }
 
   return (
@@ -164,10 +188,8 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                     fontFamily: "RobotoSlab_400Regular",
                     fontSize: 20
                   }}
-                  id="1"
-
-                >
-                  <ScrollView style={{ height: "50%" }}>
+                  id="1">
+                  <ScrollView style={{ height: "75%" }}>
                     <View style={{ backgroundColor: "#87AF9E" }}>
                       {storedUser && storedUser != null ? (
                         storedUser.map((item: any, i: any) => {
@@ -181,7 +203,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                               }}
                               style={styles.Pill}
                               onPress={() => console.log("Me eggs")}
-                              right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" />}
+                              right={props => <IconButton onPress={() => {setItemIndex(item); handleDeleteFromGroceryList}} {...props} color="#AA4040" icon="trash-can-outline" />}
 
                             />
                           )

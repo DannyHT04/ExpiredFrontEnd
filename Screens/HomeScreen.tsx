@@ -122,9 +122,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   const [showItem, setShowItem] = useState<boolean>(false);
   const [itemIndex, setItemIndex] = useState<any>([]);
   const [productName, setProductName] = useState<string>("");
-  const [dateOfExpiration, setDateOfExpiration] = useState<string | undefined>(
-    ""
-  );
+  const [dateOfExpiration, setDateOfExpiration] = useState<string | undefined>("");
   const [image, setImage] = useState<string>("");
   const [isGroceryList, setIsGroceryList] = useState<boolean>(false);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
@@ -336,10 +334,9 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       <ScrollView style={{ height: "50%" }}>
                         <View style={{ backgroundColor: "#87AF9E" }}>
                           {storedUser && storedUser != null ? (
-                            storedUser
-                              .sort((a: any, b: any) =>
-                                a.productName.localeCompare(b.productName)
-                              )
+                            value == "first" ? storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)) : 
+                            value == "second" ? storedUser.sort((a: any, b: any) => b.productName.localeCompare(a.productName)) : 
+                            storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName))
                               .map((item: any, i: any) => {
                                 return (
                                   <>
