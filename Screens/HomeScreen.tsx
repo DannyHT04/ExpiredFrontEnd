@@ -334,8 +334,82 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       <ScrollView style={{ height: "50%" }}>
                         <View style={{ backgroundColor: "#87AF9E" }}>
                           {storedUser && storedUser != null ? (
-                            // value == "first" ? storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)): 
-                            // value == "second" ? storedUser.sort((a: any, b: any) => b.productName.localeCompare(a.productName)): 
+                            value == "first" ? storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {return (
+                              <>
+                                <View style={styles.Pill}>
+                                  <Pressable
+                                    key={i}
+                                    onPress={() => {
+                                      setItemIndex(item);
+                                      showItemModal();
+                                      console.log(allPeopleItemInGroups);
+                                    }}
+                                  >
+                                    <View
+                                      style={[{ flexDirection: "row" }]}
+                                    >
+                                      <Image
+                                        source={Logo}
+                                        style={{ width: 75, height: 72 }}
+                                      />
+                                      <View
+                                        style={{
+                                          justifyContent: "space-evenly",
+                                          marginLeft: 20,
+                                        }}
+                                      >
+                                        <Text style={styles.pillText}>
+                                          {item.productName}
+                                        </Text>
+                                        <Text style={styles.pillText2}>
+                                          Expiration:{" "}
+                                          {item.dateOfExpiration}
+                                        </Text>
+                                      </View>
+                                    </View>
+                                  </Pressable>
+                                </View>
+                              </>
+                            );
+                          }) : 
+                            value == "second" ? storedUser.sort((a: any, b: any) => b.productName.localeCompare(a.productName)).map((item: any, i: any) => {return (
+                              <>
+                                <View style={styles.Pill}>
+                                  <Pressable
+                                    key={i}
+                                    onPress={() => {
+                                      setItemIndex(item);
+                                      showItemModal();
+                                      console.log(allPeopleItemInGroups);
+                                    }}
+                                  >
+                                    <View
+                                      style={[{ flexDirection: "row" }]}
+                                    >
+                                      <Image
+                                        source={Logo}
+                                        style={{ width: 75, height: 72 }}
+                                      />
+                                      <View
+                                        style={{
+                                          justifyContent: "space-evenly",
+                                          marginLeft: 20,
+                                        }}
+                                      >
+                                        <Text style={styles.pillText}>
+                                          {item.productName}
+                                        </Text>
+                                        <Text style={styles.pillText2}>
+                                          Expiration:{" "}
+                                          {item.dateOfExpiration}
+                                        </Text>
+                                      </View>
+                                    </View>
+                                  </Pressable>
+                                </View>
+                              </>
+                            );
+                          }): 
                             storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {
                                 return (
                                   <>
