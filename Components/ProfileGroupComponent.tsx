@@ -6,6 +6,7 @@ import {
   GetUserInfoByUsername,
   GetUsersFromGroup,
   GetGroupById,
+  DeleteAGroupMember,
 } from "../Services/DataService";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import AppLoading from "expo-app-loading";
@@ -32,8 +33,10 @@ const ProfileGroupComponent: FC = () => {
   const [showGroup, setShowGroup] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [usernameArray, setUserNameArray] = useState([]);
-
-
+  const [DeleteGroupId, setDeleteGroupId] = useState <number>(0);
+  const handleDelete = async () => {
+    await DeleteAGroupMember(DeleteGroupId, username, userInfo.id)
+  }
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
 
   return (
@@ -52,6 +55,7 @@ const ProfileGroupComponent: FC = () => {
                 <View style={styles.Pill}>
                   <Text style={styles.Text} onPress={() =>{showGroupModal();
                   setUserNameArray(group.userNameInGroup.split(","))
+                  setDeleteGroupId(group.id)
                   }}>
                   {group.groupName}
                   </Text>
@@ -80,12 +84,16 @@ const ProfileGroupComponent: FC = () => {
                 {
                   usernameArray && usernameArray != null ? (
                     usernameArray.map((name: any, index : any) => {
-                
-                      return (
-                        <View style={styles.GroupMembersText}>
-                        <Text style={styles.Text}>{name}</Text>
-                      </View>
-                      );
+                      if(name != ""){
+                        return (
+                          <View style={styles.GroupMembersText}>
+                          <Text style={styles.Text}>{name}</Text>
+                        </View>
+                        );
+                      }
+                     
+                      
+                     
                     })
                   ) : (
                     <Text>Is Empty</Text>
@@ -122,7 +130,10 @@ const ProfileGroupComponent: FC = () => {
                   style={{ marginTop: 20, width: 140 }}
                   color="#A15567"
                   mode="contained"
-                  onPress={hideConfirmModal}
+                  onPress={()=> {
+                    hideConfirmModal();
+                    handleDelete();
+                  }}
                 >
                   Leave Group
                 </Button>

@@ -174,4 +174,21 @@ async function GetGroceryListByUserId(UserId : number){
     return data;
 }
 
-export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId, AddGroup, GetAllGroupItems, GetAllGroups, GetGroceryListByUserId};
+async function DeleteAGroupMember(Id : number, username : string, userId : string){
+    let res= await fetch(`https://expiredbackendapi2.azurewebsites.net/Group/GroupDeleteAGroupMember/${Id}/${username}/${userId}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({})
+    });
+    if(!res.ok)
+    {
+        const message = `An Error has Occurred ${res.status}`
+        throw new Error (message)
+    }
+    let data = await res.json();
+   return data;
+}
+
+export { UserLogin, AddUser, DoesUserExist, GetUserInfoByUsername, GetAllUserItems, AddItem, DeleteItem, UpdateItem, UpdateUsername, GetUsersFromGroup, GetGroupById, GetGroupsByUserId, AddGroup, GetAllGroupItems, GetAllGroups, GetGroceryListByUserId, DeleteAGroupMember};
