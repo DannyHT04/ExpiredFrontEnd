@@ -53,8 +53,8 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     setUsername,
     storedUser,
     setStoredUser,
-    userInfo,
-    setUserInfo,
+    userInfoGL,
+    setUserInfoGL,
     userItems,
     setUserItems,
   } = useContext(UserContext);
@@ -71,10 +71,10 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
   }, []);
 
   const fetchData = async () => {
-    userInfo = await GetUserInfoByUsername(username);
-    userItems = await GetGroceryListByUserId(userInfo.id);
+    userInfoGL = await GetUserInfoByUsername(username);
+    userItems = await GetGroceryListByUserId(userInfoGL.id);
     setStoredUser(userItems);
-    setUserInfo(userInfo);
+    setUserInfoGL(userInfoGL);
   };
 
   const [itemIndex, setItemIndex] = useState<any>([]);
@@ -114,7 +114,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
   const handleDeleteFromGroceryList = async () => {
     let updateItem: iAddItem = {
       Id: itemIndex.id,
-      UserId: userInfo.id,
+      UserId: userInfoGL.id,
       GroupId: itemIndex.groupId,
       ProductName: productName,
       DateOfExpiration: dateOfExpiration,
@@ -125,7 +125,11 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
       isDeleted: false,
     };
     await UpdateItem(updateItem);
-    fetchData();
+    console.log("trigger")
+    // fetchData();
+    userInfoGL = await GetUserInfoByUsername(username);
+    userItems = await GetGroceryListByUserId(userInfoGL.id);
+    setStoredUser(userItems);
   }
 
   return (
@@ -203,7 +207,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                               }}
                               style={styles.Pill}
                               onPress={() => console.log("Me eggs")}
-                              right={props => <IconButton onPress={() => {setItemIndex(item); handleDeleteFromGroceryList}} {...props} color="#AA4040" icon="trash-can-outline" />}
+                              right={props => <IconButton onPress={() => {setItemIndex(item); handleDeleteFromGroceryList()}} {...props} color="#AA4040" icon="trash-can-outline" />}
 
                             />
                           )
