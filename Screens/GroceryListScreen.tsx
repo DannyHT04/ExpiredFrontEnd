@@ -114,7 +114,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
   }
 
 
-  const handleDeleteFromGroceryList = async () => {
+  const handleDeleteFromGroceryList = async (itemIndex : any) => {
     let updateItem: iAddItem = {
       Id: itemIndex.id,
       UserId: userInfo.id,
@@ -209,7 +209,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                               }}
                               style={styles.Pill}
                               onPress={() => console.log("Me eggs")}
-                              right={props => <IconButton onPress={() => {setItemIndex(item); handleDeleteFromGroceryList()}} {...props} color="#AA4040" icon="trash-can-outline" />}
+                              right={props => <IconButton onPress={  ()  => {handleDeleteFromGroceryList(item)}} {...props} color="#AA4040" icon="trash-can-outline" />}
 
                             />
                           )
