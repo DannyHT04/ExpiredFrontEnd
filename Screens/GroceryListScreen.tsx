@@ -129,9 +129,9 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     };
     await UpdateItem(updateItem);
     console.log("trigger")
-    // fetchData();
+    fetchData();
     // userInfo = await GetUserInfoByUsername(username);
-    setUserItemInGrocery(await GetGroceryListByUserId(userInfo.id));
+    // setUserItemInGrocery(await GetGroceryListByUserId(userInfo.id));
   }
 
   return (
