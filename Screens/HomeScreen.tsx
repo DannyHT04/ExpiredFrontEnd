@@ -37,7 +37,7 @@ import {
 import AppLoading from "expo-app-loading";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { DatePickerInput } from "react-native-paper-dates";
+import { DatePickerInput, en, registerTranslation } from "react-native-paper-dates";
 import DropDown from "react-native-paper-dropdown";
 import UserContext from "../Context/UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -56,6 +56,8 @@ import {
 import iAddItem from "../interfaces/ItemInterface";
 import { Select, CheckIcon } from "native-base";
 import { NativeBaseProvider } from "native-base";
+
+registerTranslation("en", en);
 
 
 type RootStackParamList = {
