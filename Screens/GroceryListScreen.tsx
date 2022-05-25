@@ -70,13 +70,14 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     }
   }, []);
 
+
   const fetchData = async () => {
     userInfo = await GetUserInfoByUsername(username);
-    userItems = await GetGroceryListByUserId(userInfo.id);
-    setStoredUser(userItems);
-    setUserInfo(userInfo);
+    let userItemsInGroceryList = await GetGroceryListByUserId(userInfo.id);
+    setuserItemInGrocery(userItemsInGroceryList);
+   
   };
-
+  const [userItemInGrocery, setuserItemInGrocery] = useState<any>([]);
   const [itemIndex, setItemIndex] = useState<any>([]);
   const [productName, setProductName] = useState<string>("");
   const [dateOfExpiration, setDateOfExpiration] = useState<string | undefined>("");
@@ -192,7 +193,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                   <ScrollView style={{ height: "75%" }}>
                     <View style={{ backgroundColor: "#87AF9E" }}>
                       {storedUser && storedUser != null ? (
-                        storedUser.map((item: any, i: any) => {
+                        userItemInGrocery.map((item: any, i: any) => {
                           return (
                             <List.Item
                               title={item.productName}
