@@ -76,8 +76,6 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     userInfo = await GetUserInfoByUsername(username);
     let userItemsInGroceryList = await GetGroceryListByUserId(userInfo.id);
     setUserItemInGrocery(userItemsInGroceryList);
-  
-   
   };
 
   const [itemIndex, setItemIndex] = useState<any>([]);
@@ -120,9 +118,9 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
       UserId: userInfo.id,
       GroupId: itemIndex.groupId,
       ProductName: itemIndex.productName,
-      DateOfExpiration: itemIndex.dateOfExpiration,
-      NotificationDate: itemIndex.notificationDate,
-      Owner: itemIndex.username,
+      DateOfExpiration: dateOfExpiration,
+      NotificationDate: notificationDate,
+      Owner: username,
       ProductImage: itemIndex.image,
       isGroceryList: false,
       isDeleted: false,
@@ -209,7 +207,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                               }}
                               style={styles.Pill}
                               onPress={() => console.log("Me eggs")}
-                              right={props => <IconButton onPress={  ()  => {handleDeleteFromGroceryList(item)}} {...props} color="#AA4040" icon="trash-can-outline" />}
+                              right={props => <IconButton onPress={() => {handleDeleteFromGroceryList(item)}} {...props} color="#AA4040" icon="trash-can-outline" />}
 
                             />
                           )
