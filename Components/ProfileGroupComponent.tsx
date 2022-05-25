@@ -35,7 +35,8 @@ const ProfileGroupComponent: FC = () => {
   const [usernameArray, setUserNameArray] = useState([]);
   const [DeleteGroupId, setDeleteGroupId] = useState <number>(0);
   const handleDelete = async () => {
-    await DeleteAGroupMember(DeleteGroupId, username, userInfo.id)
+    console.log(DeleteGroupId, username, userInfo.id)
+    DeleteAGroupMember(DeleteGroupId, username, userInfo.id.toString())
   }
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
 
