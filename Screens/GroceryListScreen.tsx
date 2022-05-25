@@ -70,14 +70,16 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     }
   }, []);
 
+  const [userItemInGrocery, setUserItemInGrocery] = useState<any>([]);
 
   const fetchData = async () => {
     userInfo = await GetUserInfoByUsername(username);
     let userItemsInGroceryList = await GetGroceryListByUserId(userInfo.id);
-    setuserItemInGrocery(userItemsInGroceryList);
+    setUserItemInGrocery(userItemsInGroceryList);
+  
    
   };
-  const [userItemInGrocery, setuserItemInGrocery] = useState<any>([]);
+
   const [itemIndex, setItemIndex] = useState<any>([]);
   const [productName, setProductName] = useState<string>("");
   const [dateOfExpiration, setDateOfExpiration] = useState<string | undefined>("");
@@ -129,7 +131,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     console.log("trigger")
     // fetchData();
     // userInfo = await GetUserInfoByUsername(username);
-    setuserItemInGrocery(await GetGroceryListByUserId(userInfo.id));
+    setUserItemInGrocery(await GetGroceryListByUserId(userInfo.id));
   }
 
   return (
