@@ -57,6 +57,7 @@ import iAddItem from "../interfaces/ItemInterface";
 import { Select, CheckIcon } from "native-base";
 import { NativeBaseProvider } from "native-base";
 
+
 type RootStackParamList = {
   Home: undefined;
   Login: undefined;
@@ -98,7 +99,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
       if (username != null) {
         fetchData();
-        console.log(allPeopleItemInGroups)
+        // console.log(allPeopleItemInGroups)
       }
     }
   }, []);
@@ -244,6 +245,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       isDeleted: false,
     };
     await UpdateItem(updateItem);
+    userItems = await GetAllUserItems(userInfo.id);
+    await setStoredUser(userItems);
   };
 
   const handleIsGroceryList = async () => {
