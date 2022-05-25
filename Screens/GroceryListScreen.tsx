@@ -28,7 +28,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import UserContext from "../Context/UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { GetGroceryListByUserId, GetUserInfoByUsername, UpdateItem } from "../Services/DataService";
+import { GetGroceryListByUserId, GetUserInfoByUsername, UpdateItem, AddToGroceryList } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
 
 type RootStackParamList = {
@@ -57,6 +57,8 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     setUserInfo,
     userItems,
     setUserItems,
+    setUserItemInGrocery,
+    userItemInGrocery
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -64,19 +66,16 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     if (token == null) {
       navigation.navigate("Login");
     } else {
-      if (username != null) {
         fetchData();
-      }
+      
     }
   }, []);
 
-  const [userItemInGrocery, setUserItemInGrocery] = useState<any>([]);
 
   const fetchData = async () => {
     userInfo = await GetUserInfoByUsername(username);
-    let userItemsInGroceryList = await GetGroceryListByUserId(userInfo.id);
-    setUserItemInGrocery(userItemsInGroceryList);
-  
+    console.log(userInfo)
+    userItemInGrocery = await GetGroceryListByUserId(userInfo.id);
    
   };
 
@@ -114,26 +113,30 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
   }
 
 
-  const handleDeleteFromGroceryList = async (itemIndex : any) => {
-    let updateItem: iAddItem = {
-      Id: itemIndex.id,
-      UserId: userInfo.id,
-      GroupId: itemIndex.groupId,
-      ProductName: itemIndex.productName,
-      DateOfExpiration: itemIndex.dateOfExpiration,
-      NotificationDate: itemIndex.notificationDate,
-      Owner: itemIndex.username,
-      ProductImage: itemIndex.image,
-      isGroceryList: false,
-      isDeleted: false,
-    };
-    await UpdateItem(updateItem);
-    console.log("trigger")
-    fetchData();
-    // userInfo = await GetUserInfoByUsername(username);
-    // setUserItemInGrocery(await GetGroceryListByUserId(userInfo.id));
+  // const handleDeleteFromGroceryList = async (itemIndex : any) => {
+  //   let updateItem: iAddItem = {
+  //     Id: itemIndex.id,
+  //     UserId: userInfo.id,
+  //     GroupId: itemIndex.groupId,
+  //     ProductName: itemIndex.productName,
+  //     DateOfExpiration: itemIndex.dateOfExpiration,
+  //     NotificationDate: itemIndex.notificationDate,
+  //     Owner: itemIndex.username,
+  //     ProductImage: itemIndex.image,
+  //     isGroceryList: false,
+  //     isDeleted: false,
+  //   };
+  //   await UpdateItem(updateItem);
+  //   console.log("trigger")
+  //   fetchData();
+  //   // userInfo = await GetUserInfoByUsername(username);
+  //   // setUserItemInGrocery(await GetGroceryListByUserId(userInfo.id));
+  // }
+  const handleIsGroceryList = async (id : number) => {
+    await AddToGroceryList(id);
+    await fetchData();
+    setUserItemInGrocery(await GetGroceryListByUserId(userInfo.id))
   }
-
   return (
     <Provider>
       <SafeAreaView style={{ backgroundColor: "#7FC8A9", flex: 1 }}>
@@ -208,8 +211,8 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                                 fontSize: 20,
                               }}
                               style={styles.Pill}
-                              onPress={() => console.log("Me eggs")}
-                              right={props => <IconButton onPress={  ()  => {handleDeleteFromGroceryList(item)}} {...props} color="#AA4040" icon="trash-can-outline" />}
+                              onPress={() => console.log(item)}
+                              right={props => <IconButton onPress={  ()  => {handleIsGroceryList(item.id)}} {...props} color="#AA4040" icon="trash-can-outline" />}
 
                             />
                           )

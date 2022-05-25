@@ -50,6 +50,8 @@ import {
   UpdateItem,
   GetGroupsByUserId,
   GetAllGroupItems,
+  AddToGroceryList,
+  GetGroceryListByUserId,
 } from "../Services/DataService";
 import iAddItem from "../interfaces/ItemInterface";
 import { Select, CheckIcon } from "native-base";
@@ -81,7 +83,9 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     userItems,
     setUserItems,
     test,
-    setTest
+    setTest,
+    userItemInGrocery,
+    setUserItemInGrocery,
   } = useContext(UserContext);
 
   const [userGroups, setUserGroups] = useState([]);
@@ -215,13 +219,14 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       NotificationDate: notificationDate,
       Owner: username,
       ProductImage: image,
-      isGroceryList: toGroceryList,
+      isGroceryList: itemIndex.isGroceryList,
       isDeleted: false,
     };
     console.log("updated item");
     await UpdateItem(updateItem);
     userItems = await GetAllUserItems(userInfo.id);
     await setStoredUser(userItems);
+    setUserItemInGrocery(await GetGroceryListByUserId(userInfo.id));
   };
 
   const handleDateOfExpiration = async () => {
@@ -235,11 +240,17 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       NotificationDate: notificationDate,
       Owner: username,
       ProductImage: image,
-      isGroceryList: false,
+      isGroceryList: itemIndex.isGroceryList,
       isDeleted: false,
     };
     await UpdateItem(updateItem);
   };
+
+  const handleIsGroceryList = async () => {
+    await AddToGroceryList(itemIndex.id);
+    let itemsInGroceries = await GetGroceryListByUserId(userInfo.id)
+    setUserItemInGrocery(itemsInGroceries)
+  }
 
   return (
     <>
@@ -840,7 +851,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       style={{ marginTop: 20 }}
                       color="#505050"
                       mode="contained"
-                      onPress={() => setToGroceryList(true)}
+                      onPress={() => handleIsGroceryList()}
                     >
                       Add to Grocery List
                     </Button>
