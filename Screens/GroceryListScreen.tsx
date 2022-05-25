@@ -126,7 +126,10 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
       isDeleted: false,
     };
     await UpdateItem(updateItem);
-    fetchData();
+    console.log("trigger")
+    // fetchData();
+    // userInfo = await GetUserInfoByUsername(username);
+    setuserItemInGrocery(await GetGroceryListByUserId(userInfo.id));
   }
 
   return (
@@ -204,7 +207,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                               }}
                               style={styles.Pill}
                               onPress={() => console.log("Me eggs")}
-                              right={props => <IconButton onPress={() => {setItemIndex(item); handleDeleteFromGroceryList}} {...props} color="#AA4040" icon="trash-can-outline" />}
+                              right={props => <IconButton onPress={() => {setItemIndex(item); handleDeleteFromGroceryList()}} {...props} color="#AA4040" icon="trash-can-outline" />}
 
                             />
                           )
