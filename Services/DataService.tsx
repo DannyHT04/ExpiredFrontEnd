@@ -174,8 +174,8 @@ async function GetGroceryListByUserId(UserId : number){
     return data;
 }
 
-async function DeleteAGroupMember(Id : number, username : string, userId : string){
-    let res= await fetch(`https://expiredbackendapi2.azurewebsites.net/Group/GroupDeleteAGroupMember/${Id}/${username}/${userId}`, {
+async function DeleteAGroupMember(Id : number, Username : string, userId : string){
+    let res= await fetch(`https://expiredbackendapi2.azurewebsites.net/Group/GroupDeleteAGroupMember/${Id}/${Username}/${userId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
