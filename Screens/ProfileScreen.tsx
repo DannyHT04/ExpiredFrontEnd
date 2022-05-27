@@ -165,7 +165,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
       <ProfileNameComponent />
       <ProfileGroupComponent />
       <View style={{ alignItems: "center", marginTop: 50 }}>
-        <Button icon="logout" color="#E9E9E1" onPress={handleLogOut}>
+        <Button icon="logout" color="#2C443A" onPress={handleLogOut}>
           {" "}
           Log Out{" "}
         </Button>

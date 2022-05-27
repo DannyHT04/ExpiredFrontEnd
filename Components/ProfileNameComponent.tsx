@@ -34,7 +34,7 @@ const ProfileNameComponent: FC = () => {
   return (
     <>
       <View style={{ alignItems: "flex-start", paddingTop: 50 }}>
-        <Button icon="account-edit" color="#E9E9E1">
+        <Button icon="account-edit" color="#2C443A">
           {" "}
           Name{" "}
         </Button>
