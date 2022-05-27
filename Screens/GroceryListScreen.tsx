@@ -147,9 +147,9 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
             <View style={{ flex: 1 }}>
               <IconButton
                 icon="sort-variant"
-                color='#2C443A'
+                color='#7FC8A9'
                 size={45}
-                onPress={showSortModal}
+                // onPress={showSortModal}
               />
             </View>
 
@@ -317,7 +317,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
 
         {/* **** VIEW SORT MODAL **** */}
 
-        <Portal>
+        {/* <Portal>
           <Modal
             visible={showShort}
             onDismiss={hideSortModal}
@@ -339,7 +339,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
 
             </View>
           </Modal>
-        </Portal>
+        </Portal> */}
 
 
         {/* **** VIEW ADD ITEM MODAL **** */}
