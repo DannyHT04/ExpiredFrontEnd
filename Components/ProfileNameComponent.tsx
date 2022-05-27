@@ -32,7 +32,7 @@ const ProfileNameComponent: FC = () => {
     setUserInfo(userInfo);
   };
   return (
-    <View>
+    <>
       <View style={{ alignItems: "flex-start", paddingTop: 50 }}>
         <Button icon="account-edit" color="#E9E9E1">
           {" "}
@@ -82,7 +82,7 @@ const ProfileNameComponent: FC = () => {
           </Modal>
         </Portal>
       </Provider>
-    </View>
+    </>
   );
 };
 
