@@ -67,7 +67,6 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
       navigation.navigate("Login");
     } else {
         fetchData();
-      
     }
   }, []);
 
@@ -216,7 +215,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                               }}
                               style={styles.Pill}
                               onPress={() => console.log(item)}
-                              right={props => <IconButton onPress={  ()  => {handleIsGroceryList(item.id)}} {...props} color="#AA4040" icon="trash-can-outline" />}
+                              right={props => <IconButton onPress={()  => {handleIsGroceryList(item.id)}} {...props} color="#AA4040" icon="trash-can-outline" />}
 
                             />
                           )
