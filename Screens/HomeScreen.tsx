@@ -113,7 +113,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     userInfo = await GetUserInfoByUsername(username);
     userItems = await GetAllUserItems(userInfo.id);
     test = await GetGroupsByUserId(userInfo.id);
-
+    // userItemInGrocery = await GetGroceryListByUserId(userInfo.id);
     for (let i = 0; i < test.length; i++) {
       let itemsGroupInfo = await GetAllGroupItems(test[i].id);
 

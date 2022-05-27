@@ -70,11 +70,14 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     }
   }, []);
 
+  const testing = async () =>{
 
+  }
   const fetchData = async () => {
-    userInfo = await GetUserInfoByUsername(username);
-    console.log(userInfo)
-    userItemInGrocery = await GetGroceryListByUserId(userInfo.id);
+    // userInfo = await GetUserInfoByUsername(username);
+    let userItemInGroceryTest = await GetGroceryListByUserId(userInfo.id);
+    setUserItemInGrocery(userItemInGroceryTest);
+    console.log("i am working");
    
   };
 
@@ -199,10 +202,11 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                   id="1">
                   <ScrollView style={{ height: "75%" }}>
                     <View style={{ backgroundColor: "#87AF9E" }}>
-                      {storedUser && storedUser != null ? (
+                      {userItemInGrocery && userItemInGrocery != null ? (
                         userItemInGrocery.map((item: any, i: any) => {
                           return (
                             <List.Item
+                              key = {i}
                               title={item.productName}
                               titleStyle={{
                                 fontFamily: "RobotoSlab_400Regular",
