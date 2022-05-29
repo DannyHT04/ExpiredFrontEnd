@@ -70,7 +70,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
   const test = async () => {
     let userInfoData = await GetUserInfoByUsername(username);
     setUserInfo(userInfoData);
-    let groupData = userInfo.groupId.split(",");
+    // let groupData = userInfoData.groupId.split(",");
     // setgroupArrayId(groupData);
     let groupInfoArray = await GetGroupsByUserId(userInfoData.id)
     setgroupArrayId(groupInfoArray)
@@ -119,8 +119,8 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
     let newGroup: createGroup = {
       Id: 0,
       GroupName: groupName,
-      UsersIdInGroup: userInfo.id.toString(),
-      UserNameInGroup: userInfo.username,
+      UsersIdInGroup: userInfo.id.toString() + ",",
+      UserNameInGroup: userInfo.username + ",",
       GroupPassword: groupPassword,
       IsGroupDeleted: false
     };
