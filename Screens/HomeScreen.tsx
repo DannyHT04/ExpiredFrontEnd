@@ -335,7 +335,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 {/* list according */}
                 <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
                   {
-                    storedUser != null ?
+                    storedUser && storedUser == [] ?
                       <View style={[styles.row]}>
                         <Card style={{ width: 350, backgroundColor: '#2C443A' }}>
                           <Card.Title
@@ -344,15 +344,16 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                           // left={LeftContent}
                           />
                           <Card.Content>
-                            <Text style={{ color: "#E9E9E1" }}>1. Select the plus icon in the top right corner</Text>
-                            <Text style={{ color: "#E9E9E1" }}>2. Insert Product Name, Best Used by, Owner & when you would
+                            <Text style={{ color: "#E9E9E1", marginBottom: 10 }}>1. Select the plus icon in the top right corner</Text>
+                            <Text style={{ color: "#E9E9E1", marginBottom: 10 }}>2. Insert Product Name, Best Used by, Owner & when you would
                               like to receive notifications. Click on Add button to add your
                               item</Text>
-                            <Text style={{ color: "#E9E9E1" }}>3. Now your product is successfully entered & if you'd like to
+                            <Text style={{ color: "#E9E9E1", marginBottom: 10 }}>3. Now your product is successfully entered & if you'd like to
                               add to your Grocery List select the icon on</Text>
                           </Card.Content>
                         </Card>
-                      </View> :
+                      </View>
+                       :
                       <List.AccordionGroup>
                         <List.Accordion
                           theme={{
