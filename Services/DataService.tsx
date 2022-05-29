@@ -140,7 +140,7 @@ async function GetGroupsByUserId(userId: String){
 }
 
 async function AddGroup(newGroup: createGroup){
-    let res= await fetch('https://expiredbackendapi2.azurewebsites.net/Group/3/', {
+    let res= await fetch('https://expiredbackendapi2.azurewebsites.net/Group/AddGroup/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
