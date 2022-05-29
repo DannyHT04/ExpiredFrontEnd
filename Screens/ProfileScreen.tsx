@@ -97,6 +97,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
   const handleLogOut = () => {
     AsyncStorage.clear();
     navigation.navigate("Login");
+    
   };
 
   let [fontsLoaded, error] = useFonts({

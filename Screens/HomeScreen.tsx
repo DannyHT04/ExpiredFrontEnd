@@ -101,7 +101,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
       if (username != null) {
         fetchData();
-        console.log(userInfo)
+        // console.log(userInfo)
+        console.log(storedUser)
       }
     }
   }, []);
@@ -335,8 +336,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 {/* list according */}
                 <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
                   {
-                    storedUser && storedUser == [] ?
-                      <View style={[styles.row]}>
+                  storedUser == [] ? (
+                        <View style={[styles.row]}>
                         <Card style={{ width: 350, backgroundColor: '#2C443A' }}>
                           <Card.Title
                             title="Instructions"
@@ -353,7 +354,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                           </Card.Content>
                         </Card>
                       </View>
-                       :
+                    ) : (
+
                       <List.AccordionGroup>
                         <List.Accordion
                           theme={{
@@ -817,7 +819,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
 
                       </List.AccordionGroup>
-                  }
+                  ) } 
                 </View>
               </View>
             </View>
