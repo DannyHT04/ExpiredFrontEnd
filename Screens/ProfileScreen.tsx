@@ -23,7 +23,8 @@ import {
   GetUserInfoByUsername,
   GetGroupsByUserId,
   AddGroup,
-  GetAllGroups
+  GetAllGroups,
+  AddUsernameToGroup
 } from "../Services/DataService";
 
 import ProfileNameComponent from "../Components/ProfileNameComponent";
@@ -126,8 +127,12 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
   }
 
   const handleJoinGroup = async () => {
-    let t = await GetAllGroups();
-    console.log(t)
+    let allGroups = await GetAllGroups();
+    for(let i=0; i<allGroups.length; i++){
+      if(groupName == allGroups[i].groupName && groupPassword == allGroups[i].groupPassword){
+          await AddUsernameToGroup(allGroups[i].id, userInfo.username)
+      }
+    }
   }
 
   return (
@@ -160,7 +165,7 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
       <ProfileNameComponent />
       <ProfileGroupComponent />
       <View style={{ alignItems: "center", marginTop: 50 }}>
-        <Button icon="logout" color="#E9E9E1" onPress={handleLogOut}>
+        <Button icon="logout" color="#2C443A" onPress={handleLogOut}>
           {" "}
           Log Out{" "}
         </Button>

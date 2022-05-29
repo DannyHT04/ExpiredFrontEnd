@@ -101,7 +101,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
       if (username != null) {
         fetchData();
-        // console.log(allPeopleItemInGroups)
+        console.log(userInfo)
       }
     }
   }, []);
@@ -113,7 +113,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
     userInfo = await GetUserInfoByUsername(username);
     userItems = await GetAllUserItems(userInfo.id);
     test = await GetGroupsByUserId(userInfo.id);
-
+    // userItemInGrocery = await GetGroceryListByUserId(userInfo.id);
     for (let i = 0; i < test.length; i++) {
       let itemsGroupInfo = await GetAllGroupItems(test[i].id);
 
@@ -157,7 +157,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   );
 
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
-  const [service, setService] = useState("");
+  const [service, setService] = useState("0");
   const [toGroceryList, setToGroceryList] = useState<boolean>(false);
 
   let [fontsLoaded, error] = useFonts({
@@ -199,7 +199,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       isGroceryList: false,
       isDeleted: false,
     };
-
+    console.log(newItem)
     await AddItem(newItem);
     userItems = await GetAllUserItems(userInfo.id);
     await setStoredUser(userItems);
@@ -821,93 +821,121 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
               </View>
             </View>
 
-            <Portal>
-              <Modal
-                visible={showItem}
-                onDismiss={hideItemModal}
-                contentContainerStyle={containerStyle}
-              >
-                <View>
-                  <View style={{ alignItems: "center" }}>
-                    <Text style={styles.Text}>Edit Item</Text>
-                    <Text style={styles.Text}>{itemIndex.productName}</Text>
-                    <TextInput
-                      style={{ width: 300, marginTop: 20 }}
-                      theme={{ colors: { primary: "#4B4B4B" } }}
-                      autoComplete="off"
-                      label="Product Name"
-                      value={itemIndex.productName}
-                      onChangeText={setProductName}
-                    />
+            {
+              itemIndex.owner == username ?
 
-                    <View style={{ width: 300, marginTop: 20 }}>
-                      <DatePickerInput
-                        locale="en"
-                        autoComplete="off"
-                        label="Expiration Date"
-                        value={editInputDate}
-                        onChange={(d) => {
-                          setEditInputDate(d);
-                        }}
-                        inputMode="start"
-                      />
+                <Portal>
+                  <Modal
+                    visible={showItem}
+                    onDismiss={hideItemModal}
+                    contentContainerStyle={containerStyle}
+                  >
+                    <View>
+                      <View style={{ alignItems: "center" }}>
+                        <Text style={styles.Text}>Edit Item</Text>
+                        {/* <Text style={styles.Text}>{itemIndex.productName}</Text> */}
+                        <TextInput
+                          style={{ width: 300, marginTop: 20 }}
+                          theme={{ colors: { primary: "#4B4B4B" } }}
+                          autoComplete="off"
+                          label="Product Name"
+                          value={itemIndex.productName}
+                          onChangeText={setProductName}
+                        />
+
+                        <View style={{ width: 300, marginTop: 20 }}>
+                          <DatePickerInput
+                            locale="en"
+                            autoComplete="off"
+                            label="Expiration Date"
+                            value={editInputDate}
+                            onChange={(d) => {
+                              setEditInputDate(d);
+                            }}
+                            inputMode="start"
+                          />
+                        </View>
+
+                        <TextInput
+                          style={{ width: 300 }}
+                          theme={{ colors: { primary: "#4B4B4B" } }}
+                          autoComplete="off"
+                          label="Owner"
+                          value={itemIndex.owner}
+                          onChangeText={setOwner}
+                        />
+
+                        <View style={{ width: 300, marginTop: 20 }}>
+                          <DatePickerInput
+                            locale="en"
+                            autoComplete="off"
+                            label="Change Notification Date"
+                            value={remindDate}
+                            onChange={(d) => setRemindDate(d)}
+                            inputMode="start"
+                          />
+                        </View>
+
+                        <Button
+                          style={{ marginTop: 20 }}
+                          color="#505050"
+                          mode="contained"
+                          onPress={() => handleIsGroceryList()}
+                        >
+                          Add to Grocery List
+                        </Button>
+
+                        <Button
+                          style={{ marginTop: 20 }}
+                          color="#505050"
+                          mode="contained"
+                          onPress={() => {
+                            hideItemModal();
+                            handleUpdateItem();
+                            handleDateOfExpiration();
+                          }}
+                        >
+                          Save
+                        </Button>
+                        <Button
+                          style={{ marginTop: 20 }}
+                          color="red"
+                          mode="contained"
+                          onPress={() => {
+                            hideItemModal();
+                            handleDeleteItem();
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </View>
                     </View>
+                  </Modal>
+                </Portal>
+                : 
+                <Portal>
+                  <Modal
+                    visible={showItem}
+                    onDismiss={hideItemModal}
+                    contentContainerStyle={containerStyle}
+                  >
+                    <View>
+                      <View style={{ alignItems: "center", marginBottom: 10 }}>
+                        <Text style={styles.Text}>View Item</Text>
+                        </View>
+                        <View style={{ marginLeft: 15 }}>
+                        <Text style={styles.descText}>Product Name: {itemIndex.productName}</Text>
+                        <Text style={styles.descText}>Expiration Date: {itemIndex.dateOfExpiration}</Text>
+                        <Text style={styles.descText}>Owner: {itemIndex.owner}</Text>
+                        <Text style={styles.descText}>Notification Date: {itemIndex.notificationDate}</Text>
+                        </View>
 
-                    <TextInput
-                      style={{ width: 300 }}
-                      theme={{ colors: { primary: "#4B4B4B" } }}
-                      autoComplete="off"
-                      label="Owner"
-                      value={itemIndex.owner}
-                      onChangeText={setOwner}
-                    />
-
-                    <View style={{ width: 300, marginTop: 20 }}>
-                      <DatePickerInput
-                        locale="en"
-                        autoComplete="off"
-                        label="Change Notification Date"
-                        value={remindDate}
-                        onChange={(d) => setRemindDate(d)}
-                        inputMode="start"
-                      />
+                      
                     </View>
-                    <Button
-                      style={{ marginTop: 20 }}
-                      color="#505050"
-                      mode="contained"
-                      onPress={() => handleIsGroceryList()}
-                    >
-                      Add to Grocery List
-                    </Button>
+                  </Modal>
+                </Portal>
+                }
 
-                    <Button
-                      style={{ marginTop: 20 }}
-                      color="#505050"
-                      mode="contained"
-                      onPress={() => {
-                        hideItemModal();
-                        handleUpdateItem();
-                        handleDateOfExpiration();
-                      }}
-                    >
-                      Save
-                    </Button>
-                    <Button
-                      style={{ marginTop: 20 }}
-                      color="red"
-                      mode="contained"
-                      onPress={() => {
-                        hideItemModal();
-                        handleDeleteItem();
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </View>
-                </View>
-              </Modal>
-            </Portal>
             {/* **** VIEW SORT MODAL **** */}
 
             <Portal>
@@ -1129,6 +1157,14 @@ const styles = StyleSheet.create({
     fontFamily: "RobotoSlab_400Regular",
     color: "white",
     fontSize: 18,
+  },
+  descText: {
+    fontFamily: "RobotoSlab_400Regular",
+    fontSize: 24,
+    alignItems: "center",
+    color: "#E9E9E1",
+    marginBottom: 10,
+    // textDecorationLine: "underline"
   },
 });
 

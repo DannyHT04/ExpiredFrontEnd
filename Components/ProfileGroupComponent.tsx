@@ -43,7 +43,7 @@ const ProfileGroupComponent: FC = () => {
   return (
     <>
       <View style={{ alignItems: "flex-start", paddingTop: 0 }}>
-        <Button icon="account-multiple-plus" color="#E9E9E1">
+        <Button icon="account-multiple-plus" color="#2C443A">
           {" "}
           Groups{" "}
         </Button>

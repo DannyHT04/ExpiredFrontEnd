@@ -67,15 +67,17 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
       navigation.navigate("Login");
     } else {
         fetchData();
-      
     }
   }, []);
 
+  const testing = async () =>{
 
+  }
   const fetchData = async () => {
-    userInfo = await GetUserInfoByUsername(username);
-    console.log(userInfo)
-    userItemInGrocery = await GetGroceryListByUserId(userInfo.id);
+    // userInfo = await GetUserInfoByUsername(username);
+    let userItemInGroceryTest = await GetGroceryListByUserId(userInfo.id);
+    setUserItemInGrocery(userItemInGroceryTest);
+    console.log("i am working");
    
   };
 
@@ -145,9 +147,9 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
             <View style={{ flex: 1 }}>
               <IconButton
                 icon="sort-variant"
-                color='#2C443A'
+                color='#7FC8A9'
                 size={45}
-                onPress={showSortModal}
+                // onPress={showSortModal}
               />
             </View>
 
@@ -200,10 +202,11 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                   id="1">
                   <ScrollView style={{ height: "75%" }}>
                     <View style={{ backgroundColor: "#87AF9E" }}>
-                      {storedUser && storedUser != null ? (
+                      {userItemInGrocery && userItemInGrocery != null ? (
                         userItemInGrocery.map((item: any, i: any) => {
                           return (
                             <List.Item
+                              key = {i}
                               title={item.productName}
                               titleStyle={{
                                 fontFamily: "RobotoSlab_400Regular",
@@ -212,7 +215,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                               }}
                               style={styles.Pill}
                               onPress={() => console.log(item)}
-                              right={props => <IconButton onPress={  ()  => {handleIsGroceryList(item.id)}} {...props} color="#AA4040" icon="trash-can-outline" />}
+                              right={props => <IconButton onPress={()  => {handleIsGroceryList(item.id)}} {...props} color="#AA4040" icon="trash-can-outline" />}
 
                             />
                           )
@@ -314,7 +317,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
 
         {/* **** VIEW SORT MODAL **** */}
 
-        <Portal>
+        {/* <Portal>
           <Modal
             visible={showShort}
             onDismiss={hideSortModal}
@@ -336,7 +339,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
 
             </View>
           </Modal>
-        </Portal>
+        </Portal> */}
 
 
         {/* **** VIEW ADD ITEM MODAL **** */}
