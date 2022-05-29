@@ -336,7 +336,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 {/* list according */}
                 <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
                   {
-                  storedUser.item == [] ? (
+                  storedUser == [] ? (
                         <View style={[styles.row]}>
                         <Card style={{ width: 350, backgroundColor: '#2C443A' }}>
                           <Card.Title
