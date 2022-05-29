@@ -101,7 +101,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
       if (username != null) {
         fetchData();
-        // console.log(allPeopleItemInGroups)
+        console.log(userInfo)
       }
     }
   }, []);
@@ -157,7 +157,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
   );
 
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
-  const [service, setService] = useState("");
+  const [service, setService] = useState("0");
   const [toGroceryList, setToGroceryList] = useState<boolean>(false);
 
   let [fontsLoaded, error] = useFonts({
@@ -199,7 +199,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
       isGroceryList: false,
       isDeleted: false,
     };
-
+    console.log(newItem)
     await AddItem(newItem);
     userItems = await GetAllUserItems(userInfo.id);
     await setStoredUser(userItems);
