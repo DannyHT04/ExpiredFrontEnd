@@ -69,7 +69,8 @@ const CreateAccountScreen: FC<Props> = ({ navigation }) => {
       console.log("im pressed")
 
       AddUser(userData)
-      Alert.alert("success");
+      Alert.alert("Success");
+      navigation.navigate("Login");
 
     } else {
       console.log("Already exist")

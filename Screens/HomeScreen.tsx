@@ -334,101 +334,42 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
 
                 {/* list according */}
                 <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
-                  <List.AccordionGroup>
-                    <List.Accordion
-                      theme={{
-                        colors: { background: "#2C443A", primary: "#4B4B4B" },
-                      }}
-                      title="Personal Items"
-                      titleStyle={{
-                        color: "#E9E9E1",
-                        fontFamily: "RobotoSlab_400Regular",
-                        fontSize: 20,
-                      }}
-                      id="1"
-                    >
-                      <ScrollView style={{ height: "50%" }}>
-                        <View style={{ backgroundColor: "#87AF9E" }}>
-                          {storedUser && storedUser != null ? (
-                            value == "first" ? storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {
-                              return (
-                                <>
-                                  <View style={styles.Pill}>
-                                    <Pressable
-                                      key={i}
-                                      onPress={() => {
-                                        setItemIndex(item);
-                                        showItemModal();
-                                        console.log(allPeopleItemInGroups);
-                                      }}
-                                    >
-                                      <View
-                                        style={[{ flexDirection: "row" }]}
-                                      >
-                                        <Image
-                                          source={Logo}
-                                          style={{ width: 75, height: 72 }}
-                                        />
-                                        <View
-                                          style={{
-                                            justifyContent: "space-evenly",
-                                            marginLeft: 20,
-                                          }}
-                                        >
-                                          <Text style={styles.pillText}>
-                                            {item.productName}
-                                          </Text>
-                                          <Text style={styles.pillText2}>
-                                            Expiration:{" "}
-                                            {item.dateOfExpiration}
-                                          </Text>
-                                        </View>
-                                      </View>
-                                    </Pressable>
-                                  </View>
-                                </>
-                              );
-                            }) :
-                              value == "second" ? storedUser.sort((a: any, b: any) => b.productName.localeCompare(a.productName)).map((item: any, i: any) => {
-                                return (
-                                  <>
-                                    <View style={styles.Pill}>
-                                      <Pressable
-                                        key={i}
-                                        onPress={() => {
-                                          setItemIndex(item);
-                                          showItemModal();
-                                          console.log(allPeopleItemInGroups);
-                                        }}
-                                      >
-                                        <View
-                                          style={[{ flexDirection: "row" }]}
-                                        >
-                                          <Image
-                                            source={Logo}
-                                            style={{ width: 75, height: 72 }}
-                                          />
-                                          <View
-                                            style={{
-                                              justifyContent: "space-evenly",
-                                              marginLeft: 20,
-                                            }}
-                                          >
-                                            <Text style={styles.pillText}>
-                                              {item.productName}
-                                            </Text>
-                                            <Text style={styles.pillText2}>
-                                              Expiration:{" "}
-                                              {item.dateOfExpiration}
-                                            </Text>
-                                          </View>
-                                        </View>
-                                      </Pressable>
-                                    </View>
-                                  </>
-                                );
-                              }) :
-                                value == "third" ? storedUser.sort((a: any, b: any) => a.dateOfExpiration.localeCompare(b.dateOfExpiration)).map((item: any, i: any) => {
+                  {
+                    storedUser != null ?
+                      <View style={[styles.row]}>
+                        <Card style={{ width: 350, backgroundColor: '#2C443A' }}>
+                          <Card.Title
+                            title="Instructions"
+                            titleStyle={{ color: "#E9E9E1" }}
+                          // left={LeftContent}
+                          />
+                          <Card.Content>
+                            <Text style={{ color: "#E9E9E1" }}>1. Select the plus icon in the top right corner</Text>
+                            <Text style={{ color: "#E9E9E1" }}>2. Insert Product Name, Best Used by, Owner & when you would
+                              like to receive notifications. Click on Add button to add your
+                              item</Text>
+                            <Text style={{ color: "#E9E9E1" }}>3. Now your product is successfully entered & if you'd like to
+                              add to your Grocery List select the icon on</Text>
+                          </Card.Content>
+                        </Card>
+                      </View> :
+                      <List.AccordionGroup>
+                        <List.Accordion
+                          theme={{
+                            colors: { background: "#2C443A", primary: "#4B4B4B" },
+                          }}
+                          title="Personal Items"
+                          titleStyle={{
+                            color: "#E9E9E1",
+                            fontFamily: "RobotoSlab_400Regular",
+                            fontSize: 20,
+                          }}
+                          id="1"
+                        >
+                          <ScrollView style={{ height: "50%" }}>
+                            <View style={{ backgroundColor: "#87AF9E" }}>
+                              {storedUser && storedUser != null ? (
+                                value == "first" ? storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {
                                   return (
                                     <>
                                       <View style={styles.Pill}>
@@ -467,7 +408,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                     </>
                                   );
                                 }) :
-                                  value == "fourth" ? storedUser.sort((a: any, b: any) => b.dateOfExpiration.localeCompare(a.dateOfExpiration)).map((item: any, i: any) => {
+                                  value == "second" ? storedUser.sort((a: any, b: any) => b.productName.localeCompare(a.productName)).map((item: any, i: any) => {
                                     return (
                                       <>
                                         <View style={styles.Pill}>
@@ -506,7 +447,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                       </>
                                     );
                                   }) :
-                                    storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {
+                                    value == "third" ? storedUser.sort((a: any, b: any) => a.dateOfExpiration.localeCompare(b.dateOfExpiration)).map((item: any, i: any) => {
                                       return (
                                         <>
                                           <View style={styles.Pill}>
@@ -544,48 +485,17 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                           </View>
                                         </>
                                       );
-                                    })
-                          ) : (
-                            <Text>Is Empty</Text>
-                          )}
-                        </View>
-                      </ScrollView>
-                    </List.Accordion>
-                    {userGroups && userGroups != null
-                      ? (userGroups.map((group: any, i: any) => {
-                        return (
-                          <List.Accordion
-                            theme={{
-                              colors: {
-                                background: "#2C443A",
-                                primary: "#4B4B4B",
-                              },
-                            }}
-                            title={group.groupName}
-                            titleStyle={{
-                              color: "#E9E9E1",
-                              fontFamily: "RobotoSlab_400Regular",
-                              fontSize: 20,
-                            }}
-                            id={i + 1}
-                          >
-                            <ScrollView style={{ flexGrow: 1 }}>
-                              {/* THIS IS MAP FOR GROUP ITEMS */}
-                              <View style={{ backgroundColor: "#87AF9E" }}>
-                                {/* {allPeopleItemInGroups && allPeopleItemInGroups != null ? ( */}
-                                {allPeopleItemInGroups.map((Groups: any, k: any) => {
-                                  return (
-                                    value == "first" ? Groups.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((Item: any, j: any) => {
-                                      if (Item.groupId == group.id) {
+                                    }) :
+                                      value == "fourth" ? storedUser.sort((a: any, b: any) => b.dateOfExpiration.localeCompare(a.dateOfExpiration)).map((item: any, i: any) => {
                                         return (
                                           <>
                                             <View style={styles.Pill}>
-
                                               <Pressable
-                                                key={j}
+                                                key={i}
                                                 onPress={() => {
-                                                  setItemIndex(Item);
+                                                  setItemIndex(item);
                                                   showItemModal();
+                                                  console.log(allPeopleItemInGroups);
                                                 }}
                                               >
                                                 <View
@@ -602,32 +512,29 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                                     }}
                                                   >
                                                     <Text style={styles.pillText}>
-                                                      {Item.productName}
+                                                      {item.productName}
                                                     </Text>
                                                     <Text style={styles.pillText2}>
                                                       Expiration:{" "}
-                                                      {Item.dateOfExpiration}
+                                                      {item.dateOfExpiration}
                                                     </Text>
                                                   </View>
                                                 </View>
                                               </Pressable>
                                             </View>
                                           </>
-                                        )
-                                      }
-
-                                    }) :
-                                      value == "second" ? Groups.sort((a: any, b: any) => b.productName.localeCompare(a.productName)).map((Item: any, j: any) => {
-                                        if (Item.groupId == group.id) {
+                                        );
+                                      }) :
+                                        storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {
                                           return (
                                             <>
                                               <View style={styles.Pill}>
-
                                                 <Pressable
-                                                  key={j}
+                                                  key={i}
                                                   onPress={() => {
-                                                    setItemIndex(Item);
+                                                    setItemIndex(item);
                                                     showItemModal();
+                                                    console.log(allPeopleItemInGroups);
                                                   }}
                                                 >
                                                   <View
@@ -644,159 +551,272 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                                       }}
                                                     >
                                                       <Text style={styles.pillText}>
-                                                        {Item.productName}
+                                                        {item.productName}
                                                       </Text>
                                                       <Text style={styles.pillText2}>
                                                         Expiration:{" "}
-                                                        {Item.dateOfExpiration}
+                                                        {item.dateOfExpiration}
                                                       </Text>
                                                     </View>
                                                   </View>
                                                 </Pressable>
                                               </View>
                                             </>
-                                          )
-                                        }
+                                          );
+                                        })
+                              ) : (
+                                <Text>Is Empty</Text>
+                              )}
+                            </View>
+                          </ScrollView>
+                        </List.Accordion>
+                        {userGroups && userGroups != null
+                          ? (userGroups.map((group: any, i: any) => {
+                            return (
+                              <List.Accordion
+                                theme={{
+                                  colors: {
+                                    background: "#2C443A",
+                                    primary: "#4B4B4B",
+                                  },
+                                }}
+                                title={group.groupName}
+                                titleStyle={{
+                                  color: "#E9E9E1",
+                                  fontFamily: "RobotoSlab_400Regular",
+                                  fontSize: 20,
+                                }}
+                                id={i + 1}
+                              >
+                                <ScrollView style={{ flexGrow: 1 }}>
+                                  {/* THIS IS MAP FOR GROUP ITEMS */}
+                                  <View style={{ backgroundColor: "#87AF9E" }}>
+                                    {/* {allPeopleItemInGroups && allPeopleItemInGroups != null ? ( */}
+                                    {allPeopleItemInGroups.map((Groups: any, k: any) => {
+                                      return (
+                                        value == "first" ? Groups.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((Item: any, j: any) => {
+                                          if (Item.groupId == group.id) {
+                                            return (
+                                              <>
+                                                <View style={styles.Pill}>
 
-                                      }) : value == "third" ? Groups.sort((a: any, b: any) => a.dateOfExpiration.localeCompare(b.dateOfExpiration)).map((Item: any, j: any) => {
-                                        if (Item.groupId == group.id) {
-                                          return (
-                                            <>
-                                              <View style={styles.Pill}>
-
-                                                <Pressable
-                                                  key={j}
-                                                  onPress={() => {
-                                                    setItemIndex(Item);
-                                                    showItemModal();
-                                                  }}
-                                                >
-                                                  <View
-                                                    style={[{ flexDirection: "row" }]}
+                                                  <Pressable
+                                                    key={j}
+                                                    onPress={() => {
+                                                      setItemIndex(Item);
+                                                      showItemModal();
+                                                    }}
                                                   >
-                                                    <Image
-                                                      source={Logo}
-                                                      style={{ width: 75, height: 72 }}
-                                                    />
                                                     <View
-                                                      style={{
-                                                        justifyContent: "space-evenly",
-                                                        marginLeft: 20,
+                                                      style={[{ flexDirection: "row" }]}
+                                                    >
+                                                      <Image
+                                                        source={Logo}
+                                                        style={{ width: 75, height: 72 }}
+                                                      />
+                                                      <View
+                                                        style={{
+                                                          justifyContent: "space-evenly",
+                                                          marginLeft: 20,
+                                                        }}
+                                                      >
+                                                        <Text style={styles.pillText}>
+                                                          {Item.productName}
+                                                        </Text>
+                                                        <Text style={styles.pillText2}>
+                                                          Expiration:{" "}
+                                                          {Item.dateOfExpiration}
+                                                        </Text>
+                                                      </View>
+                                                    </View>
+                                                  </Pressable>
+                                                </View>
+                                              </>
+                                            )
+                                          }
+
+                                        }) :
+                                          value == "second" ? Groups.sort((a: any, b: any) => b.productName.localeCompare(a.productName)).map((Item: any, j: any) => {
+                                            if (Item.groupId == group.id) {
+                                              return (
+                                                <>
+                                                  <View style={styles.Pill}>
+
+                                                    <Pressable
+                                                      key={j}
+                                                      onPress={() => {
+                                                        setItemIndex(Item);
+                                                        showItemModal();
                                                       }}
                                                     >
-                                                      <Text style={styles.pillText}>
-                                                        {Item.productName}
-                                                      </Text>
-                                                      <Text style={styles.pillText2}>
-                                                        Expiration:{" "}
-                                                        {Item.dateOfExpiration}
-                                                      </Text>
-                                                    </View>
+                                                      <View
+                                                        style={[{ flexDirection: "row" }]}
+                                                      >
+                                                        <Image
+                                                          source={Logo}
+                                                          style={{ width: 75, height: 72 }}
+                                                        />
+                                                        <View
+                                                          style={{
+                                                            justifyContent: "space-evenly",
+                                                            marginLeft: 20,
+                                                          }}
+                                                        >
+                                                          <Text style={styles.pillText}>
+                                                            {Item.productName}
+                                                          </Text>
+                                                          <Text style={styles.pillText2}>
+                                                            Expiration:{" "}
+                                                            {Item.dateOfExpiration}
+                                                          </Text>
+                                                        </View>
+                                                      </View>
+                                                    </Pressable>
                                                   </View>
-                                                </Pressable>
-                                              </View>
-                                            </>
-                                          )
-                                        }
+                                                </>
+                                              )
+                                            }
 
-                                      }) : value == "fourth" ? Groups.sort((a: any, b: any) => b.dateOfExpiration.localeCompare(a.dateOfExpiration)).map((Item: any, j: any) => {
-                                        if (Item.groupId == group.id) {
-                                          return (
-                                            <>
-                                              <View style={styles.Pill}>
+                                          }) : value == "third" ? Groups.sort((a: any, b: any) => a.dateOfExpiration.localeCompare(b.dateOfExpiration)).map((Item: any, j: any) => {
+                                            if (Item.groupId == group.id) {
+                                              return (
+                                                <>
+                                                  <View style={styles.Pill}>
 
-                                                <Pressable
-                                                  key={j}
-                                                  onPress={() => {
-                                                    setItemIndex(Item);
-                                                    showItemModal();
-                                                  }}
-                                                >
-                                                  <View
-                                                    style={[{ flexDirection: "row" }]}
-                                                  >
-                                                    <Image
-                                                      source={Logo}
-                                                      style={{ width: 75, height: 72 }}
-                                                    />
-                                                    <View
-                                                      style={{
-                                                        justifyContent: "space-evenly",
-                                                        marginLeft: 20,
+                                                    <Pressable
+                                                      key={j}
+                                                      onPress={() => {
+                                                        setItemIndex(Item);
+                                                        showItemModal();
                                                       }}
                                                     >
-                                                      <Text style={styles.pillText}>
-                                                        {Item.productName}
-                                                      </Text>
-                                                      <Text style={styles.pillText2}>
-                                                        Expiration:{" "}
-                                                        {Item.dateOfExpiration}
-                                                      </Text>
-                                                    </View>
+                                                      <View
+                                                        style={[{ flexDirection: "row" }]}
+                                                      >
+                                                        <Image
+                                                          source={Logo}
+                                                          style={{ width: 75, height: 72 }}
+                                                        />
+                                                        <View
+                                                          style={{
+                                                            justifyContent: "space-evenly",
+                                                            marginLeft: 20,
+                                                          }}
+                                                        >
+                                                          <Text style={styles.pillText}>
+                                                            {Item.productName}
+                                                          </Text>
+                                                          <Text style={styles.pillText2}>
+                                                            Expiration:{" "}
+                                                            {Item.dateOfExpiration}
+                                                          </Text>
+                                                        </View>
+                                                      </View>
+                                                    </Pressable>
                                                   </View>
-                                                </Pressable>
-                                              </View>
-                                            </>
-                                          )
-                                        }
+                                                </>
+                                              )
+                                            }
 
-                                      }) : Groups.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((Item: any, j: any) => {
-                                        if (Item.groupId == group.id) {
-                                          return (
-                                            <>
-                                              <View style={styles.Pill}>
+                                          }) : value == "fourth" ? Groups.sort((a: any, b: any) => b.dateOfExpiration.localeCompare(a.dateOfExpiration)).map((Item: any, j: any) => {
+                                            if (Item.groupId == group.id) {
+                                              return (
+                                                <>
+                                                  <View style={styles.Pill}>
 
-                                                <Pressable
-                                                  key={j}
-                                                  onPress={() => {
-                                                    setItemIndex(Item);
-                                                    showItemModal();
-                                                  }}
-                                                >
-                                                  <View
-                                                    style={[{ flexDirection: "row" }]}
-                                                  >
-                                                    <Image
-                                                      source={Logo}
-                                                      style={{ width: 75, height: 72 }}
-                                                    />
-                                                    <View
-                                                      style={{
-                                                        justifyContent: "space-evenly",
-                                                        marginLeft: 20,
+                                                    <Pressable
+                                                      key={j}
+                                                      onPress={() => {
+                                                        setItemIndex(Item);
+                                                        showItemModal();
                                                       }}
                                                     >
-                                                      <Text style={styles.pillText}>
-                                                        {Item.productName}
-                                                      </Text>
-                                                      <Text style={styles.pillText2}>
-                                                        Expiration:{" "}
-                                                        {Item.dateOfExpiration}
-                                                      </Text>
-                                                    </View>
+                                                      <View
+                                                        style={[{ flexDirection: "row" }]}
+                                                      >
+                                                        <Image
+                                                          source={Logo}
+                                                          style={{ width: 75, height: 72 }}
+                                                        />
+                                                        <View
+                                                          style={{
+                                                            justifyContent: "space-evenly",
+                                                            marginLeft: 20,
+                                                          }}
+                                                        >
+                                                          <Text style={styles.pillText}>
+                                                            {Item.productName}
+                                                          </Text>
+                                                          <Text style={styles.pillText2}>
+                                                            Expiration:{" "}
+                                                            {Item.dateOfExpiration}
+                                                          </Text>
+                                                        </View>
+                                                      </View>
+                                                    </Pressable>
                                                   </View>
-                                                </Pressable>
-                                              </View>
-                                            </>
-                                          )
-                                        }
+                                                </>
+                                              )
+                                            }
 
-                                      })
-                                  )
-                                })}
-                                {/* ) : (
+                                          }) : Groups.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((Item: any, j: any) => {
+                                            if (Item.groupId == group.id) {
+                                              return (
+                                                <>
+                                                  <View style={styles.Pill}>
+
+                                                    <Pressable
+                                                      key={j}
+                                                      onPress={() => {
+                                                        setItemIndex(Item);
+                                                        showItemModal();
+                                                      }}
+                                                    >
+                                                      <View
+                                                        style={[{ flexDirection: "row" }]}
+                                                      >
+                                                        <Image
+                                                          source={Logo}
+                                                          style={{ width: 75, height: 72 }}
+                                                        />
+                                                        <View
+                                                          style={{
+                                                            justifyContent: "space-evenly",
+                                                            marginLeft: 20,
+                                                          }}
+                                                        >
+                                                          <Text style={styles.pillText}>
+                                                            {Item.productName}
+                                                          </Text>
+                                                          <Text style={styles.pillText2}>
+                                                            Expiration:{" "}
+                                                            {Item.dateOfExpiration}
+                                                          </Text>
+                                                        </View>
+                                                      </View>
+                                                    </Pressable>
+                                                  </View>
+                                                </>
+                                              )
+                                            }
+
+                                          })
+                                      )
+                                    })}
+                                    {/* ) : (
                                   <Text>Is Empty</Text>
                                 )} */}
-                              </View>
-                            </ScrollView>
-                          </List.Accordion>
-                        );
-                      })
-                      )
-                      : null}
+                                  </View>
+                                </ScrollView>
+                              </List.Accordion>
+                            );
+                          })
+                          )
+                          : null}
 
-                    
-                  </List.AccordionGroup>
+
+                      </List.AccordionGroup>
+                  }
                 </View>
               </View>
             </View>
