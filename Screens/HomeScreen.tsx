@@ -336,7 +336,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                 {/* list according */}
                 <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
                   {
-                  storedUser == [] ? (
+                  storedUser == "" ? (
                         <View style={[styles.row]}>
                         <Card style={{ width: 350, backgroundColor: '#2C443A' }}>
                           <Card.Title
@@ -371,7 +371,8 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                         >
                           <ScrollView style={{ height: "50%" }}>
                             <View style={{ backgroundColor: "#87AF9E" }}>
-                              {storedUser && storedUser != null ? (
+                              {/* {storedUser && storedUser != null ? ( */}
+                                {
                                 value == "first" ? storedUser.sort((a: any, b: any) => a.productName.localeCompare(b.productName)).map((item: any, i: any) => {
                                   return (
                                     <>
@@ -567,9 +568,11 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                                             </>
                                           );
                                         })
-                              ) : (
-                                <Text>Is Empty</Text>
-                              )}
+                                      }
+
+                              {/* // ) : (
+                              //   <Text>Is Empty</Text>
+                              // )} */}
                             </View>
                           </ScrollView>
                         </List.Accordion>
