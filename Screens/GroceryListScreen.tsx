@@ -78,7 +78,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     // userInfo = await GetUserInfoByUsername(username);
     let userItemInGroceryTest = await GetGroceryListByUserId(userInfo.id);
     setUserItemInGrocery(userItemInGroceryTest);
-    console.log(userItemInGrocery);
+    // console.log(userItemInGrocery);
 
   };
 
@@ -167,7 +167,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                 icon="plus-circle-outline"
                 color='#7FC8A9'
                 size={45}
-                // onPress={showAddItemModal}
+              // onPress={showAddItemModal}
               />
             </View>
           </View>
@@ -177,23 +177,24 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
 
             {/* list according */}
             <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
+              <View style={[styles.row]}>
+                <Card style={{ width: 350, backgroundColor: '#2C443A', marginBottom: 30 }}>
+                  <Card.Title
+                    title="Instructions"
+                    titleStyle={{ color: "#E9E9E1", fontFamily: "RobotoSlab_400Regular" }}
+                  // left={LeftContent}
+                  />
+                  <Card.Content>
+                    <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>1. From the Home Screen press on the item you wish to add to Grocery List</Text>
+                    <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>2. From the pop-up select "Add to Grocery List" button & your Grocery List will populate</Text>
+                    <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>3. Now your item is successfully added & if you'd like to
+                      remove it press on the red trash can and it will be deleted</Text>
+                  </Card.Content>
+                </Card>
+              </View>
               {
                 userItemInGrocery == "" ? (
-                  <View style={[styles.row]}>
-                    <Card style={{ width: 350, backgroundColor: '#2C443A' }}>
-                      <Card.Title
-                        title="Instructions"
-                        titleStyle={{ color: "#E9E9E1", fontFamily: "RobotoSlab_400Regular" }}
-                      // left={LeftContent}
-                      />
-                      <Card.Content>
-                        <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>1. From the Home Screen press on the item you wish to add to Grocery List</Text>
-                        <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>2. From the pop-up select "Add to Grocery List" button & your Grocery List will populate</Text>
-                        <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>3. Now your product is successfully added & if you'd like to
-                          remove it press on the red trash can and it will be deleted</Text>
-                      </Card.Content>
-                    </Card>
-                  </View>
+                  null
                 ) : (
                   <List.AccordionGroup>
                     <List.Accordion
@@ -227,7 +228,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                               )
                             })
                           }
-                            {/* // ) : (
+                          {/* // ) : (
                             //   <Text>Please add items for Grocery List to display</Text>
                             // ) */}
 
