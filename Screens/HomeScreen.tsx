@@ -346,7 +346,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                           />
                           <Card.Content>
                             <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>1. Select the plus icon in the top right corner</Text>
-                            <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>2. Insert Product Name, Best Used by, Owner & when you would
+                            <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>2. Insert Product Name, Expiration Date, & when you would
                               like to receive notifications. Click on Add button to add your
                               item</Text>
                             <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>3. Now your product is successfully entered & if you'd like to
@@ -963,22 +963,26 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                       label="A-Z"
                       value="first"
                       color="#E9E9E1"
+                      labelStyle={{color:"#E9E9E1", fontFamily: "RobotoSlab_400Regular",}}
                     />
                     <RadioButton.Item
                       label="Z-A"
                       value="second"
                       color="#E9E9E1"
+                      labelStyle={{color:"#E9E9E1", fontFamily: "RobotoSlab_400Regular",}}
                     />
                     <Text style={styles.SortText}>Best By Date</Text>
                     <RadioButton.Item
                       label="Closest to Farthest"
                       value="third"
                       color="#E9E9E1"
+                      labelStyle={{color:"#E9E9E1", fontFamily: "RobotoSlab_400Regular",}}
                     />
                     <RadioButton.Item
                       label="Farthest to Closest"
                       value="fourth"
                       color="#E9E9E1"
+                      labelStyle={{color:"#E9E9E1", fontFamily: "RobotoSlab_400Regular",}}
                     />
                   </RadioButton.Group>
                   <View style={{ alignItems: "center" }}>
@@ -1150,6 +1154,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     alignItems: "center",
     color: "#E9E9E1",
+    textDecorationLine: "underline"
+    
   },
   font: {
     fontFamily: "RobotoSlab_400Regular",
