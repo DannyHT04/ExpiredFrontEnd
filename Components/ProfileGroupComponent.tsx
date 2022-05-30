@@ -7,6 +7,7 @@ import {
   GetUsersFromGroup,
   GetGroupById,
   DeleteAGroupMember,
+  GetGroupsByUserId,
 } from "../Services/DataService";
 import { useFonts } from "@expo-google-fonts/roboto-slab";
 import AppLoading from "expo-app-loading";
@@ -35,9 +36,20 @@ const ProfileGroupComponent: FC = () => {
   const [usernameArray, setUserNameArray] = useState([]);
   const [DeleteGroupId, setDeleteGroupId] = useState<number>(0);
 
+  const test = async () => {
+    let userInfoData = await GetUserInfoByUsername(username);
+    setUserInfo(userInfoData);
+    // let groupData = userInfoData.groupId.split(",");
+    // setgroupArrayId(groupData);
+    let groupInfoArray = await GetGroupsByUserId(userInfoData.id)
+    setgroupArrayId(groupInfoArray)
+
+  };
+
   const handleDelete = async () => {
     console.log(DeleteGroupId, username, userInfo.id)
-    DeleteAGroupMember(DeleteGroupId, username, userInfo.id.toString())
+    DeleteAGroupMember(DeleteGroupId, username, userInfo.id.toString());
+    test();
   }
   const containerStyle = { backgroundColor: "#2C443A", padding: 20 };
 
@@ -159,6 +171,7 @@ const ProfileGroupComponent: FC = () => {
                   onPress={() => {
                     hideConfirmModal();
                     handleDelete();
+                    hideGroupModal();
                   }}
                 >
                   Leave Group
