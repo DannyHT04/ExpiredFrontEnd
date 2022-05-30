@@ -125,11 +125,13 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
       IsGroupDeleted: false
     };
     await AddGroup(newGroup)
+    test();
   }
 
   const handleJoinGroup = async () => {
 
     await AddUsersNameToGroup(username, groupName, userInfo.id.toString(), groupPassword )
+    test();
     // let allGroups = await GetAllGroups();
     // for(let i=0; i<allGroups.length; i++){
     //   if(groupName == allGroups[i].groupName && groupPassword == allGroups[i].groupPassword){
