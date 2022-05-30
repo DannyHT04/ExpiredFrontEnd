@@ -24,7 +24,7 @@ import {
   GetGroupsByUserId,
   AddGroup,
   GetAllGroups,
-  AddUsernameToGroup
+  AddUsersNameToGroup
 } from "../Services/DataService";
 
 import ProfileNameComponent from "../Components/ProfileNameComponent";
@@ -128,12 +128,14 @@ const ProfileScreen: FC<Props> = ({ navigation }) => {
   }
 
   const handleJoinGroup = async () => {
-    let allGroups = await GetAllGroups();
-    for(let i=0; i<allGroups.length; i++){
-      if(groupName == allGroups[i].groupName && groupPassword == allGroups[i].groupPassword){
-          await AddUsernameToGroup(allGroups[i].id, userInfo.username)
-      }
-    }
+
+    await AddUsersNameToGroup(username, groupName, userInfo.id.toString(), groupPassword )
+    // let allGroups = await GetAllGroups();
+    // for(let i=0; i<allGroups.length; i++){
+    //   if(groupName == allGroups[i].groupName && groupPassword == allGroups[i].groupPassword){
+    //       await AddUsernameToGroup(allGroups[i].id, userInfo.username)
+    //   }
+    // }
   }
 
   return (

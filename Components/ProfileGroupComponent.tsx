@@ -34,6 +34,7 @@ const ProfileGroupComponent: FC = () => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [usernameArray, setUserNameArray] = useState([]);
   const [DeleteGroupId, setDeleteGroupId] = useState<number>(0);
+
   const handleDelete = async () => {
     console.log(DeleteGroupId, username, userInfo.id)
     DeleteAGroupMember(DeleteGroupId, username, userInfo.id.toString())
