@@ -133,12 +133,12 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
               Create Account?
             </Button>
 
-            <Button
+            {/* <Button
               mode="contained"
               onPress={() => toaster.show({ message: 'Success!' })}
             >
               Press me
-            </Button>
+            </Button> */}
           </View>
         </View>
       </KeyboardAwareScrollView>
