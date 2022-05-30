@@ -340,7 +340,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                         <View style={[styles.row]}>
                         <Card style={{ width: 350, backgroundColor: '#2C443A' }}>
                           <Card.Title
-                            title="Instructions"
+                            title="Add Item Instructions"
                             titleStyle={{ color: "#E9E9E1", fontFamily: "RobotoSlab_400Regular" }}
                           // left={LeftContent}
                           />

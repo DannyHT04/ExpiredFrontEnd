@@ -180,7 +180,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
               <View style={[styles.row]}>
                 <Card style={{ width: 350, backgroundColor: '#2C443A', marginBottom: 30 }}>
                   <Card.Title
-                    title="Instructions"
+                    title="Grocery List Instructions"
                     titleStyle={{ color: "#E9E9E1", fontFamily: "RobotoSlab_400Regular" }}
                   // left={LeftContent}
                   />
