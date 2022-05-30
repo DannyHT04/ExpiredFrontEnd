@@ -58,10 +58,11 @@ const ProfileGroupComponent: FC = () => {
               // left={LeftContent}
               />
               <Card.Content>
-                <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>1. From the Home Screen press on the item you wish to add to Grocery List</Text>
-                <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>2. From the pop-up select "Add to Grocery List" button & your Grocery List will populate</Text>
-                <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>3. Now your item is successfully added & if you'd like to
-                  remove it press on the red trash can and it will be deleted</Text>
+                <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>1. Select the plus icon in the top right corner</Text>
+                <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>2. Insert Group Name & Group Password</Text>
+                <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>3. Now your group is successfully added & if you'd like to
+                  view the group members just press on the group name</Text>
+                <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>4. If you want to share this group with others just give them the Group Name & Password</Text>
               </Card.Content>
             </Card>
           </View>
