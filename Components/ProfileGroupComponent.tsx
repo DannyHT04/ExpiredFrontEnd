@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { FC, useState, useContext, useEffect } from "react";
-import { Modal, Portal, Button, Provider, TextInput } from "react-native-paper";
+import { Modal, Portal, Button, Provider, Card } from "react-native-paper";
 import UserContext from "../Context/UserContext";
 import {
   GetUserInfoByUsername,
@@ -33,7 +33,7 @@ const ProfileGroupComponent: FC = () => {
   const [showGroup, setShowGroup] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [usernameArray, setUserNameArray] = useState([]);
-  const [DeleteGroupId, setDeleteGroupId] = useState <number>(0);
+  const [DeleteGroupId, setDeleteGroupId] = useState<number>(0);
   const handleDelete = async () => {
     console.log(DeleteGroupId, username, userInfo.id)
     DeleteAGroupMember(DeleteGroupId, username, userInfo.id.toString())
@@ -48,30 +48,53 @@ const ProfileGroupComponent: FC = () => {
           Groups{" "}
         </Button>
       </View>
-      {groupArrayId && groupArrayId != null ? (
-        groupArrayId.map((group: any, index : any) => {
-          return (
-            <>
-              <View style={{ alignItems: "center" }}>
-                <View style={styles.Pill}>
-                  <Text style={styles.Text} onPress={() =>{showGroupModal();
-                  setUserNameArray(group.userNameInGroup.split(","))
-                  setDeleteGroupId(group.id)
-                  }}>
-                  {group.groupName}
-                  </Text>
-                </View>
-              </View>
-            </>
-          );
-        })
-      ) : (
-        <Text>Is Empty</Text>
-      )}
+      {
+        groupArrayId == "" ? (
+          <View style={[styles.row]}>
+            <Card style={{ width: 350, backgroundColor: '#2C443A', marginBottom: 30 }}>
+              <Card.Title
+                title="Instructions"
+                titleStyle={{ color: "#E9E9E1", fontFamily: "RobotoSlab_400Regular" }}
+              // left={LeftContent}
+              />
+              <Card.Content>
+                <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>1. From the Home Screen press on the item you wish to add to Grocery List</Text>
+                <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>2. From the pop-up select "Add to Grocery List" button & your Grocery List will populate</Text>
+                <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>3. Now your item is successfully added & if you'd like to
+                  remove it press on the red trash can and it will be deleted</Text>
+              </Card.Content>
+            </Card>
+          </View>
+        ) : (
+          // {groupArrayId && groupArrayId != null ? (
+          
+            groupArrayId.map((group: any, index: any) => {
+              return (
+                <>
+                  <View style={{ alignItems: "center" }}>
+                    <View style={styles.Pill}>
+                      <Text style={styles.Text} onPress={() => {
+                        showGroupModal();
+                        setUserNameArray(group.userNameInGroup.split(","))
+                        setDeleteGroupId(group.id)
+                      }}>
+                        {group.groupName}
+                      </Text>
+                    </View>
+                  </View>
+                </>
+              );
+            })
+            // ) : (
+            //   <Text>Is Empty</Text>
+            // )}
+        )
+      }
+
 
       {/* ****VIEW GROUP MODAL**** */}
 
-            
+
       <Provider>
         <Portal>
           <Modal
@@ -84,22 +107,22 @@ const ProfileGroupComponent: FC = () => {
                 <Text style={styles.Text}>Group Members</Text>
                 {
                   usernameArray && usernameArray != null ? (
-                    usernameArray.map((name: any, index : any) => {
-                      if(name != ""){
+                    usernameArray.map((name: any, index: any) => {
+                      if (name != "") {
                         return (
                           <View style={styles.GroupMembersText}>
-                          <Text style={styles.Text}>{name}</Text>
-                        </View>
+                            <Text style={styles.Text}>{name}</Text>
+                          </View>
                         );
                       }
-                     
-                      
-                     
+
+
+
                     })
                   ) : (
                     <Text>Is Empty</Text>
                   )}
-            
+
                 {/* <View style={styles.GroupMembersText}>
                   <Text style={styles.Text}>Ryan</Text>
                 </View>
@@ -131,7 +154,7 @@ const ProfileGroupComponent: FC = () => {
                   style={{ marginTop: 20, width: 140 }}
                   color="#A15567"
                   mode="contained"
-                  onPress={()=> {
+                  onPress={() => {
                     hideConfirmModal();
                     handleDelete();
                   }}
@@ -184,6 +207,10 @@ const styles = StyleSheet.create({
     // marginBottom: 10,
     width: 300,
     justifyContent: "center",
+    alignItems: "center",
+  },
+  row: {
+    flexDirection: "column",
     alignItems: "center",
   },
 });
