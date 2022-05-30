@@ -8,6 +8,7 @@ import {
   Button,
   Provider,
   TextInput,
+  Card
 } from "react-native-paper";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import Logo from "../assets/Logo.png";
@@ -66,19 +67,19 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
     if (token == null) {
       navigation.navigate("Login");
     } else {
-        fetchData();
+      fetchData();
     }
   }, []);
 
-  const testing = async () =>{
+  const testing = async () => {
 
   }
   const fetchData = async () => {
     // userInfo = await GetUserInfoByUsername(username);
     let userItemInGroceryTest = await GetGroceryListByUserId(userInfo.id);
     setUserItemInGrocery(userItemInGroceryTest);
-    console.log("i am working");
-   
+    console.log(userItemInGrocery);
+
   };
 
   const [itemIndex, setItemIndex] = useState<any>([]);
@@ -134,7 +135,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
   //   // userInfo = await GetUserInfoByUsername(username);
   //   // setUserItemInGrocery(await GetGroceryListByUserId(userInfo.id));
   // }
-  const handleIsGroceryList = async (id : number) => {
+  const handleIsGroceryList = async (id: number) => {
     await AddToGroceryList(id);
     await fetchData();
     setUserItemInGrocery(await GetGroceryListByUserId(userInfo.id))
@@ -149,7 +150,7 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
                 icon="sort-variant"
                 color='#7FC8A9'
                 size={45}
-                // onPress={showSortModal}
+              // onPress={showSortModal}
               />
             </View>
 
@@ -164,153 +165,77 @@ const GroceryListScreen: FC<Props> = ({ navigation }) => {
             <View style={{ flex: 1, alignItems: "flex-end" }}>
               <IconButton
                 icon="plus-circle-outline"
-                color='#2C443A'
+                color='#7FC8A9'
                 size={45}
-                onPress={showAddItemModal}
+                // onPress={showAddItemModal}
               />
             </View>
           </View>
 
 
           <View style={{ marginTop: 50, backgroundColor: "#7FC8A9", flex: 1, alignItems: 'center' }}>
-            {/* <View style={[styles.row, styles.bgBox]}>
-        <Text>Instructions</Text>
-
-        <Text>1. Select the plus icon in the top right corner </Text>
-        <Text>
-          2. Insert Product Name, Best Used by, Owner & when you would like to receive notifications. Click on Add button to add your item
-        </Text>
-        <Text>
-          3. Now your product is successfully entered & if you'd like to add to
-          your Grocery List select the icon on
-        </Text>
-      </View> */}
 
             {/* list according */}
             <View style={[{ marginRight: 30, marginLeft: 30, width: 350 }]}>
-              <List.AccordionGroup>
-                <List.Accordion
-                  theme={{
-                    colors: { background: "#2C443A", primary: "#87AF9E" },
-                  }}
-                  title="Grocery List Items"
-                  titleStyle={{
-                    color: "#E9E9E1",
-                    fontFamily: "RobotoSlab_400Regular",
-                    fontSize: 20
-                  }}
-                  id="1">
-                  <ScrollView style={{ height: "75%" }}>
-                    <View style={{ backgroundColor: "#87AF9E" }}>
-                      {userItemInGrocery && userItemInGrocery != null ? (
-                        userItemInGrocery.map((item: any, i: any) => {
-                          return (
-                            <List.Item
-                              key = {i}
-                              title={item.productName}
-                              titleStyle={{
-                                fontFamily: "RobotoSlab_400Regular",
-                                color: "white",
-                                fontSize: 20,
-                              }}
-                              style={styles.Pill}
-                              onPress={() => console.log(item)}
-                              right={props => <IconButton onPress={()  => {handleIsGroceryList(item.id)}} {...props} color="#AA4040" icon="trash-can-outline" />}
+              {
+                userItemInGrocery == "" ? (
+                  <View style={[styles.row]}>
+                    <Card style={{ width: 350, backgroundColor: '#2C443A' }}>
+                      <Card.Title
+                        title="Instructions"
+                        titleStyle={{ color: "#E9E9E1", fontFamily: "RobotoSlab_400Regular" }}
+                      // left={LeftContent}
+                      />
+                      <Card.Content>
+                        <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>1. From the Home Screen press on the item you wish to add to Grocery List</Text>
+                        <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>2. From the pop-up select "Add to Grocery List" button & your Grocery List will populate</Text>
+                        <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>3. Now your product is successfully added & if you'd like to
+                          remove it press on the red trash can and it will be deleted</Text>
+                      </Card.Content>
+                    </Card>
+                  </View>
+                ) : (
+                  <List.AccordionGroup>
+                    <List.Accordion
+                      theme={{
+                        colors: { background: "#2C443A", primary: "#87AF9E" },
+                      }}
+                      title="Grocery List Items"
+                      titleStyle={{
+                        color: "#E9E9E1",
+                        fontFamily: "RobotoSlab_400Regular",
+                        fontSize: 20
+                      }}
+                      id="1">
+                      <ScrollView style={{ height: "75%" }}>
+                        <View style={{ backgroundColor: "#87AF9E" }}>
+                          {/* {userItemInGrocery && userItemInGrocery != null ? ( */}
+                          {
+                            userItemInGrocery.map((item: any, i: any) => {
+                              return (
+                                <List.Item
+                                  key={i}
+                                  title={item.productName}
+                                  titleStyle={{
+                                    fontFamily: "RobotoSlab_400Regular",
+                                    color: "white",
+                                    fontSize: 20,
+                                  }}
+                                  style={styles.Pill}
+                                  onPress={() => console.log(item)}
+                                  right={props => <IconButton onPress={() => { handleIsGroceryList(item.id) }} {...props} color="#AA4040" icon="trash-can-outline" />} />
+                              )
+                            })
+                          }
+                            {/* // ) : (
+                            //   <Text>Please add items for Grocery List to display</Text>
+                            // ) */}
 
-                            />
-                          )
-                        })
-                      ) : (
-                        <Text>Please add items for Grocery List to display</Text>
-                      )
-                      }
-                    </View>
-                  </ScrollView>
-                </List.Accordion>
-
-                {/* <List.Accordion
-                theme={{
-                  colors: { background: "#2C443A", primary: "#4B4B4B" },
-                }}
-                title="House Fridge"
-                titleStyle={{
-                  color: "#E9E9E1",
-                  fontFamily: "RobotoSlab_400Regular",
-                  fontSize: 20,
-                }}
-                id="2"
-              >
-                <View style={{ backgroundColor: "#87AF9E" }}>
-                  <List.Item
-                    title="eggs"
-                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
-                    color: "white",
-                    fontSize: 20, }}
-                    style={styles.Pill}
-                    onPress={() => console.log("Me eggs")}
-                    right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
-                  />
-                  <List.Item
-                    title="Steak"
-                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
-                    color: "white",
-                    fontSize: 20, }}
-                    style={styles.Pill}
-                    onPress={() => console.log("Me Steak")}
-                    right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
-                  />
-                  <List.Item
-                    title="Milk"
-                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
-                    color: "white",
-                    fontSize: 20, }}
-                    style={styles.Pill}
-                    onPress={() => console.log("Me Milk")}
-                    right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
-                  />
-                </View>
-              </List.Accordion> */}
-                {/* <List.Accordion
-                theme={{
-                  colors: { background: "#2C443A", primary: "#4B4B4B" },
-                }}
-                title="Work Fridge"
-                titleStyle={{
-                  color: "#E9E9E1",
-                  fontFamily: "RobotoSlab_400Regular",
-                  fontSize: 20,
-                }}
-                id="3"
-              >
-                <View style={{ backgroundColor: "#87AF9E" }}>
-                  <List.Item
-                    title="eggs"
-                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
-                    color: "white",
-                    fontSize: 20, }}
-                    style={styles.Pill}
-                    onPress={() => console.log("Me eggs")}
-                    right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
-                  />
-                  <List.Item
-                    title="Steak"
-                    titleStyle={{fontFamily: "RobotoSlab_400Regular",
-                    color: "white",
-                    fontSize: 20, }}
-                    style={styles.Pill}
-                    onPress={() => console.log("Me Steak")}
-                    right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
-                  />
-                  <List.Item
-                    title="Milk"
-                    titleStyle={{color:'white'}}
-                    style={styles.Pill}
-                    onPress={() => console.log("Me Milk")}
-                    right={props => <IconButton onPress={() => console.log("Delete")} {...props} color="#AA4040" icon="trash-can-outline" /> }
-                  />
-                </View>
-              </List.Accordion> */}
-              </List.AccordionGroup>
+                        </View>
+                      </ScrollView>
+                    </List.Accordion>
+                  </List.AccordionGroup>
+                )}
             </View>
           </View>
         </View>

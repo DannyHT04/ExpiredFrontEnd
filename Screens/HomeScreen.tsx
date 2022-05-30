@@ -341,15 +341,15 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                         <Card style={{ width: 350, backgroundColor: '#2C443A' }}>
                           <Card.Title
                             title="Instructions"
-                            titleStyle={{ color: "#E9E9E1" }}
+                            titleStyle={{ color: "#E9E9E1", fontFamily: "RobotoSlab_400Regular" }}
                           // left={LeftContent}
                           />
                           <Card.Content>
-                            <Text style={{ color: "#E9E9E1", marginBottom: 10 }}>1. Select the plus icon in the top right corner</Text>
-                            <Text style={{ color: "#E9E9E1", marginBottom: 10 }}>2. Insert Product Name, Best Used by, Owner & when you would
+                            <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>1. Select the plus icon in the top right corner</Text>
+                            <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>2. Insert Product Name, Best Used by, Owner & when you would
                               like to receive notifications. Click on Add button to add your
                               item</Text>
-                            <Text style={{ color: "#E9E9E1", marginBottom: 10 }}>3. Now your product is successfully entered & if you'd like to
+                            <Text style={{ color: "#E9E9E1", marginBottom: 10, fontFamily: "RobotoSlab_400Regular" }}>3. Now your product is successfully entered & if you'd like to
                               add to your Grocery List select the icon on</Text>
                           </Card.Content>
                         </Card>
