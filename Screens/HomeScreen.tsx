@@ -886,7 +886,7 @@ const HomeScreen: FC<Props> = ({ navigation }) => {
                           style={{ marginTop: 20 }}
                           color="#505050"
                           mode="contained"
-                          onPress={() => handleIsGroceryList()}
+                          onPress={() => {handleIsGroceryList(); hideItemModal()}}
                         >
                           Add to Grocery List
                         </Button>
