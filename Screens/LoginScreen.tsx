@@ -148,7 +148,7 @@ const LoginScreen: FC<Props> = ({ navigation }) => {
 const styles = StyleSheet.create({
   Center: {
     alignItems: "center",
-    backgroundColor: "#2C443A",
+    backgroundColor: "#87AF9E",
     justifyContent: "center",
     flex: 1,
   },
